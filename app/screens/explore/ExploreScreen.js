@@ -8,7 +8,7 @@ import {CommonStyles, CommonColors, CommonSize} from '../../utils/CommonStyles';
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import I18n from '../../i18n/i18n';
 import SearchIcon from '../../../assets/svg/ic_search.svg';
-import {moderateScale} from '../../libs/reactSizeMatter/scalingUtils';
+import {moderateScale, scale} from '../../libs/reactSizeMatter/scalingUtils';
 import LabelComponent from '../../components/LabelComponent';
 import ItemTab from './tabs/ItemTab';
 import {connect} from 'react-redux';
@@ -26,7 +26,11 @@ const ExploreTabs = (props) => {
       }}
       tabBarOptions={{
         style: {
-          marginTop: CommonSize.paddingTopHeader,
+          marginTop: scale(5),
+        },
+        tabStyle: {
+          width: 'auto',
+          marginHorizontal: scale(5),
         },
         scrollEnabled: true,
         activeTintColor: CommonColors.primaryText,
@@ -41,7 +45,6 @@ const ExploreTabs = (props) => {
           <Tab.Screen
             key={index}
             name={item}
-            component={ItemTab}
             options={{
               tabBarLabel: ({focused}) => (
                 <LabelComponent
@@ -49,13 +52,14 @@ const ExploreTabs = (props) => {
                   focused={focused}
                   style={{
                     color: focused
-                      ? CommonColors.primaryText
-                      : CommonColors.secondaryText,
+                      ? CommonColors.indicatorColor
+                      : CommonColors.hintTextColor,
                   }}
                 />
               ),
-            }}
-          />
+            }}>
+            {() => <ItemTab data={props.data[item]} />}
+          </Tab.Screen>
         );
       })}
     </Tab.Navigator>
