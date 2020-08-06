@@ -17,6 +17,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import LabelComponent from './app/components/LabelComponent';
+import {Provider} from 'react-redux';
+import store from './app/store';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -24,7 +26,7 @@ const Stack = createStackNavigator();
 const MyTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName={'HomeScreen'}
+      initialRouteName={'ExploreScreen'}
       tabBarOptions={{
         showLabel: false,
         activeTintColor: CommonColors.activeTintColor,
@@ -153,6 +155,10 @@ const MainScreen = () => {
 
 export default class App extends React.Component {
   render() {
-    return <MainScreen />;
+    return (
+      <Provider store={store}>
+        <MainScreen />
+      </Provider>
+    );
   }
 }

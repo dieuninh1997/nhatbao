@@ -7,6 +7,7 @@ export default {
   },
   ExploreScreen: {
     header: 'Explore',
+    hintSearch: 'Search Flipboard',
   },
   FollowScreen: {
     header: 'Following',

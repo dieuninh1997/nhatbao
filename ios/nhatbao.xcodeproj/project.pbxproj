@@ -13,7 +13,6 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1E237499C34DCE942CD3C1C1 /* libPods-nhatbao-nhatbaoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 522E53C1EB72F6045CFAAD9C /* libPods-nhatbao-nhatbaoTests.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -22,16 +21,19 @@
 		361E26C8990A4431B9076965 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5EACC572FEA4BE38394E0CD /* Roboto-BoldItalic.ttf */; };
 		3A82456F94B447A59FE9A675 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3D68DBB02E942E390935030 /* Roboto-Light.ttf */; };
 		3F5AF840C7314601B6D43A32 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3367E8E039B64B2AB68B751C /* Roboto-Regular.ttf */; };
+		5445BECEFEBD4518E5A731F1 /* libPods-nhatbao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8139E98D462EAD319DC57D1 /* libPods-nhatbao.a */; };
 		5ECA52B31E1B4CEDB15DAF07 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D441C9DBE5846249CBBE11C /* Roboto-Black.ttf */; };
-		66D5064821C4B7CF39E5CFA0 /* libPods-nhatbao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B4930E9E1631260EEDCD21 /* libPods-nhatbao.a */; };
-		7309F57592583640C81EFDF6 /* libPods-nhatbao-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1897C4F51253641ED5F6E327 /* libPods-nhatbao-tvOS.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		86318D7D525B4E03863752C9 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D6B01F783D845FEBB935475 /* Roboto-MediumItalic.ttf */; };
 		9EB0EEC0C1E74880AFA1E827 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FD7EC459B2FA45B1BC8CBAA2 /* Roboto-Italic.ttf */; };
-		A03BE98E175D12B6EB639803 /* libPods-nhatbao-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F6DE71E062DA739FCA5A58C /* libPods-nhatbao-tvOSTests.a */; };
 		A2E7BAEF82764967A0049E6A /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F4F9FC437C154F6BAC19B272 /* Roboto-Thin.ttf */; };
 		A2F4A7706BB347D194CE6040 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9EF3C53A625D459AA21B4D96 /* Roboto-LightItalic.ttf */; };
+		B0B3149C0E0556558D509D63 /* libPods-nhatbao-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0449172F3245DDE7AA0AAB19 /* libPods-nhatbao-tvOSTests.a */; };
 		B998FD48834C488AAE16F741 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 301F1FBC2F994ECBBF4BB11B /* Roboto-Bold.ttf */; };
+		BBDD7FC824DBA2CF00BC99AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BBDD7FC724DBA2CF00BC99AC /* GoogleService-Info.plist */; };
+		BBDD7FCA24DBB3D500BC99AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BBDD7FC924DBB3D500BC99AC /* GoogleService-Info.plist */; };
+		BC3A5EB202B189590EDC033D /* libPods-nhatbao-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2218BF9019845FE660675909 /* libPods-nhatbao-tvOS.a */; };
+		D014EDA10AB7467784AD026D /* libPods-nhatbao-nhatbaoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 199B2AF8F7D91B291171ACA1 /* libPods-nhatbao-nhatbaoTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,41 +58,43 @@
 		00E356EE1AD99517003FC87E /* nhatbaoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = nhatbaoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* nhatbaoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = nhatbaoTests.m; sourceTree = "<group>"; };
-		12B4930E9E1631260EEDCD21 /* libPods-nhatbao.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nhatbao.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0449172F3245DDE7AA0AAB19 /* libPods-nhatbao-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nhatbao-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0954E78E0F7E4B002293A6A3 /* Pods-nhatbao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nhatbao.release.xcconfig"; path = "Target Support Files/Pods-nhatbao/Pods-nhatbao.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* nhatbao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nhatbao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = nhatbao/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = nhatbao/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = nhatbao/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = nhatbao/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = nhatbao/main.m; sourceTree = "<group>"; };
-		1897C4F51253641ED5F6E327 /* libPods-nhatbao-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nhatbao-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		199B2AF8F7D91B291171ACA1 /* libPods-nhatbao-nhatbaoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nhatbao-nhatbaoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2218BF9019845FE660675909 /* libPods-nhatbao-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nhatbao-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E47B1E0B4A5D006451C7 /* nhatbao-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nhatbao-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* nhatbao-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "nhatbao-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D6B01F783D845FEBB935475 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-MediumItalic.ttf"; path = "../assets/fonts/Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
-		3008A7BBCD73E10C4EF4B9CF /* Pods-nhatbao-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nhatbao-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-nhatbao-tvOSTests/Pods-nhatbao-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		301F1FBC2F994ECBBF4BB11B /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
-		309160C6ED2230723F7DB695 /* Pods-nhatbao-nhatbaoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nhatbao-nhatbaoTests.debug.xcconfig"; path = "Target Support Files/Pods-nhatbao-nhatbaoTests/Pods-nhatbao-nhatbaoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		3367E8E039B64B2AB68B751C /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
-		3F6DE71E062DA739FCA5A58C /* libPods-nhatbao-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nhatbao-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		522E53C1EB72F6045CFAAD9C /* libPods-nhatbao-nhatbaoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nhatbao-nhatbaoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D6B01F783D845FEBB935475 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-MediumItalic.ttf"; path = "../assets/fonts/Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
+		2F015C8BC889E5982929E755 /* Pods-nhatbao-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nhatbao-tvOS.release.xcconfig"; path = "Target Support Files/Pods-nhatbao-tvOS/Pods-nhatbao-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		301F1FBC2F994ECBBF4BB11B /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		3367E8E039B64B2AB68B751C /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		65AE1DE308B7B39AA77C81BF /* Pods-nhatbao-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nhatbao-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-nhatbao-tvOSTests/Pods-nhatbao-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6B548ED5DA4641636779802A /* Pods-nhatbao-nhatbaoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nhatbao-nhatbaoTests.release.xcconfig"; path = "Target Support Files/Pods-nhatbao-nhatbaoTests/Pods-nhatbao-nhatbaoTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = nhatbao/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8228CCCF18AD95449822866F /* Pods-nhatbao-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nhatbao-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-nhatbao-tvOSTests/Pods-nhatbao-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		9D441C9DBE5846249CBBE11C /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
-		9EF3C53A625D459AA21B4D96 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-LightItalic.ttf"; path = "../assets/fonts/Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
-		A3842A0CF21944A3A8065AD6 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-ThinItalic.ttf"; path = "../assets/fonts/Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
-		A885D61925CA75A3215AA094 /* Pods-nhatbao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nhatbao.release.xcconfig"; path = "Target Support Files/Pods-nhatbao/Pods-nhatbao.release.xcconfig"; sourceTree = "<group>"; };
-		AA639EEBE83AB812E54DAA6E /* Pods-nhatbao-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nhatbao-tvOS.release.xcconfig"; path = "Target Support Files/Pods-nhatbao-tvOS/Pods-nhatbao-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		BF24F359F56526B6028B95F5 /* Pods-nhatbao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nhatbao.debug.xcconfig"; path = "Target Support Files/Pods-nhatbao/Pods-nhatbao.debug.xcconfig"; sourceTree = "<group>"; };
-		C3D68DBB02E942E390935030 /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
-		C5EACC572FEA4BE38394E0CD /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BoldItalic.ttf"; path = "../assets/fonts/Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
-		C72A04965A2E4B75BC4D76C7 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BlackItalic.ttf"; path = "../assets/fonts/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
+		9D441C9DBE5846249CBBE11C /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
+		9EF3C53A625D459AA21B4D96 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-LightItalic.ttf"; path = "../assets/fonts/Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
+		A3842A0CF21944A3A8065AD6 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-ThinItalic.ttf"; path = "../assets/fonts/Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
+		A8139E98D462EAD319DC57D1 /* libPods-nhatbao.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nhatbao.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBDD7FC724DBA2CF00BC99AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BBDD7FC924DBB3D500BC99AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C3D68DBB02E942E390935030 /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
+		C46E64FA17466F98317DAC45 /* Pods-nhatbao-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nhatbao-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-nhatbao-tvOSTests/Pods-nhatbao-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		C5EACC572FEA4BE38394E0CD /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BoldItalic.ttf"; path = "../assets/fonts/Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
+		C72A04965A2E4B75BC4D76C7 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-BlackItalic.ttf"; path = "../assets/fonts/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
+		E3229AD1904D1B09BCE580B1 /* Pods-nhatbao-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nhatbao-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-nhatbao-tvOS/Pods-nhatbao-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		EC1D73C769D84C5D0AA81CF0 /* Pods-nhatbao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nhatbao.debug.xcconfig"; path = "Target Support Files/Pods-nhatbao/Pods-nhatbao.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		F2F9BFECA6A54AB7962FD618 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
-		F4F9FC437C154F6BAC19B272 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
-		F5E206D4E067F27F77482500 /* Pods-nhatbao-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nhatbao-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-nhatbao-tvOS/Pods-nhatbao-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		F890ED64786655832FEC33EC /* Pods-nhatbao-nhatbaoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nhatbao-nhatbaoTests.release.xcconfig"; path = "Target Support Files/Pods-nhatbao-nhatbaoTests/Pods-nhatbao-nhatbaoTests.release.xcconfig"; sourceTree = "<group>"; };
-		FD7EC459B2FA45B1BC8CBAA2 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Italic.ttf"; path = "../assets/fonts/Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		F2F9BFECA6A54AB7962FD618 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		F4562C1A4C88EA6A2B194E33 /* Pods-nhatbao-nhatbaoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nhatbao-nhatbaoTests.debug.xcconfig"; path = "Target Support Files/Pods-nhatbao-nhatbaoTests/Pods-nhatbao-nhatbaoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F4F9FC437C154F6BAC19B272 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		FD7EC459B2FA45B1BC8CBAA2 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Italic.ttf"; path = "../assets/fonts/Roboto-Italic.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E237499C34DCE942CD3C1C1 /* libPods-nhatbao-nhatbaoTests.a in Frameworks */,
+				D014EDA10AB7467784AD026D /* libPods-nhatbao-nhatbaoTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,7 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66D5064821C4B7CF39E5CFA0 /* libPods-nhatbao.a in Frameworks */,
+				5445BECEFEBD4518E5A731F1 /* libPods-nhatbao.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7309F57592583640C81EFDF6 /* libPods-nhatbao-tvOS.a in Frameworks */,
+				BC3A5EB202B189590EDC033D /* libPods-nhatbao-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,7 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A03BE98E175D12B6EB639803 /* libPods-nhatbao-tvOSTests.a in Frameworks */,
+				B0B3149C0E0556558D509D63 /* libPods-nhatbao-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,10 +169,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				12B4930E9E1631260EEDCD21 /* libPods-nhatbao.a */,
-				522E53C1EB72F6045CFAAD9C /* libPods-nhatbao-nhatbaoTests.a */,
-				1897C4F51253641ED5F6E327 /* libPods-nhatbao-tvOS.a */,
-				3F6DE71E062DA739FCA5A58C /* libPods-nhatbao-tvOSTests.a */,
+				A8139E98D462EAD319DC57D1 /* libPods-nhatbao.a */,
+				199B2AF8F7D91B291171ACA1 /* libPods-nhatbao-nhatbaoTests.a */,
+				2218BF9019845FE660675909 /* libPods-nhatbao-tvOS.a */,
+				0449172F3245DDE7AA0AAB19 /* libPods-nhatbao-tvOSTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -176,16 +180,15 @@
 		8271C2C10E90BF3A94DDAF8F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BF24F359F56526B6028B95F5 /* Pods-nhatbao.debug.xcconfig */,
-				A885D61925CA75A3215AA094 /* Pods-nhatbao.release.xcconfig */,
-				309160C6ED2230723F7DB695 /* Pods-nhatbao-nhatbaoTests.debug.xcconfig */,
-				F890ED64786655832FEC33EC /* Pods-nhatbao-nhatbaoTests.release.xcconfig */,
-				F5E206D4E067F27F77482500 /* Pods-nhatbao-tvOS.debug.xcconfig */,
-				AA639EEBE83AB812E54DAA6E /* Pods-nhatbao-tvOS.release.xcconfig */,
-				3008A7BBCD73E10C4EF4B9CF /* Pods-nhatbao-tvOSTests.debug.xcconfig */,
-				8228CCCF18AD95449822866F /* Pods-nhatbao-tvOSTests.release.xcconfig */,
+				EC1D73C769D84C5D0AA81CF0 /* Pods-nhatbao.debug.xcconfig */,
+				0954E78E0F7E4B002293A6A3 /* Pods-nhatbao.release.xcconfig */,
+				F4562C1A4C88EA6A2B194E33 /* Pods-nhatbao-nhatbaoTests.debug.xcconfig */,
+				6B548ED5DA4641636779802A /* Pods-nhatbao-nhatbaoTests.release.xcconfig */,
+				E3229AD1904D1B09BCE580B1 /* Pods-nhatbao-tvOS.debug.xcconfig */,
+				2F015C8BC889E5982929E755 /* Pods-nhatbao-tvOS.release.xcconfig */,
+				65AE1DE308B7B39AA77C81BF /* Pods-nhatbao-tvOSTests.debug.xcconfig */,
+				C46E64FA17466F98317DAC45 /* Pods-nhatbao-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -199,6 +202,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				BBDD7FC724DBA2CF00BC99AC /* GoogleService-Info.plist */,
+				BBDD7FC924DBB3D500BC99AC /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* nhatbao */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* nhatbaoTests */,
@@ -240,7 +245,6 @@
 				A3842A0CF21944A3A8065AD6 /* Roboto-ThinItalic.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,11 +254,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "nhatbaoTests" */;
 			buildPhases = (
-				C33F8A903680491ED108A09A /* [CP] Check Pods Manifest.lock */,
+				EA30E250C8486B69BC2EED5B /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				8D08C493B27A4EB535D1738F /* [CP] Copy Pods Resources */,
+				C45E1DCD17551AFB2233AEBE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -270,13 +274,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "nhatbao" */;
 			buildPhases = (
-				C9DE128FB637D4498C8F4002 /* [CP] Check Pods Manifest.lock */,
+				52768941DC706BC857C456D8 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				687D94030F368F33EAAEA129 /* [CP] Copy Pods Resources */,
+				90ABF2570375F8CF10154384 /* [CP] Copy Pods Resources */,
+				2B6FF88B9D2C71C9FAE01345 /* [CP-User] [RNFB] Core Configuration */,
 			);
 			buildRules = (
 			);
@@ -291,7 +296,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "nhatbao-tvOS" */;
 			buildPhases = (
-				33214003B8B453C9B04D738E /* [CP] Check Pods Manifest.lock */,
+				B2C39BF0184E83E3E1596857 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F122414F3F0027D42C /* Start Packager */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
@@ -311,7 +316,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "nhatbao-tvOSTests" */;
 			buildPhases = (
-				CF151806B996432628A0BCA8 /* [CP] Check Pods Manifest.lock */,
+				D763695836524474B1D4A605 /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
@@ -387,12 +392,14 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				BBDD7FC824DBA2CF00BC99AC /* GoogleService-Info.plist in Resources */,
 				5ECA52B31E1B4CEDB15DAF07 /* Roboto-Black.ttf in Resources */,
 				33114692B46A436A95153BE2 /* Roboto-BlackItalic.ttf in Resources */,
 				B998FD48834C488AAE16F741 /* Roboto-Bold.ttf in Resources */,
 				361E26C8990A4431B9076965 /* Roboto-BoldItalic.ttf in Resources */,
 				9EB0EEC0C1E74880AFA1E827 /* Roboto-Italic.ttf in Resources */,
 				3A82456F94B447A59FE9A675 /* Roboto-Light.ttf in Resources */,
+				BBDD7FCA24DBB3D500BC99AC /* GoogleService-Info.plist in Resources */,
 				A2F4A7706BB347D194CE6040 /* Roboto-LightItalic.ttf in Resources */,
 				06A93C66FE324C55A6929B42 /* Roboto-Medium.ttf in Resources */,
 				86318D7D525B4E03863752C9 /* Roboto-MediumItalic.ttf in Resources */,
@@ -434,6 +441,16 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		2B6FF88B9D2C71C9FAE01345 /* [CP-User] [RNFB] Core Configuration */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "[CP-User] [RNFB] Core Configuration";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/usr/bin/env bash\n#\n# Copyright (c) 2016-present Invertase Limited & Contributors\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this library except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#   http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\nset -e\n\n_MAX_LOOKUPS=2;\n_SEARCH_RESULT=''\n_RN_ROOT_EXISTS=''\n_CURRENT_LOOKUPS=1\n_JSON_ROOT=\"'react-native'\"\n_JSON_FILE_NAME='firebase.json'\n_JSON_OUTPUT_BASE64='e30=' # { }\n_CURRENT_SEARCH_DIR=${PROJECT_DIR}\n_PLIST_BUDDY=/usr/libexec/PlistBuddy\n_TARGET_PLIST=\"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n_DSYM_PLIST=\"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist\"\n\n# plist arrays\n_PLIST_ENTRY_KEYS=()\n_PLIST_ENTRY_TYPES=()\n_PLIST_ENTRY_VALUES=()\n\nfunction setPlistValue {\n  echo \"info:      setting plist entry '$1' of type '$2' in file '$4'\"\n  ${_PLIST_BUDDY} -c \"Add :$1 $2 '$3'\" $4 || echo \"info:      '$1' already exists\"\n}\n\nfunction getFirebaseJsonKeyValue () {\n  if [[ ${_RN_ROOT_EXISTS} ]]; then\n    ruby -e \"require 'rubygems';require 'json'; output=JSON.parse('$1'); puts output[$_JSON_ROOT]['$2']\"\n  else\n    echo \"\"\n  fi;\n}\n\nfunction jsonBoolToYesNo () {\n  if [[ $1 == \"false\" ]]; then\n    echo \"NO\"\n  elif [[ $1 == \"true\" ]]; then\n    echo \"YES\"\n  else echo \"NO\"\n  fi\n}\n\necho \"info: -> RNFB build script started\"\necho \"info: 1) Locating ${_JSON_FILE_NAME} file:\"\n\nif [[ -z ${_CURRENT_SEARCH_DIR} ]]; then\n  _CURRENT_SEARCH_DIR=$(pwd)\nfi;\n\nwhile true; do\n  _CURRENT_SEARCH_DIR=$(dirname \"$_CURRENT_SEARCH_DIR\")\n  if [[ \"$_CURRENT_SEARCH_DIR\" == \"/\" ]] || [[ ${_CURRENT_LOOKUPS} -gt ${_MAX_LOOKUPS} ]]; then break; fi;\n  echo \"info:      ($_CURRENT_LOOKUPS of $_MAX_LOOKUPS) Searching in '$_CURRENT_SEARCH_DIR' for a ${_JSON_FILE_NAME} file.\"\n  _SEARCH_RESULT=$(find \"$_CURRENT_SEARCH_DIR\" -maxdepth 2 -name ${_JSON_FILE_NAME} -print | head -n 1)\n  if [[ ${_SEARCH_RESULT} ]]; then\n    echo \"info:      ${_JSON_FILE_NAME} found at $_SEARCH_RESULT\"\n    break;\n  fi;\n  _CURRENT_LOOKUPS=$((_CURRENT_LOOKUPS+1))\ndone\n\nif [[ ${_SEARCH_RESULT} ]]; then\n  _JSON_OUTPUT_RAW=$(cat \"${_SEARCH_RESULT}\")\n  _RN_ROOT_EXISTS=$(ruby -e \"require 'rubygems';require 'json'; output=JSON.parse('$_JSON_OUTPUT_RAW'); puts output[$_JSON_ROOT]\" || echo '')\n\n  if [[ ${_RN_ROOT_EXISTS} ]]; then\n    _JSON_OUTPUT_BASE64=$(python -c 'import json,sys,base64;print(base64.b64encode(json.dumps(json.loads(open('\"'${_SEARCH_RESULT}'\"').read())['${_JSON_ROOT}'])))' || echo \"e30=\")\n  fi\n\n  _PLIST_ENTRY_KEYS+=(\"firebase_json_raw\")\n  _PLIST_ENTRY_TYPES+=(\"string\")\n  _PLIST_ENTRY_VALUES+=(\"$_JSON_OUTPUT_BASE64\")\n\n  # config.messaging_auto_init_enabled\n  _MESSAGING_AUTO_INIT=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"messaging_auto_init_enabled\")\n  if [[ $_MESSAGING_AUTO_INIT ]]; then\n    _PLIST_ENTRY_KEYS+=(\"FirebaseMessagingAutoInitEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"$(jsonBoolToYesNo \"$_MESSAGING_AUTO_INIT\")\")\n  fi\n\n  # config.crashlytics_disable_auto_disabler - undocumented for now - mainly for debugging, document if becomes usful\n  _CRASHLYTICS_AUTO_DISABLE_ENABLED=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"crashlytics_disable_auto_disabler\")\n  if [[ $_CRASHLYTICS_AUTO_DISABLE_ENABLED == \"true\" ]]; then\n    echo \"Disabled Crashlytics auto disabler.\" # do nothing\n  else\n    _PLIST_ENTRY_KEYS+=(\"FirebaseCrashlyticsCollectionEnabled\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"NO\")\n  fi\n\n  # config.admob_delay_app_measurement_init\n  _ADMOB_DELAY_APP_MEASUREMENT=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"admob_delay_app_measurement_init\")\n  if [[ $_ADMOB_DELAY_APP_MEASUREMENT == \"true\" ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GADDelayAppMeasurementInit\")\n    _PLIST_ENTRY_TYPES+=(\"bool\")\n    _PLIST_ENTRY_VALUES+=(\"YES\")\n  fi\n\n  # config.admob_ios_app_id\n  _ADMOB_IOS_APP_ID=$(getFirebaseJsonKeyValue \"$_JSON_OUTPUT_RAW\" \"admob_ios_app_id\")\n  if [[ $_ADMOB_IOS_APP_ID ]]; then\n    _PLIST_ENTRY_KEYS+=(\"GADApplicationIdentifier\")\n    _PLIST_ENTRY_TYPES+=(\"string\")\n    _PLIST_ENTRY_VALUES+=(\"$_ADMOB_IOS_APP_ID\")\n  fi\nelse\n  _PLIST_ENTRY_KEYS+=(\"firebase_json_raw\")\n  _PLIST_ENTRY_TYPES+=(\"string\")\n  _PLIST_ENTRY_VALUES+=(\"$_JSON_OUTPUT_BASE64\")\n  echo \"warning:   A firebase.json file was not found, whilst this file is optional it is recommended to include it to configure firebase services in React Native Firebase.\"\nfi;\n\necho \"info: 2) Injecting Info.plist entries: \"\n\n# Log out the keys we're adding\nfor i in \"${!_PLIST_ENTRY_KEYS[@]}\"; do\n  echo \"    ->  $i) ${_PLIST_ENTRY_KEYS[$i]}\" \"${_PLIST_ENTRY_TYPES[$i]}\" \"${_PLIST_ENTRY_VALUES[$i]}\"\ndone\n\nfor plist in \"${_TARGET_PLIST}\" \"${_DSYM_PLIST}\" ; do\n  if [[ -f \"${plist}\" ]]; then\n\n    # paths with spaces break the call to setPlistValue. temporarily modify\n    # the shell internal field separator variable (IFS), which normally \n    # includes spaces, to consist only of line breaks\n    oldifs=$IFS\n    IFS=\"\n\"\n\n    for i in \"${!_PLIST_ENTRY_KEYS[@]}\"; do\n      setPlistValue \"${_PLIST_ENTRY_KEYS[$i]}\" \"${_PLIST_ENTRY_TYPES[$i]}\" \"${_PLIST_ENTRY_VALUES[$i]}\" \"${plist}\"\n    done\n\n    # restore the original internal field separator value\n    IFS=$oldifs\n  else\n    echo \"warning:   A Info.plist build output file was not found (${plist})\"\n  fi\ndone\n\necho \"info: <- RNFB build script finished\"\n\n";
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -448,87 +465,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		33214003B8B453C9B04D738E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-nhatbao-tvOS-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		687D94030F368F33EAAEA129 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nhatbao/Pods-nhatbao-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nhatbao/Pods-nhatbao-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8D08C493B27A4EB535D1738F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nhatbao-nhatbaoTests/Pods-nhatbao-nhatbaoTests-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nhatbao-nhatbaoTests/Pods-nhatbao-nhatbaoTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C33F8A903680491ED108A09A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-nhatbao-nhatbaoTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C9DE128FB637D4498C8F4002 /* [CP] Check Pods Manifest.lock */ = {
+		52768941DC706BC857C456D8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -550,7 +487,65 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CF151806B996432628A0BCA8 /* [CP] Check Pods Manifest.lock */ = {
+		90ABF2570375F8CF10154384 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nhatbao/Pods-nhatbao-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nhatbao/Pods-nhatbao-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B2C39BF0184E83E3E1596857 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-nhatbao-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C45E1DCD17551AFB2233AEBE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nhatbao-nhatbaoTests/Pods-nhatbao-nhatbaoTests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nhatbao-nhatbaoTests/Pods-nhatbao-nhatbaoTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D763695836524474B1D4A605 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -566,6 +561,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-nhatbao-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EA30E250C8486B69BC2EED5B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-nhatbao-nhatbaoTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -665,7 +682,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 309160C6ED2230723F7DB695 /* Pods-nhatbao-nhatbaoTests.debug.xcconfig */;
+			baseConfigurationReference = F4562C1A4C88EA6A2B194E33 /* Pods-nhatbao-nhatbaoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -688,7 +705,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F890ED64786655832FEC33EC /* Pods-nhatbao-nhatbaoTests.release.xcconfig */;
+			baseConfigurationReference = 6B548ED5DA4641636779802A /* Pods-nhatbao-nhatbaoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -708,7 +725,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF24F359F56526B6028B95F5 /* Pods-nhatbao.debug.xcconfig */;
+			baseConfigurationReference = EC1D73C769D84C5D0AA81CF0 /* Pods-nhatbao.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -721,7 +738,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = nhatbao;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -731,7 +748,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A885D61925CA75A3215AA094 /* Pods-nhatbao.release.xcconfig */;
+			baseConfigurationReference = 0954E78E0F7E4B002293A6A3 /* Pods-nhatbao.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -743,7 +760,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = nhatbao;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -752,7 +769,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5E206D4E067F27F77482500 /* Pods-nhatbao-tvOS.debug.xcconfig */;
+			baseConfigurationReference = E3229AD1904D1B09BCE580B1 /* Pods-nhatbao-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -780,7 +797,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA639EEBE83AB812E54DAA6E /* Pods-nhatbao-tvOS.release.xcconfig */;
+			baseConfigurationReference = 2F015C8BC889E5982929E755 /* Pods-nhatbao-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -808,7 +825,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3008A7BBCD73E10C4EF4B9CF /* Pods-nhatbao-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = 65AE1DE308B7B39AA77C81BF /* Pods-nhatbao-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -835,7 +852,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8228CCCF18AD95449822866F /* Pods-nhatbao-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = C46E64FA17466F98317DAC45 /* Pods-nhatbao-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;

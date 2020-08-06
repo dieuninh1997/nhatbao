@@ -21,10 +21,17 @@ class CommonColors {
   static headerBarBgColor = '#FFF';
   static mainText = '#4B4B4B';
   static primaryText = '#262626';
+  static secondaryText = '#cbcbcb';
   static separator = '#F7F7F7';
   static tabbar = '#0a0a0a';
+  static indicatorColor = '#de2828';
   static activeTintColor = '#fdfdfd';
   static inActiveTintColor = '#585858';
+
+  static hintColor = '#c8c8c8';
+  static hintTextColor = '#b8b8b8';
+  static lightBgColor = '#e5e5e5';
+  static bgColor = '#FFF';
 }
 
 class CommonSize {

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "828063111001",
+    "firebase_url": "https://nhatbao-9497.firebaseio.com",
+    "project_id": "nhatbao-9497",
+    "storage_bucket": "nhatbao-9497.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:828063111001:android:8c97878e0e8b90ef9b9e48",
+        "android_client_info": {
+          "package_name": "com.nhatbao"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "828063111001-luqu5u6ihjsuesfljh4h3j2125gqqe43.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPQwkUmTztzRbdzbkDI3qCbDNe1GLQ2Nk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "828063111001-luqu5u6ihjsuesfljh4h3j2125gqqe43.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
