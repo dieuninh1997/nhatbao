@@ -4,8 +4,8 @@ import {
   FlatList,
   ImageBackground,
   Image,
-  ScrollView,
   TouchableWithoutFeedback,
+  ScrollView,
 } from 'react-native';
 import {connect} from 'react-redux';
 import _ from 'lodash';
@@ -62,7 +62,7 @@ function ItemTab(props) {
               style={styles.topImage}
               resizeMode={'cover'}
               source={{uri: topImg.image}}>
-              <LinearGradient
+              {/* <LinearGradient
                 ref={(r) => (this.gradiant = r)}
                 locations={[0.5, 0]}
                 colors={[
@@ -71,7 +71,7 @@ function ItemTab(props) {
                   'rgba(255, 255, 255, 0.1)',
                 ]}
                 style={styles.gradientView}
-              />
+              /> */}
             </ImageBackground>
 
             <Text
@@ -106,7 +106,7 @@ const styles = ScaledSheet.create({
   },
   list: {
     flex: 1,
-    backgroundColor: CommonColors.hintColor,
+    backgroundColor: CommonColors.lightSeparator,
   },
   topViewContainer: {
     width: 'auto',
@@ -138,12 +138,6 @@ const styles = ScaledSheet.create({
     fontSize: '14@s',
     color: CommonColors.mainText,
     ...Fonts.defaultRegular,
-    borderLeftWidth: 1,
-    borderRightWidth: 1,
-    borderBottomWidth: 1,
-    borderLeftColor: CommonColors.border,
-    borderRightColor: CommonColors.border,
-    borderBottomColor: CommonColors.border,
   },
   topLabel: {
     fontSize: '16@s',

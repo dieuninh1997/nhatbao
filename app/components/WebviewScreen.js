@@ -7,21 +7,20 @@ import {WebView} from 'react-native-webview';
 import ScaledSheet from '../libs/reactSizeMatter/ScaledSheet';
 import {CommonColors} from '../utils/CommonStyles';
 import Header from './Header';
-import BackIcon from '../../assets/svg/ic_back.svg';
 import MenuIcon from '../../assets/svg/ic_menu.svg';
 import BookmarkIcon from '../../assets/svg/ic_bookmark.svg';
 import CommentIcon from '../../assets/svg/ic_comment.svg';
 import HeartIcon from '../../assets/svg/ic_heart.svg';
 import PlusIcon from '../../assets/svg/ic_plus.svg';
 import ShareIcon from '../../assets/svg/ic_share.svg';
-import I18n from '../i18n/i18n';
+import BackButton from './BackButton';
 
 function WebviewScreen({navigation, route, netInfo}, props) {
   const link = route?.params?.linkUrl;
   return (
     <View style={styles.container}>
       <Header
-        left={<BackIcon width={18} height={18} color={'#000'} />}
+        left={<BackButton />}
         right={
           <View style={styles.row}>
             <ShareIcon width={18} height={18} color={'#000'} />

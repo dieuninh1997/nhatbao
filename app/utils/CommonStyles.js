@@ -25,6 +25,7 @@ class CommonColors {
   static lightText = '#FFF';
 
   static separator = '#F7F7F7';
+  static lightSeparator = '#eaeaea';
   static tabbar = '#0a0a0a';
   static indicatorColor = '#de2828';
   static activeTintColor = '#fdfdfd';
