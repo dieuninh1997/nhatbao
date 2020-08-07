@@ -12,13 +12,15 @@ import NotificationIcon from './assets/svg/ic_bell.svg';
 import FollowIcon from './assets/svg/ic_follow.svg';
 import ExploreIcon from './assets/svg/ic_search.svg';
 import AccountIcon from './assets/svg/ic_user.svg';
+import store from './app/store';
+import WebviewScreen from './app/components/WebviewScreen';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import LabelComponent from './app/components/LabelComponent';
 import {Provider} from 'react-redux';
-import store from './app/store';
+import {RootSiblingParent} from 'react-native-root-siblings';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -141,6 +143,7 @@ const MyStack = () => {
     <Stack.Navigator initialRouteName={'SplashScreen'} headerMode={'none'}>
       <Stack.Screen name="MainScreen" component={MyTabs} />
       <Stack.Screen name="SplashScreen" component={SplashScreen} />
+      <Stack.Screen name="WebviewScreen" component={WebviewScreen} />
     </Stack.Navigator>
   );
 };
@@ -157,7 +160,9 @@ export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <MainScreen />
+        <RootSiblingParent>
+          <MainScreen />
+        </RootSiblingParent>
       </Provider>
     );
   }

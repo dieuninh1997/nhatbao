@@ -3,25 +3,40 @@ import {View} from 'react-native';
 import {CommonActions} from '@react-navigation/native';
 import _ from 'lodash';
 import {connect} from 'react-redux';
+import NetInfo from '@react-native-community/netinfo';
 
 import * as actions from '../../actions';
 import store from '../../store';
 
 async function initData(navigation, dataLoadingState, feeds) {
-  if (!dataLoadingState) {
-    store.dispatch(actions.fetchAllFeeds());
-  } else {
-    if (_.isEmpty(feeds)) {
-      store.dispatch(actions.fetchAllFeeds());
+  //check internet
+  NetInfo.fetch().then((state) => {
+    store.dispatch(actions.changeNetInfo(state.isConnected));
+  });
+
+  NetInfo.addEventListener(async (state) => {
+    const isConnected =
+      state.type === 'none' || state.type === 'unknown' ? false : true;
+    if (!isConnected) {
+      // Utils.showErrorToast({message: 'No internet'});
     } else {
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 1,
-          routes: [{name: 'MainScreen'}],
-        }),
-      );
+      if (!dataLoadingState) {
+        store.dispatch(actions.fetchAllFeeds());
+      } else {
+        if (_.isEmpty(feeds)) {
+          store.dispatch(actions.fetchAllFeeds());
+        } else {
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 1,
+              routes: [{name: 'MainScreen'}],
+            }),
+          );
+        }
+      }
     }
-  }
+    store.dispatch(actions.changeNetInfo(isConnected));
+  });
 }
 
 function SplashScreen({navigation, dataLoadingState, feeds}, props) {

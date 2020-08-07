@@ -1,7 +1,16 @@
 import React from 'react';
-import {View, FlatList, Image, ScrollView} from 'react-native';
+import {
+  View,
+  FlatList,
+  ImageBackground,
+  Image,
+  ScrollView,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import {connect} from 'react-redux';
 import _ from 'lodash';
+import LinearGradient from 'react-native-linear-gradient';
+import {useNavigation} from '@react-navigation/native';
 
 import Text from '../../../components/Text';
 import ScaledSheet from '../../../libs/reactSizeMatter/ScaledSheet';
@@ -9,26 +18,28 @@ import {scale} from '../../../libs/reactSizeMatter/scalingUtils';
 import {CommonColors, Fonts} from '../../../utils/CommonStyles';
 
 const renderItem = ({item, index}) => {
-  console.log('================================================');
-  console.log('item', item);
-  console.log('================================================');
   return (
-    <View
-      style={[
-        styles.itemContainer,
-        index % 2 === 0 ? {marginRight: scale(1)} : {},
-      ]}>
-      <Image
-        style={styles.image}
-        resizeMode={'cover'}
-        source={{uri: item.image}}
-      />
-      <Text style={styles.label}>{item.title}</Text>
-    </View>
+    <TouchableWithoutFeedback onPress={() => {}}>
+      <View
+        style={[
+          styles.itemContainer,
+          index % 2 === 0 ? {marginRight: scale(1)} : {},
+        ]}>
+        <Image
+          style={styles.image}
+          resizeMode={'cover'}
+          source={{uri: item.image}}
+        />
+        <Text style={styles.label} numberOfLines={3} ellipsizeMode="tail">
+          {item.title}
+        </Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
 function ItemTab(props) {
+  const navigation = useNavigation();
   const {data} = props;
   const topImg = data[0];
   const arr = _.toArray(data);
@@ -42,14 +53,36 @@ function ItemTab(props) {
     <View style={styles.container}>
       <ScrollView>
         {/* topView */}
-        <View style={styles.topViewContainer}>
-          <Image
-            style={styles.topImage}
-            resizeMode={'cover'}
-            source={{uri: topImg.image}}
-          />
-          <Text style={styles.topLabel}>{topImg.title}</Text>
-        </View>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            navigation.navigate('WebviewScreen', {linkUrl: topImg.link});
+          }}>
+          <View style={styles.topViewContainer}>
+            <ImageBackground
+              style={styles.topImage}
+              resizeMode={'cover'}
+              source={{uri: topImg.image}}>
+              <LinearGradient
+                ref={(r) => (this.gradiant = r)}
+                locations={[0.5, 0]}
+                colors={[
+                  'rgba(170, 170, 170, 0.1)',
+                  'rgba(115, 115, 115, 1)',
+                  'rgba(255, 255, 255, 0.1)',
+                ]}
+                style={styles.gradientView}
+              />
+            </ImageBackground>
+
+            <Text
+              style={styles.topLabel}
+              numberOfLines={1}
+              ellipsizeMode="tail">
+              {topImg.title}
+            </Text>
+          </View>
+        </TouchableWithoutFeedback>
+
         {/* list */}
         <FlatList
           style={styles.list}
@@ -77,11 +110,15 @@ const styles = ScaledSheet.create({
   },
   topViewContainer: {
     width: 'auto',
-    height: scale(250),
+    height: scale(200),
+  },
+  gradientView: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
   },
   topImage: {
     flex: 1,
-    height: scale(180),
     marginHorizontal: scale(10),
     marginTop: scale(10),
   },
@@ -113,7 +150,8 @@ const styles = ScaledSheet.create({
     color: CommonColors.lightText,
     ...Fonts.defaultBold,
     position: 'absolute',
-    bottom: scale(20),
-    left: scale(20),
+    top: 20,
+    left: 20,
+    width: '80%',
   },
 });
