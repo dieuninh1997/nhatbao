@@ -58,7 +58,7 @@ const MyTabs = () => {
             ),
         }}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         name="FollowScreen"
         component={FollowScreen}
         options={{
@@ -133,7 +133,7 @@ const MyTabs = () => {
               />
             ),
         }}
-      />*/}
+      />
     </Tab.Navigator>
   );
 };
@@ -141,8 +141,9 @@ const MyTabs = () => {
 const MyStack = () => {
   return (
     <Stack.Navigator initialRouteName={'SplashScreen'} headerMode={'none'}>
-      <Stack.Screen name="MainScreen" component={MyTabs} />
+      {/* <Stack.Screen name="MainScreen" component={MyTabs} /> */}
       <Stack.Screen name="SplashScreen" component={SplashScreen} />
+      <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="WebviewScreen" component={WebviewScreen} />
     </Stack.Navigator>
   );

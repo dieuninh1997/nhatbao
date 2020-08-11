@@ -1,6 +1,7 @@
 export default {
   HomeScreen: {
     header: 'Home',
+    forYou: 'For you',
   },
   AccountScreen: {
     header: 'Account',

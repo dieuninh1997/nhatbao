@@ -29,7 +29,7 @@ async function initData(navigation, dataLoadingState, feeds) {
           navigation.dispatch(
             CommonActions.reset({
               index: 1,
-              routes: [{name: 'MainScreen'}],
+              routes: [{name: 'HomeScreen'}],
             }),
           );
         }

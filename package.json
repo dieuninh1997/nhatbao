@@ -21,7 +21,7 @@
     "lodash": "^4.17.19",
     "react": "16.13.1",
     "react-native": "0.63.2",
-    "react-native-flip-page": "^0.5.0",
+    "react-native-flip-page": "https://github.com/dieuninh1997/react-native-flip-page.git",
     "react-native-gesture-handler": "^1.7.0",
     "react-native-i18n": "^2.0.15",
     "react-native-linear-gradient": "^2.5.6",

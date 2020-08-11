@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {
   View,
   TouchableWithoutFeedback,
   ImageBackground,
   Dimensions,
   Image,
-  ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import FlipPage, {FlipPagePage} from 'react-native-flip-page';
 import {connect} from 'react-redux';
@@ -15,9 +15,8 @@ import Text from '../../../components/Text';
 import ScaledSheet from '../../../libs/reactSizeMatter/ScaledSheet';
 import {scale} from '../../../libs/reactSizeMatter/scalingUtils';
 import {CommonColors, Fonts} from '../../../utils/CommonStyles';
-import Header from '../../../components/Header';
-import Utils from '../../../utils/Utils';
-import Flipboard from '../../../components/Flipboard';
+import I18n from '../../../i18n/i18n';
+import CloseIcon from '../../../../assets/svg/ic_close.svg';
 
 const renderTopPage = (navigation, data) => {
   const topImg = data[0];
@@ -82,34 +81,24 @@ const renderTopPage = (navigation, data) => {
 
 function ForYouTab({navigation, value}) {
   const feeds = _.get(value, 'feeds', {});
-  const beauty = feeds ? feeds.beauty : [];
-  const arrBeauty = _.map(beauty, (val, key) => ({key, val}));
-  const topPage = arrBeauty ? arrBeauty.slice(0, 3) : [];
+  const arrFeeds = _.map(feeds, (val, key) => ({key, val}));
+  const data = arrFeeds ? arrFeeds[0].val : [];
+  const arrData = _.map(data, (val, key) => ({key, val}));
+  const topPage = arrData ? arrData.slice(0, 3) : [];
   let images = [];
-  arrBeauty.map((item, index) => {
-    if (index >= 0 && index < 5) {
+
+  const [resetPage, setResetPage] = useState(false);
+  const flipPageRef = useRef(null);
+
+  arrData.map((item, index) => {
+    if (index > 2) {
       images.push(item);
     }
   });
 
   return (
     <View style={styles.container}>
-      {/* {images.map((item, index) => {
-        const current = item;
-        const prev = images[index - 1];
-        const next = images[index + 1];
-
-        if (!prev || !next) {
-          return <View key={index} />;
-        }
-        if (prev) {
-          return <Flipboard key={index} front={current} back={prev} />;
-        }
-        if (next) {
-          return <Flipboard key={index} front={current} back={next} bottom />;
-        }
-      })} */}
-      <FlipPage>
+      <FlipPage ref={flipPageRef}>
         <FlipPagePage>{renderTopPage(navigation, topPage)}</FlipPagePage>
 
         {images.length > 0 &&
@@ -138,6 +127,21 @@ function ForYouTab({navigation, value}) {
             );
           })}
       </FlipPage>
+      {/* footer */}
+      {/* {flipPageRef?.current?.state?.page !== 0 && (
+        <View style={styles.footer}>
+          <TouchableOpacity
+            style={{alignSelf: 'center'}}
+            onPress={() => {
+              flipPageRef.current.resetPage();
+            }}>
+            <CloseIcon width={15} height={15} color={'#FFF'} />
+          </TouchableOpacity>
+          <Text style={styles.footerTitle}>
+            {I18n.t('HomeScreen.forYou').toUpperCase()}
+          </Text>
+        </View>
+      )} */}
     </View>
   );
 }
@@ -205,4 +209,19 @@ const styles = ScaledSheet.create({
     marginTop: scale(10),
   },
   page: {},
+  footer: {
+    height: scale(40),
+    backgroundColor: CommonColors.mainText,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    paddingHorizontal: scale(16),
+  },
+  footerTitle: {
+    alignSelf: 'center',
+    fontSize: scale(16),
+    color: '#FFF',
+    flex: 1,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
 });
