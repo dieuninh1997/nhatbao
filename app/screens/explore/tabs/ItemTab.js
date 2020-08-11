@@ -17,32 +17,15 @@ import ScaledSheet from '../../../libs/reactSizeMatter/ScaledSheet';
 import {scale} from '../../../libs/reactSizeMatter/scalingUtils';
 import {CommonColors, Fonts} from '../../../utils/CommonStyles';
 
-const renderItem = ({item, index}) => {
-  return (
-    <TouchableWithoutFeedback onPress={() => {}}>
-      <View
-        style={[
-          styles.itemContainer,
-          index % 2 === 0 ? {marginRight: scale(1)} : {},
-        ]}>
-        <Image
-          style={styles.image}
-          resizeMode={'cover'}
-          source={{uri: item.image}}
-        />
-        <Text style={styles.label} numberOfLines={3} ellipsizeMode="tail">
-          {item.title}
-        </Text>
-      </View>
-    </TouchableWithoutFeedback>
-  );
-};
-
 function ItemTab(props) {
   const navigation = useNavigation();
   const {data} = props;
-  const topImg = data[0];
-  const arr = _.toArray(data);
+  const arr = _.map(data, (val, key) => ({key, val}));
+  const topImg = arr[0];
+  console.log('================================================');
+  console.log('arr', arr);
+  console.log('topImg', topImg);
+  console.log('================================================');
   let images = [];
   arr.map((item, index) => {
     if (index > 0) {
@@ -55,13 +38,13 @@ function ItemTab(props) {
         {/* topView */}
         <TouchableWithoutFeedback
           onPress={() => {
-            navigation.navigate('WebviewScreen', {linkUrl: topImg.link});
+            navigation.navigate('WebviewScreen', {linkUrl: topImg.val.link});
           }}>
           <View style={styles.topViewContainer}>
             <ImageBackground
               style={styles.topImage}
               resizeMode={'cover'}
-              source={{uri: topImg.image}}>
+              source={{uri: topImg.val.image}}>
               {/* <LinearGradient
                 ref={(r) => (this.gradiant = r)}
                 locations={[0.5, 0]}
@@ -78,7 +61,7 @@ function ItemTab(props) {
               style={styles.topLabel}
               numberOfLines={1}
               ellipsizeMode="tail">
-              {topImg.title}
+              {topImg.val.title}
             </Text>
           </View>
         </TouchableWithoutFeedback>
@@ -90,7 +73,34 @@ function ItemTab(props) {
           numColumns={2}
           data={images}
           keyExtractor={(item, index) => `${item} + ${index}`}
-          renderItem={renderItem}
+          renderItem={({item, index}) => {
+            return (
+              <TouchableWithoutFeedback
+                onPress={() => {
+                  navigation.navigate('WebviewScreen', {
+                    linkUrl: item.val.link,
+                  });
+                }}>
+                <View
+                  style={[
+                    styles.itemContainer,
+                    index % 2 === 0 ? {marginRight: scale(1)} : {},
+                  ]}>
+                  <Image
+                    style={styles.image}
+                    resizeMode={'cover'}
+                    source={{uri: item.val.image}}
+                  />
+                  <Text
+                    style={styles.label}
+                    numberOfLines={3}
+                    ellipsizeMode="tail">
+                    {item.val.title}
+                  </Text>
+                </View>
+              </TouchableWithoutFeedback>
+            );
+          }}
         />
       </ScrollView>
     </View>

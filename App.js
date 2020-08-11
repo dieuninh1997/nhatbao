@@ -28,7 +28,7 @@ const Stack = createStackNavigator();
 const MyTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName={'ExploreScreen'}
+      initialRouteName={'HomeScreen'}
       tabBarOptions={{
         showLabel: false,
         activeTintColor: CommonColors.activeTintColor,
@@ -58,7 +58,7 @@ const MyTabs = () => {
             ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="FollowScreen"
         component={FollowScreen}
         options={{
@@ -133,7 +133,7 @@ const MyTabs = () => {
               />
             ),
         }}
-      />
+      />*/}
     </Tab.Navigator>
   );
 };

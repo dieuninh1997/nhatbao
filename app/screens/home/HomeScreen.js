@@ -32,6 +32,10 @@ const HomeTabs = () => {
           backgroundColor: CommonColors.indicatorColor,
           height: 2,
         },
+        tabStyle: {
+          width: 'auto',
+          marginHorizontal: scale(5),
+        },
       }}>
       <Tab.Screen
         name="ForYou"
@@ -91,13 +95,6 @@ const HomeTabs = () => {
 function HomeScreen({navigation}) {
   return (
     <View style={styles.container}>
-      {/* <Header
-        center={
-          <Text style={CommonStyles.headerTitle}>
-            {I18n.t('HomeScreen.header')}
-          </Text>
-        }
-      /> */}
       <HomeTabs />
     </View>
   );
