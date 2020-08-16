@@ -22,10 +22,7 @@ function ItemTab(props) {
   const {data} = props;
   const arr = _.map(data, (val, key) => ({key, val}));
   const topImg = arr[0];
-  console.log('================================================');
-  console.log('arr', arr);
-  console.log('topImg', topImg);
-  console.log('================================================');
+
   let images = [];
   arr.map((item, index) => {
     if (index > 0) {
@@ -44,19 +41,18 @@ function ItemTab(props) {
             <ImageBackground
               style={styles.topImage}
               resizeMode={'cover'}
-              source={{uri: topImg.val.image}}>
-              {/* <LinearGradient
-                ref={(r) => (this.gradiant = r)}
-                locations={[0.5, 0]}
-                colors={[
-                  'rgba(170, 170, 170, 0.1)',
-                  'rgba(115, 115, 115, 1)',
-                  'rgba(255, 255, 255, 0.1)',
-                ]}
-                style={styles.gradientView}
-              /> */}
-            </ImageBackground>
-
+              source={{uri: topImg.val.image}}
+            />
+            <LinearGradient
+              start={{x: 0, y: 0}}
+              end={{x: 0, y: 1}}
+              colors={[
+                'rgba(0, 0, 0, 0.8)',
+                'rgba(0, 0, 0, 0.2)',
+                'rgba(238, 238, 238, 0.1)',
+              ]}
+              style={styles.gradientView}
+            />
             <Text
               style={styles.topLabel}
               numberOfLines={1}
@@ -84,16 +80,26 @@ function ItemTab(props) {
                 <View
                   style={[
                     styles.itemContainer,
-                    index % 2 === 0 ? {marginRight: scale(1)} : {},
+                    index % 2 === 0 ? {paddingRight: 0} : {},
                   ]}>
                   <Image
                     style={styles.image}
                     resizeMode={'cover'}
                     source={{uri: item.val.image}}
                   />
+                  <LinearGradient
+                    start={{x: 0, y: 0}}
+                    end={{x: 0, y: 1}}
+                    colors={[
+                      'rgba(0, 0, 0, 0.8)',
+                      'rgba(0, 0, 0, 0.2)',
+                      'rgba(238, 238, 238, 0.1)',
+                    ]}
+                    style={styles.gradientView}
+                  />
                   <Text
                     style={styles.label}
-                    numberOfLines={3}
+                    numberOfLines={2}
                     ellipsizeMode="tail">
                     {item.val.title}
                   </Text>
@@ -124,6 +130,9 @@ const styles = ScaledSheet.create({
   },
   gradientView: {
     position: 'absolute',
+    zIndex: 100,
+    top: 10,
+    left: 10,
     width: '100%',
     height: '100%',
   },
@@ -135,27 +144,31 @@ const styles = ScaledSheet.create({
   image: {
     width: 'auto',
     height: scale(150),
-    marginBottom: scale(10),
   },
   itemContainer: {
     flex: 1,
-    height: scale(250),
+    height: scale(150),
     backgroundColor: '#FFF',
     padding: scale(10),
-    marginBottom: scale(1),
   },
   label: {
     fontSize: '14@s',
-    color: CommonColors.mainText,
+    color: CommonColors.lightText,
     ...Fonts.defaultRegular,
+    position: 'absolute',
+    top: 0,
+    zIndex: 1000,
+    flexWrap: 'wrap',
+    padding: '15@s',
   },
   topLabel: {
     fontSize: '16@s',
     color: CommonColors.lightText,
     ...Fonts.defaultBold,
     position: 'absolute',
-    top: 20,
-    left: 20,
+    top: 0,
     width: '80%',
+    zIndex: 1000,
+    padding: '20@s',
   },
 });

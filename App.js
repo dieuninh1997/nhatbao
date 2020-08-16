@@ -14,6 +14,7 @@ import ExploreIcon from './assets/svg/ic_search.svg';
 import AccountIcon from './assets/svg/ic_user.svg';
 import store from './app/store';
 import WebviewScreen from './app/components/WebviewScreen';
+import FollowItem from './app/screens/follow/FollowItem';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -88,7 +89,7 @@ const MyTabs = () => {
             ),
         }}
       />
-      <Tab.Screen
+      {/*  <Tab.Screen
         name="NotificationScreen"
         component={NotificationScreen}
         options={{
@@ -111,7 +112,7 @@ const MyTabs = () => {
             ),
         }}
       />
-      <Tab.Screen
+     <Tab.Screen
         name="AccountScreen"
         component={AccountScreen}
         options={{
@@ -133,7 +134,7 @@ const MyTabs = () => {
               />
             ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };
@@ -141,9 +142,11 @@ const MyTabs = () => {
 const MyStack = () => {
   return (
     <Stack.Navigator initialRouteName={'SplashScreen'} headerMode={'none'}>
-      {/* <Stack.Screen name="MainScreen" component={MyTabs} /> */}
+      <Stack.Screen name="MainScreen" component={MyTabs} />
       <Stack.Screen name="SplashScreen" component={SplashScreen} />
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen name="FollowScreen" component={FollowScreen} />
+      <Stack.Screen name="FollowItem" component={FollowItem} />
       <Stack.Screen name="WebviewScreen" component={WebviewScreen} />
     </Stack.Navigator>
   );

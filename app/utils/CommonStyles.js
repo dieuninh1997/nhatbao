@@ -52,11 +52,7 @@ class CommonSize {
   static btnSubmitHeight = scale(35);
 
   static paddingTopHeader =
-    Platform.OS === 'ios'
-      ? Utils.isIphoneX()
-        ? scale(34)
-        : scale(20)
-      : StatusBar.currentHeight;
+    Platform.OS === 'ios' ? (Utils.isIphoneX() ? scale(34) : scale(20)) : 0; //StatusBar.currentHeight;
 
   static headerHeight = scale(59) + CommonSize.paddingTopHeader;
 

@@ -21,15 +21,21 @@ async function initData(navigation, dataLoadingState, feeds) {
       // Utils.showErrorToast({message: 'No internet'});
     } else {
       if (!dataLoadingState) {
+        console.log('================================================');
+        console.log('dataLoadingState', dataLoadingState);
+        console.log('================================================');
         store.dispatch(actions.fetchAllFeeds());
       } else {
         if (_.isEmpty(feeds)) {
+          console.log('================================================');
+          console.log('feeds', feeds);
+          console.log('================================================');
           store.dispatch(actions.fetchAllFeeds());
         } else {
           navigation.dispatch(
             CommonActions.reset({
               index: 1,
-              routes: [{name: 'HomeScreen'}],
+              routes: [{name: 'MainScreen'}],
             }),
           );
         }
@@ -46,7 +52,15 @@ function SplashScreen({navigation, dataLoadingState, feeds}, props) {
       .catch();
   }, [feeds, dataLoadingState, navigation]);
 
-  return <View />;
+  return (
+    <View style={{flex: 1, backgroundColor: 'rgb(100, 200, 300)'}}>
+      {/* <Image
+        resizeMode="cover"
+        style={styles.logoStyle}
+        source={require('../../assets/images/splash_screen/splash_screen.jpg')}
+      /> */}
+    </View>
+  );
 }
 
 export default connect((state) => ({

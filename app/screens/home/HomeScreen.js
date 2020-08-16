@@ -12,6 +12,9 @@ import TodayTab from './tabs/TodayTab';
 import DailyEditionTab from './tabs/DailyEditionTab';
 import {scale} from '../../libs/reactSizeMatter/scalingUtils';
 import LabelComponent from '../../components/LabelComponent';
+import TabItem from './TabItem';
+import {connect} from 'react-redux';
+import _ from 'lodash';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -92,15 +95,66 @@ const HomeTabs = () => {
   );
 };
 
-function HomeScreen({navigation}) {
+// const HomeTabs = (props) => {
+//   const keys = Object.keys(props.data);
+
+//   return (
+//     <Tab.Navigator
+//       initialLayout={{
+//         width: Dimensions.get('window').width,
+//       }}
+//       tabBarOptions={{
+//         style: {
+//           marginTop: CommonSize.paddingTopHeader,
+//         },
+//         tabStyle: {
+//           width: 'auto',
+//           marginHorizontal: scale(5),
+//         },
+//         scrollEnabled: true,
+//         activeTintColor: CommonColors.primaryText,
+//         inactiveTintColor: CommonColors.secondaryText,
+//         indicatorStyle: {
+//           backgroundColor: CommonColors.indicatorColor,
+//           height: 2,
+//         },
+//       }}>
+//       {keys.map((item, index) => {
+//         return (
+//           <Tab.Screen
+//             key={index}
+//             name={item}
+//             options={{
+//               tabBarLabel: ({focused}) => (
+//                 <LabelComponent
+//                   title={item.toUpperCase()}
+//                   focused={focused}
+//                   style={{
+//                     color: focused
+//                       ? CommonColors.indicatorColor
+//                       : CommonColors.hintTextColor,
+//                   }}
+//                 />
+//               ),
+//             }}>
+//             {() => <TabItem data={props.data[item]} />}
+//           </Tab.Screen>
+//         );
+//       })}
+//     </Tab.Navigator>
+//   );
+// };
+
+function HomeScreen({navigation, value}) {
   return (
     <View style={styles.container}>
       <HomeTabs />
     </View>
   );
 }
-
-export default HomeScreen;
+export default connect((state) => ({
+  value: state.feeds,
+}))(HomeScreen);
 
 const styles = ScaledSheet.create({
   container: {

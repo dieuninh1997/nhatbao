@@ -1,5 +1,14 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {
+  View,
+  FlatList,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
+import {connect} from 'react-redux';
+import _ from 'lodash';
+import LinearGradient from 'react-native-linear-gradient';
 
 import Text from '../../components/Text';
 import Header from '../../components/Header';
@@ -7,30 +16,137 @@ import {CommonStyles, CommonColors} from '../../utils/CommonStyles';
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import I18n from '../../i18n/i18n';
 import ReloadIcon from '../../../assets/svg/ic_reload.svg';
+import {scale} from '../../libs/reactSizeMatter/scalingUtils';
+import MenuIcon from '../../../assets/svg/ic_menu.svg';
 
-function FollowScreen({navigation}) {
+const renderHeader = () => {
+  return (
+    <Header
+      left={
+        <Text style={[CommonStyles.headerTitle, styles.header]}>
+          {I18n.t('FollowScreen.header')}
+        </Text>
+      }
+      right={<ReloadIcon color={'#989898'} width={20} height={20} />}
+    />
+  );
+};
+
+const renderItem = (item, index, navigation, feeds) => {
+  const data = feeds[`${item}`];
+  const arrData = _.map(data, (val, key) => ({key, val}));
+  const thumbnai = arrData.length > 0 ? arrData[0].val.image : null;
+
+  return (
+    <TouchableOpacity
+      style={styles.itemContainer}
+      onPress={() => {
+        navigation.navigate('FollowItem', {
+          value: item,
+        });
+      }}>
+      <View>
+        {!thumbnai ? (
+          <Image
+            style={styles.thumbnai}
+            source={require('../../../assets/images/img_placeholder.png')}
+          />
+        ) : (
+          <Image style={styles.thumbnai} source={{uri: thumbnai}} />
+        )}
+        <LinearGradient
+          start={{x: 0, y: 0}}
+          end={{x: 0, y: 1}}
+          colors={[
+            'rgba(0, 0, 0, 0.8)',
+            'rgba(0, 0, 0, 0.2)',
+            'rgba(238, 238, 238, 0.1)',
+          ]}
+          style={styles.linearGradient}
+        />
+        <View style={[styles.row, styles.itemHeader]}>
+          <Text style={styles.title}>{item}</Text>
+          <MenuIcon width={15} height={15} color={'#f8f8f8'} />
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+function FollowScreen({navigation, value}) {
+  const feeds = _.get(value, 'feeds', {});
+  const data = Object.keys(feeds);
+
   return (
     <View style={styles.container}>
-      <Header
-        left={
-          <Text
-            style={[
-              CommonStyles.headerTitle,
-              {textTransform: 'uppercase', color: CommonColors.primaryText},
-            ]}>
-            {I18n.t('FollowScreen.header')}
-          </Text>
+      {renderHeader()}
+      {/* list feeds */}
+      <FlatList
+        style={styles.flexOne}
+        data={data}
+        keyExtractor={(item, index) => `${item.id}_${index}`}
+        renderItem={({item, index}) =>
+          renderItem(item, index, navigation, feeds)
         }
-        right={<ReloadIcon color={'#989898'} width={20} height={20} />}
+        numColumns={2}
+        ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
     </View>
   );
 }
 
-export default FollowScreen;
+export default connect((state) => ({
+  value: state.feeds,
+}))(FollowScreen);
 
+const {width, height} = Dimensions.get('window');
 const styles = ScaledSheet.create({
   container: {
     flex: 1,
+  },
+  header: {
+    textTransform: 'uppercase',
+    color: CommonColors.primaryText,
+  },
+  flexOne: {
+    flex: 1,
+  },
+  itemContainer: {
+    flex: 1,
+    height: width / 2 - 5,
+    margin: 1,
+  },
+  thumbnai: {
+    width: '100%',
+    height: '100%',
+  },
+  separator: {
+    width: 1,
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  linearGradient: {
+    width: '100%',
+    height: '100%',
+    zIndex: 100,
+    position: 'absolute',
+    top: 0,
+  },
+  itemHeader: {
+    position: 'absolute',
+    top: 0,
+    padding: scale(10),
+    zIndex: 1000,
+    width: '100%',
+    height: '40@s',
+    alignItems: 'center',
+  },
+  title: {
+    flex: 1,
+    fontSize: '16@ms',
+    color: '#f8f8f8',
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
   },
 });
