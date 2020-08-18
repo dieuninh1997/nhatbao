@@ -3,6 +3,7 @@ import {
   SHOW_LOADING,
   DATA_LOADING,
   FETCH_ALL_FEEDS_SUCCESS,
+  FETCH_ALL_TOPICS_SUCCESS,
 } from '../actions/types';
 
 const initialState = {
@@ -18,6 +19,7 @@ export default function (state = initialState, action) {
       return {loading: false};
     case DATA_LOADING:
     case FETCH_ALL_FEEDS_SUCCESS:
+    case FETCH_ALL_TOPICS_SUCCESS:
       return {dataLoadingState: true};
     default:
       return state;

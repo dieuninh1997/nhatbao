@@ -21,4 +21,5 @@ export default class Utils {
   static getScreenHeight() {
     return Utils.screenHeight;
   }
+  
 }

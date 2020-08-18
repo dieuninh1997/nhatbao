@@ -15,9 +15,6 @@ async function loadAllFeeds() {
 function* fetchAllFeeds() {
   try {
     const response = yield call(loadAllFeeds);
-    console.log('================================================');
-    console.log('response', response);
-    console.log('================================================');
     if (response) {
       yield put({
         type: actionTypes.FETCH_ALL_FEEDS_SUCCESS,

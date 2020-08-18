@@ -8,7 +8,7 @@ import NetInfo from '@react-native-community/netinfo';
 import * as actions from '../../actions';
 import store from '../../store';
 
-async function initData(navigation, dataLoadingState, feeds) {
+async function initData(navigation, dataLoadingState, feeds, topics) {
   //check internet
   NetInfo.fetch().then((state) => {
     store.dispatch(actions.changeNetInfo(state.isConnected));
@@ -21,16 +21,12 @@ async function initData(navigation, dataLoadingState, feeds) {
       // Utils.showErrorToast({message: 'No internet'});
     } else {
       if (!dataLoadingState) {
-        console.log('================================================');
-        console.log('dataLoadingState', dataLoadingState);
-        console.log('================================================');
         store.dispatch(actions.fetchAllFeeds());
+        store.dispatch(actions.fetchAllTopics());
       } else {
-        if (_.isEmpty(feeds)) {
-          console.log('================================================');
-          console.log('feeds', feeds);
-          console.log('================================================');
+        if (_.isEmpty(feeds) || _.isEmpty(topics)) {
           store.dispatch(actions.fetchAllFeeds());
+          store.dispatch(actions.fetchAllTopics());
         } else {
           navigation.dispatch(
             CommonActions.reset({
@@ -45,12 +41,12 @@ async function initData(navigation, dataLoadingState, feeds) {
   });
 }
 
-function SplashScreen({navigation, dataLoadingState, feeds}, props) {
+function SplashScreen({navigation, dataLoadingState, feeds, topics}, props) {
   useEffect(() => {
-    initData(navigation, dataLoadingState, feeds)
+    initData(navigation, dataLoadingState, feeds, topics)
       .then((r) => {})
       .catch();
-  }, [feeds, dataLoadingState, navigation]);
+  }, [feeds, topics, dataLoadingState, navigation]);
 
   return (
     <View style={{flex: 1, backgroundColor: 'rgb(100, 200, 300)'}}>
@@ -66,4 +62,5 @@ function SplashScreen({navigation, dataLoadingState, feeds}, props) {
 export default connect((state) => ({
   dataLoadingState: state.loading.dataLoadingState,
   feeds: state.feeds,
+  topics: state.topics,
 }))(SplashScreen);

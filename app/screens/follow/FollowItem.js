@@ -13,7 +13,6 @@ import {connect} from 'react-redux';
 import _ from 'lodash';
 import LinearGradient from 'react-native-linear-gradient';
 import FastImage from 'react-native-fast-image';
-import {optimizeHeavyScreen} from 'react-navigation-heavy-screen';
 
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import Text from '../../components/Text';
@@ -196,7 +195,7 @@ function FollowItem({navigation, route, value}) {
 
 export default connect((state) => ({
   value: state.feeds,
-}))(optimizeHeavyScreen(FollowItem));
+}))(FollowItem);
 
 const {width, height} = Dimensions.get('window');
 

@@ -8,6 +8,8 @@ export const hideLoading = () => ({type: actionTypes.HIDE_LOADING});
 
 export const fetchAllFeeds = () => ({type: actionTypes.FETCH_ALL_FEEDS});
 
+export const fetchAllTopics = () => ({type: actionTypes.FETCH_ALL_TOPICS});
+
 export const changeNetInfo = (params) => {
   return {type: actionTypes.CHANGE_NET_INFO, payload: params};
 };
