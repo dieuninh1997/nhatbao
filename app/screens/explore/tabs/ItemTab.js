@@ -6,6 +6,7 @@ import {
   Image,
   TouchableWithoutFeedback,
   ScrollView,
+  SafeAreaView,
 } from 'react-native';
 import {connect} from 'react-redux';
 import _ from 'lodash';
@@ -29,86 +30,83 @@ function ItemTab(props) {
       images.push(item);
     }
   });
+  const getHeader = () => {
+    return (
+      <TouchableWithoutFeedback
+        onPress={() => {
+          navigation.navigate('WebviewScreen', {linkUrl: topImg.val.link});
+        }}>
+        <View style={styles.topViewContainer}>
+          <ImageBackground
+            style={styles.topImage}
+            resizeMode={'cover'}
+            source={{uri: topImg.val.image}}
+          />
+          <LinearGradient
+            start={{x: 0, y: 0}}
+            end={{x: 0, y: 1}}
+            colors={[
+              'rgba(0, 0, 0, 0.8)',
+              'rgba(0, 0, 0, 0.2)',
+              'rgba(238, 238, 238, 0.1)',
+            ]}
+            style={styles.gradientView}
+          />
+          <Text style={styles.topLabel} numberOfLines={1} ellipsizeMode="tail">
+            {topImg.val.title}
+          </Text>
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  };
   return (
     <View style={styles.container}>
-      <ScrollView>
-        {/* topView */}
-        <TouchableWithoutFeedback
-          onPress={() => {
-            navigation.navigate('WebviewScreen', {linkUrl: topImg.val.link});
-          }}>
-          <View style={styles.topViewContainer}>
-            <ImageBackground
-              style={styles.topImage}
-              resizeMode={'cover'}
-              source={{uri: topImg.val.image}}
-            />
-            <LinearGradient
-              start={{x: 0, y: 0}}
-              end={{x: 0, y: 1}}
-              colors={[
-                'rgba(0, 0, 0, 0.8)',
-                'rgba(0, 0, 0, 0.2)',
-                'rgba(238, 238, 238, 0.1)',
-              ]}
-              style={styles.gradientView}
-            />
-            <Text
-              style={styles.topLabel}
-              numberOfLines={1}
-              ellipsizeMode="tail">
-              {topImg.val.title}
-            </Text>
-          </View>
-        </TouchableWithoutFeedback>
-
-        {/* list */}
-        <FlatList
-          style={styles.list}
-          horizontal={false}
-          numColumns={2}
-          data={images}
-          keyExtractor={(item, index) => `${item} + ${index}`}
-          renderItem={({item, index}) => {
-            return (
-              <TouchableWithoutFeedback
-                onPress={() => {
-                  navigation.navigate('WebviewScreen', {
-                    linkUrl: item.val.link,
-                  });
-                }}>
-                <View
-                  style={[
-                    styles.itemContainer,
-                    index % 2 === 0 ? {paddingRight: 0} : {},
-                  ]}>
-                  <Image
-                    style={styles.image}
-                    resizeMode={'cover'}
-                    source={{uri: item.val.image}}
-                  />
-                  <LinearGradient
-                    start={{x: 0, y: 0}}
-                    end={{x: 0, y: 1}}
-                    colors={[
-                      'rgba(0, 0, 0, 0.8)',
-                      'rgba(0, 0, 0, 0.2)',
-                      'rgba(238, 238, 238, 0.1)',
-                    ]}
-                    style={styles.gradientView}
-                  />
-                  <Text
-                    style={styles.label}
-                    numberOfLines={2}
-                    ellipsizeMode="tail">
-                    {item.val.title}
-                  </Text>
-                </View>
-              </TouchableWithoutFeedback>
-            );
-          }}
-        />
-      </ScrollView>
+      {/* list */}
+      <FlatList
+        style={styles.list}
+        numColumns={2}
+        data={images}
+        keyExtractor={(item, index) => `${item} + ${index}`}
+        ListHeaderComponent={getHeader}
+        renderItem={({item, index}) => {
+          return (
+            <TouchableWithoutFeedback
+              onPress={() => {
+                navigation.navigate('WebviewScreen', {
+                  linkUrl: item.val.link,
+                });
+              }}>
+              <View
+                style={[
+                  styles.itemContainer,
+                  index % 2 === 0 ? {paddingRight: 0} : {},
+                ]}>
+                <Image
+                  style={styles.image}
+                  resizeMode={'cover'}
+                  source={{uri: item.val.image}}
+                />
+                <LinearGradient
+                  start={{x: 0, y: 0}}
+                  end={{x: 0, y: 1}}
+                  colors={[
+                    'rgba(0, 0, 0, 0.8)',
+                    'rgba(0, 0, 0, 0.2)',
+                    'rgba(238, 238, 238, 0.1)',
+                  ]}
+                  style={styles.gradientView}
+                />
+                <Text
+                  style={styles.label}
+                  numberOfLines={2}
+                  ellipsizeMode="tail">
+                  {item.val.title}
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
+          );
+        }}
+      />
     </View>
   );
 }
