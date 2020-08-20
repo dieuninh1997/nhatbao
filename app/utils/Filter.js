@@ -1,5 +1,6 @@
 import moment from 'moment-timezone';
 import * as RNLocalize from 'react-native-localize';
+import I18n from '../i18n/i18n';
 
 function getDateTime(timestamp) {
   return moment.unix(timestamp).format('DD-MM-YYYY HH:mm:ss');
@@ -23,11 +24,11 @@ function getDiffHours(date) {
   const h = Math.abs(Math.round(duration / 3600));
   const d = Math.abs(Math.round(h / 24));
   if (h >= 24) {
-    return `${d} days`;
+    return I18n.t('common.daysAgo', {d});
   } else if (h > 0 && h <= 24) {
-    return `${h} hours`;
+    return I18n.t('common.hoursAgo', {h});
   } else {
-    return `${m} minutes`;
+    return I18n.t('common.minutesAgo', {m});
   }
 }
 

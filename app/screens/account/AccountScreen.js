@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Switch, Image} from 'react-native';
+import {View, Switch, Image, TouchableOpacity} from 'react-native';
 
 import Text from '../../components/Text';
 import Header from '../../components/Header';
@@ -9,7 +9,6 @@ import I18n from '../../i18n/i18n';
 import AddUserIcon from '../../../assets/svg/ic_add_user.svg';
 import SettingIcon from '../../../assets/svg/ic_settings';
 import {scale} from '../../libs/reactSizeMatter/scalingUtils';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import AvatarIcon from '../../../assets/svg/ic_avatar_user.svg';
 
 function AccountScreen({navigation}) {
@@ -30,8 +29,19 @@ function AccountScreen({navigation}) {
         }
       />
       <View style={styles.profile}>
+        <Text style={styles.profileTitle}>
+          {I18n.t('AccountScreen.yourProfile')}
+        </Text>
         <AvatarIcon width={50} height={50} color="#ccc" />
-        <Text style={styles.title}>{I18n.t('AccountScreen.yourProfile')}</Text>
+        <View style={styles.rowBtn}>
+          <TouchableOpacity style={styles.btnContainer}>
+            <Text style={styles.btnName}>{I18n.t('SettingScreen.signUp')}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.roundBtnContainer, {marginLeft: scale(10)}]}>
+            <Text style={styles.roundBtnName}>Log in</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -49,16 +59,51 @@ const styles = ScaledSheet.create({
   space: {
     width: '20@s',
   },
+  rowBtn: {
+    flexDirection: 'row',
+    marginTop: '10@s',
+  },
   profile: {
-    padding: '10@s',
+    paddingHorizontal: '10@s',
     flex: 1,
     backgroundColor: '#FFF',
+    marginVertical: '10@s',
   },
-  title: {
+  profileTitle: {
     fontSize: '16@ms',
     color: CommonColors.mainText,
     ...Fonts.defaultBold,
     marginTop: '10@s',
+    textTransform: 'uppercase',
+    marginVertical: '10@s',
+  },
+  btnContainer: {
+    height: '40@s',
+    backgroundColor: CommonColors.indicatorColor,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '3@s',
+  },
+  roundBtnContainer: {
+    height: '40@s',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '3@s',
+    borderWidth: 1,
+    borderColor: CommonColors.indicatorColor,
+  },
+  roundBtnName: {
+    fontSize: '16@ms',
+    color: CommonColors.indicatorColor,
+    ...Fonts.defaultBold,
+    textTransform: 'uppercase',
+  },
+  btnName: {
+    fontSize: '16@ms',
+    color: CommonColors.lightText,
+    ...Fonts.defaultBold,
     textTransform: 'uppercase',
   },
 });

@@ -1,6 +1,9 @@
 export default {
   common: {
     appName: 'nhatbao',
+    daysAgo: '{{d}} ngày trước',
+    hoursAgo: '{{h}} giờ trước',
+    minutesAgo: '{{m}} phút trước',
   },
   HomeScreen: {
     header: 'Trang Chủ',
@@ -29,5 +32,7 @@ export default {
     language: 'Ngôn ngữ',
     en: 'English',
     vn: 'Tiếng Việt',
+    signUp: 'Đăng kí',
+    logIn: 'Đăng nhập'
   },
 };

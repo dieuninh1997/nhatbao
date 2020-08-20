@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {View, Switch, Image, TouchableWithoutFeedback} from 'react-native';
+import {
+  View,
+  Switch,
+  Image,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+} from 'react-native';
 import {connect} from 'react-redux';
 
 import Text from '../../components/Text';
@@ -11,12 +17,12 @@ import AddUserIcon from '../../../assets/svg/ic_add_user.svg';
 import SettingIcon from '../../../assets/svg/ic_settings';
 import {scale} from '../../libs/reactSizeMatter/scalingUtils';
 import AvatarIcon from '../../../assets/svg/ic_avatar_user.svg';
-import BackButton from '../../components/BackButton';
 import LanguageIcon from '../../../assets/svg/ic_language.svg';
 import ArrowIcon from '../../../assets/svg/ic_next.svg';
 import AppPreferences from '../../utils/AppPreferences';
 import store from '../../store';
 import * as actions from '../../actions';
+import BackButton from '../../components/BackButton';
 
 function SettingScreen({navigation, language}) {
   const [userLocale, setUserLocale] = useState(language);
@@ -39,47 +45,56 @@ function SettingScreen({navigation, language}) {
           </Text>
         }
       />
-      <TouchableWithoutFeedback
-        onPress={() => {
-          setShowLanguage(!showLanguage);
-        }}>
-        <View style={styles.rowItem}>
-          <LanguageIcon width={25} height={25} color={CommonColors.mainText} />
-          <Text style={styles.title}>{I18n.t('SettingScreen.language')}</Text>
-          <Text style={styles.langTitle}>{userLocale}</Text>
-          <ArrowIcon width={15} height={15} color="#000" />
-        </View>
-      </TouchableWithoutFeedback>
-      {showLanguage && (
-        <View style={styles.listLanguage}>
-          <TouchableWithoutFeedback onPress={() => changeLocale('en')}>
-            <View style={styles.itemLanguage}>
-              <Text
-                style={[
-                  styles.titleLanguage,
-                  userLocale === 'en'
-                    ? {color: CommonColors.indicatorColor}
-                    : null,
-                ]}>
-                {I18n.t('SettingScreen.en')}
-              </Text>
-            </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={() => changeLocale('vn')}>
-            <View style={styles.itemLanguage}>
-              <Text
-                style={[
-                  styles.titleLanguage,
-                  userLocale === 'vn'
-                    ? {color: CommonColors.indicatorColor}
-                    : null,
-                ]}>
-                {I18n.t('SettingScreen.vn')}
-              </Text>
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
-      )}
+      <View style={styles.setting}>
+        {/* <Text style={styles.settingTitle}>
+          {I18n.t('SettingScreen.header')}
+        </Text> */}
+        <TouchableWithoutFeedback
+          onPress={() => {
+            setShowLanguage(!showLanguage);
+          }}>
+          <View style={styles.rowItem}>
+            <LanguageIcon
+              width={25}
+              height={25}
+              color={CommonColors.mainText}
+            />
+            <Text style={styles.title}>{I18n.t('SettingScreen.language')}</Text>
+            <Text style={styles.langTitle}>{userLocale}</Text>
+            <ArrowIcon width={15} height={15} color="#000" />
+          </View>
+        </TouchableWithoutFeedback>
+        {showLanguage && (
+          <View>
+            <TouchableWithoutFeedback onPress={() => changeLocale('en')}>
+              <View style={styles.itemLanguage}>
+                <Text
+                  style={[
+                    styles.titleLanguage,
+                    userLocale === 'en'
+                      ? {color: CommonColors.indicatorColor}
+                      : null,
+                  ]}>
+                  {I18n.t('SettingScreen.en')}
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={() => changeLocale('vn')}>
+              <View style={styles.itemLanguage}>
+                <Text
+                  style={[
+                    styles.titleLanguage,
+                    userLocale === 'vn'
+                      ? {color: CommonColors.indicatorColor}
+                      : null,
+                  ]}>
+                  {I18n.t('SettingScreen.vn')}
+                </Text>
+              </View>
+            </TouchableWithoutFeedback>
+          </View>
+        )}
+      </View>
     </View>
   );
 }
@@ -130,6 +145,47 @@ const styles = ScaledSheet.create({
     color: CommonColors.indicatorColor,
     ...Fonts.defaultRegular,
     marginRight: '10@s',
+    textTransform: 'uppercase',
+  },
+  setting: {
+    flex: 1,
+  },
+  settingTitle: {
+    fontSize: '16@ms',
+    color: CommonColors.mainText,
+    ...Fonts.defaultBold,
+    marginTop: '10@s',
+    textTransform: 'uppercase',
+    marginVertical: '10@s',
+    paddingHorizontal: '10@s',
+  },
+  btnContainer: {
+    height: '40@s',
+    backgroundColor: CommonColors.indicatorColor,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '3@s',
+  },
+  roundBtnContainer: {
+    height: '40@s',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '3@s',
+    borderWidth: 1,
+    borderColor: CommonColors.indicatorColor,
+  },
+  roundBtnName: {
+    fontSize: '16@ms',
+    color: CommonColors.indicatorColor,
+    ...Fonts.defaultBold,
+    textTransform: 'uppercase',
+  },
+  btnName: {
+    fontSize: '16@ms',
+    color: CommonColors.lightText,
+    ...Fonts.defaultBold,
     textTransform: 'uppercase',
   },
 });

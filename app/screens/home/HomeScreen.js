@@ -63,7 +63,7 @@ const renderTopics = (data, headerTitle, navigation) => {
           source={{uri: firstData.image}}
           resizeMode={FastImage.resizeMode.cover}
         />
-        <Text style={styles.itemTime}>{getDateTime(firstData.timestamp)}</Text>
+        <Text style={styles.itemTime}>{getDiffHours(firstData.timestamp)}</Text>
         <Text style={styles.itemTitle}>{firstData.title}</Text>
       </View>
 
@@ -78,9 +78,9 @@ const renderTopics = (data, headerTitle, navigation) => {
               />
               <View style={styles.flexOne}>
                 <Text style={styles.secTitle}>{sec.title}</Text>
-                <Text style={styles.secTime}>{`${getDiffHours(
-                  sec.timestamp,
-                )} ago`}</Text>
+                <Text style={styles.secTime}>
+                  {getDiffHours(sec.timestamp)}
+                </Text>
               </View>
             </View>
           );
@@ -96,7 +96,10 @@ const renderTopics = (data, headerTitle, navigation) => {
   );
 };
 
-function HomeScreen({navigation, value}) {
+function HomeScreen({navigation, value, language}) {
+  console.log('================================================');
+  console.log('language', language);
+  console.log('================================================');
   const [refreshing, setRefreshing] = useState(false);
   const _onRefresh = () => {
     setRefreshing(true);
@@ -128,6 +131,7 @@ function HomeScreen({navigation, value}) {
 }
 export default connect((state) => ({
   value: state.topics,
+  language: state.user.language,
 }))(HomeScreen);
 
 const styles = ScaledSheet.create({
