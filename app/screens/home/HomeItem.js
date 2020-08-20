@@ -75,8 +75,6 @@ export default HomeItem;
 const styles = ScaledSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
-    padding: '10@s',
   },
   header: {
     textTransform: 'uppercase',
@@ -86,9 +84,10 @@ const styles = ScaledSheet.create({
     flex: 1,
   },
   itemContainer: {
+    padding: '10@s',
+    marginTop: '1@s',
+    backgroundColor: '#FFF',
     paddingBottom: '10@s',
-    borderBottomWidth: 1,
-    borderBottomColor: CommonColors.lightBgColor,
   },
   itemTitle: {
     fontSize: '18@ms',

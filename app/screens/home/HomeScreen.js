@@ -35,10 +35,12 @@ const renderHeader = () => {
 };
 
 const renderTopics = (data, headerTitle, navigation) => {
-  const arrData = _.map(data, (val, key) => ({key, val}));
-  const firstData = arrData[0];
+  if (!data || data.length === 0) {
+    return null;
+  }
+  const firstData = data[0];
   const secondData = [];
-  arrData.map((item, index) => {
+  data.map((item, index) => {
     if (index > 0 && index < 4) {
       secondData.push(item);
     }
@@ -58,30 +60,28 @@ const renderTopics = (data, headerTitle, navigation) => {
       <View style={styles.topContent}>
         <FastImage
           style={styles.topImage}
-          source={{uri: firstData.val.image}}
+          source={{uri: firstData.image}}
           resizeMode={FastImage.resizeMode.cover}
         />
-        <Text style={styles.itemTime}>
-          {getDateTime(firstData.val.timestamp)}
-        </Text>
-        <Text style={styles.itemTitle}>{firstData.val.title}</Text>
+        <Text style={styles.itemTime}>{getDateTime(firstData.timestamp)}</Text>
+        <Text style={styles.itemTitle}>{firstData.title}</Text>
       </View>
 
       {secondData.length > 0 &&
         secondData.map((sec, index) => {
-          const diffHours = getDiffHours(sec.val.timestamp);
+          const diffHours = getDiffHours(sec.timestamp);
           return (
             <View style={styles.secContainer} key={index}>
               <FastImage
                 style={styles.secImage}
-                source={{uri: sec.val.image}}
+                source={{uri: sec.image}}
                 resizeMode={FastImage.resizeMode.cover}
               />
               <View style={styles.flexOne}>
-                <Text style={styles.secTitle}>{sec.val.title}</Text>
+                <Text style={styles.secTitle}>{sec.title}</Text>
                 <Text style={styles.secTime}>
-                  {diffHours > 24
-                    ? getDateTime(sec.val.timestamp)
+                  {diffHours > 24 || diffHours === 0
+                    ? getDateTime(sec.timestamp)
                     : `${diffHours} hours ago`}
                 </Text>
               </View>
@@ -90,7 +90,7 @@ const renderTopics = (data, headerTitle, navigation) => {
         })}
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('HomeItem', {value: data});
+          navigation.navigate('HomeItem', {value: {headerTitle, data}});
         }}
         style={styles.btnSeeMore}>
         <Text style={styles.btnName}>{I18n.t('HomeScreen.more')}</Text>
@@ -109,9 +109,13 @@ function HomeScreen({navigation, value}) {
     }, 500);
   };
   const topics = _.get(value, 'topics', {});
+  console.log('================================================');
+  console.log('topics', topics);
+  console.log('================================================');
   const hotNews = topics.hot_news;
   const films = topics.film;
   const golds = topics.gold;
+
   return (
     <ScrollView
       scrollEnabled={true}
