@@ -5,6 +5,8 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  Platform,
+  StatusBar,
 } from 'react-native';
 import {connect} from 'react-redux';
 import _ from 'lodash';
@@ -103,6 +105,7 @@ const {width, height} = Dimensions.get('window');
 const styles = ScaledSheet.create({
   container: {
     flex: 1,
+    marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   header: {
     textTransform: 'uppercase',

@@ -1,17 +1,33 @@
 export default {
+  common: {
+    appName: 'nhatbao',
+  },
   HomeScreen: {
-    header: 'Home',
+    header: 'Trang Chủ',
+    forYou: 'Sự kiện',
+    hotNews: 'Tin tức sự kiện nóng',
+    film: 'Phim ảnh',
+    golds: 'Giá vàng',
+    more: 'Xem thêm',
   },
   AccountScreen: {
-    header: 'Account',
+    header: 'Tài Khoản',
+    yourProfile: 'Thông tin tài khoản',
   },
   ExploreScreen: {
-    header: 'Explore',
+    header: 'Khám Phá',
+    hintSearch: 'Tìm kiếm',
   },
   FollowScreen: {
-    header: 'Follow',
+    header: 'Theo Dõi',
   },
   NotificationScreen: {
-    header: 'Notification',
+    header: 'Thông báo',
+  },
+  SettingScreen: {
+    header: 'Cài Đặt',
+    language: 'Ngôn ngữ',
+    en: 'English',
+    vn: 'Tiếng Việt',
   },
 };

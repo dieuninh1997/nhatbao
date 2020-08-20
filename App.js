@@ -16,6 +16,7 @@ import store from './app/store';
 import WebviewScreen from './app/components/WebviewScreen';
 import FollowItem from './app/screens/follow/FollowItem';
 import HomeItem from './app/screens/home/HomeItem';
+import SettingScreen from './app/screens/setting/SettingScreen';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -112,8 +113,8 @@ const MyTabs = () => {
               />
             ),
         }}
-      />
-     <Tab.Screen
+      />*/}
+      <Tab.Screen
         name="AccountScreen"
         component={AccountScreen}
         options={{
@@ -135,7 +136,7 @@ const MyTabs = () => {
               />
             ),
         }}
-      /> */}
+      />
     </Tab.Navigator>
   );
 };
@@ -150,6 +151,7 @@ const MyStack = () => {
       <Stack.Screen name="FollowItem" component={FollowItem} />
       <Stack.Screen name="WebviewScreen" component={WebviewScreen} />
       <Stack.Screen name="HomeItem" component={HomeItem} />
+      <Stack.Screen name="SettingScreen" component={SettingScreen} />
     </Stack.Navigator>
   );
 };

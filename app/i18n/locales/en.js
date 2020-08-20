@@ -12,6 +12,7 @@ export default {
   },
   AccountScreen: {
     header: 'Account',
+    yourProfile: 'Your Profile',
   },
   ExploreScreen: {
     header: 'Explore',
@@ -22,5 +23,11 @@ export default {
   },
   NotificationScreen: {
     header: 'Notifications',
+  },
+  SettingScreen: {
+    header: 'Settings',
+    language: 'Language',
+    en: 'English',
+    vn: 'Tiếng Việt',
   },
 };

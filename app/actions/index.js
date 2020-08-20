@@ -13,3 +13,8 @@ export const fetchAllTopics = () => ({type: actionTypes.FETCH_ALL_TOPICS});
 export const changeNetInfo = (params) => {
   return {type: actionTypes.CHANGE_NET_INFO, payload: params};
 };
+
+export const changeLanguage = (params) => ({
+  type: actionTypes.CHANGE_LANGUAGE,
+  params,
+});

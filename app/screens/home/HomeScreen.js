@@ -19,7 +19,7 @@ import I18n from '../../i18n/i18n';
 import {getDateTime, getDiffHours} from '../../utils/Filter';
 import store from '../../store';
 import * as actions from '../../actions';
-import MoreIcon from '../../../assets/svg/ic_arrow_right.svg';
+import MoreIcon from '../../../assets/svg/ic_more_arrow_right.svg';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const renderHeader = () => {
@@ -106,9 +106,6 @@ function HomeScreen({navigation, value}) {
     }, 500);
   };
   const topics = _.get(value, 'topics', {});
-  console.log('================================================');
-  console.log('topics', topics);
-  console.log('================================================');
   const hotNews = topics.hot_news;
   const films = topics.film;
   const golds = topics.gold;

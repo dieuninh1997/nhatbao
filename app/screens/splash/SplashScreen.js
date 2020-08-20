@@ -4,9 +4,10 @@ import {CommonActions} from '@react-navigation/native';
 import _ from 'lodash';
 import {connect} from 'react-redux';
 import NetInfo from '@react-native-community/netinfo';
-
+import AppPreferences from '../../utils/AppPreferences';
 import * as actions from '../../actions';
 import store from '../../store';
+import I18n from '../../i18n/i18n';
 
 async function initData(navigation, dataLoadingState, feeds, topics) {
   //check internet
@@ -37,6 +38,13 @@ async function initData(navigation, dataLoadingState, feeds, topics) {
         }
       }
     }
+    AppPreferences.getLocale().then((locale) => {
+      if (!locale) {
+        locale = 'vn';
+      }
+      I18n.locale = locale;
+      store.dispatch(actions.changeLanguage(locale));
+    });
     store.dispatch(actions.changeNetInfo(isConnected));
   });
 }

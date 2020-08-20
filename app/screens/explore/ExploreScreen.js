@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, TouchableWithoutFeedback, Dimensions} from 'react-native';
+import {
+  View,
+  TouchableWithoutFeedback,
+  Dimensions,
+  StatusBar,
+  Platform,
+} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 import Text from '../../components/Text';
@@ -100,6 +106,7 @@ const styles = ScaledSheet.create({
   container: {
     flex: 1,
     backgroundColor: CommonColors.bgColor,
+    marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   header: {
     textTransform: 'uppercase',
