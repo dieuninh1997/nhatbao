@@ -15,6 +15,7 @@ import AccountIcon from './assets/svg/ic_user.svg';
 import store from './app/store';
 import WebviewScreen from './app/components/WebviewScreen';
 import FollowItem from './app/screens/follow/FollowItem';
+import HomeItem from './app/screens/home/HomeItem';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -148,6 +149,7 @@ const MyStack = () => {
       <Stack.Screen name="FollowScreen" component={FollowScreen} />
       <Stack.Screen name="FollowItem" component={FollowItem} />
       <Stack.Screen name="WebviewScreen" component={WebviewScreen} />
+      <Stack.Screen name="HomeItem" component={HomeItem} />
     </Stack.Navigator>
   );
 };

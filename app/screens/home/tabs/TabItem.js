@@ -11,12 +11,12 @@ import FlipPage, {FlipPagePage} from 'react-native-flip-page';
 import {useNavigation} from '@react-navigation/native';
 import _ from 'lodash';
 
-import Text from '../../components/Text';
-import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
-import {scale} from '../../libs/reactSizeMatter/scalingUtils';
-import {CommonColors, Fonts} from '../../utils/CommonStyles';
-import store from '../../store';
-import * as actions from '../../actions';
+import Text from '../../../components/Text';
+import ScaledSheet from '../../../libs/reactSizeMatter/ScaledSheet';
+import {scale} from '../../../libs/reactSizeMatter/scalingUtils';
+import {CommonColors, Fonts} from '../../../utils/CommonStyles';
+import store from '../../../store';
+import * as actions from '../../../actions';
 
 const renderTopPage = (navigation, data) => {
   const topImg = data[0];

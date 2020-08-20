@@ -1,117 +1,26 @@
 import React, {useState} from 'react';
 import {
   View,
-  StyleSheet,
   Dimensions,
   Platform,
   ScrollView,
   RefreshControl,
+  StatusBar,
 } from 'react-native';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 import FastImage from 'react-native-fast-image';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 import Text from '../../components/Text';
 import Header from '../../components/Header';
-import {
-  CommonStyles,
-  CommonColors,
-  CommonSize,
-  Fonts,
-} from '../../utils/CommonStyles';
+import {CommonStyles, CommonColors, Fonts} from '../../utils/CommonStyles';
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import I18n from '../../i18n/i18n';
-import ForYouTab from './tabs/ForYouTab';
-import TodayTab from './tabs/TodayTab';
-import DailyEditionTab from './tabs/DailyEditionTab';
-import {scale} from '../../libs/reactSizeMatter/scalingUtils';
-import LabelComponent from '../../components/LabelComponent';
-import TabItem from './TabItem';
 import {getDateTime, getDiffHours} from '../../utils/Filter';
 import store from '../../store';
 import * as actions from '../../actions';
 import MoreIcon from '../../../assets/svg/ic_arrow_right.svg';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-
-const Tab = createMaterialTopTabNavigator();
-
-const HomeTabs = () => {
-  return (
-    <Tab.Navigator
-      initialLayout={{
-        width: Dimensions.get('window').width,
-      }}
-      tabBarOptions={{
-        style: {
-          marginTop: CommonSize.paddingTopHeader,
-        },
-        scrollEnabled: true,
-        activeTintColor: CommonColors.primaryText,
-        inactiveTintColor: CommonColors.secondaryText,
-        indicatorStyle: {
-          backgroundColor: CommonColors.indicatorColor,
-          height: 2,
-        },
-        tabStyle: {
-          width: 'auto',
-          marginHorizontal: scale(5),
-        },
-      }}>
-      <Tab.Screen
-        name="ForYou"
-        component={ForYouTab}
-        options={{
-          tabBarLabel: ({focused}) => (
-            <LabelComponent
-              title="FOR YOU"
-              focused={focused}
-              style={{
-                color: focused
-                  ? CommonColors.primaryText
-                  : CommonColors.secondaryText,
-              }}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Today"
-        component={TodayTab}
-        options={{
-          tabBarLabel: ({focused}) => (
-            <LabelComponent
-              title="TODAY"
-              focused={focused}
-              style={{
-                color: focused
-                  ? CommonColors.primaryText
-                  : CommonColors.secondaryText,
-              }}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="DailyEditionTab"
-        component={DailyEditionTab}
-        options={{
-          tabBarLabel: ({focused}) => (
-            <LabelComponent
-              title="DAILY EDITION"
-              focused={focused}
-              style={{
-                color: focused
-                  ? CommonColors.primaryText
-                  : CommonColors.secondaryText,
-              }}
-            />
-          ),
-        }}
-      />
-    </Tab.Navigator>
-  );
-};
 
 const renderHeader = () => {
   return (
@@ -125,7 +34,7 @@ const renderHeader = () => {
   );
 };
 
-const renderTopics = (data, headerTitle) => {
+const renderTopics = (data, headerTitle, navigation) => {
   const arrData = _.map(data, (val, key) => ({key, val}));
   const firstData = arrData[0];
   const secondData = [];
@@ -138,7 +47,10 @@ const renderTopics = (data, headerTitle) => {
     <View style={styles.itemTopicContainer}>
       <View style={styles.headerContainer}>
         <Text style={styles.topicHeaderTitle}>{headerTitle}</Text>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('HomeItem', {value: {headerTitle, data}});
+          }}>
           <MoreIcon width={15} height={15} color="#000" />
         </TouchableOpacity>
       </View>
@@ -176,7 +88,11 @@ const renderTopics = (data, headerTitle) => {
             </View>
           );
         })}
-      <TouchableOpacity onPress={() => {}} style={styles.btnSeeMore}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('HomeItem', {value: data});
+        }}
+        style={styles.btnSeeMore}>
         <Text style={styles.btnName}>{I18n.t('HomeScreen.more')}</Text>
       </TouchableOpacity>
     </View>
@@ -205,9 +121,9 @@ function HomeScreen({navigation, value}) {
       <View style={styles.container}>
         {/* <HomeTabs /> */}
         {renderHeader()}
-        {renderTopics(hotNews, I18n.t('HomeScreen.hotNews'))}
-        {renderTopics(films, I18n.t('HomeScreen.film'))}
-        {renderTopics(golds, I18n.t('HomeScreen.golds'))}
+        {renderTopics(hotNews, I18n.t('HomeScreen.hotNews'), navigation)}
+        {renderTopics(films, I18n.t('HomeScreen.film'), navigation)}
+        {renderTopics(golds, I18n.t('HomeScreen.golds'), navigation)}
       </View>
     </ScrollView>
   );
@@ -220,6 +136,7 @@ const styles = ScaledSheet.create({
   container: {
     flex: 1,
     backgroundColor: CommonColors.lightSeparator,
+    marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   flexOne: {
     flex: 1,
