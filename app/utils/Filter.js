@@ -19,8 +19,16 @@ function getDiffHours(date) {
   const dd = new Date(date * 1000);
   const today = new Date();
   const duration = (today.getTime() - dd.getTime()) / 1000;
+  const m = Math.abs(Math.round(duration / 60));
   const h = Math.abs(Math.round(duration / 3600));
-  return h;
+  const d = Math.abs(Math.round(h / 24));
+  if (h >= 24) {
+    return `${d} days`;
+  } else if (h > 0 && h <= 24) {
+    return `${h} hours`;
+  } else {
+    return `${m} minutes`;
+  }
 }
 
 export {getDateTime, convertToLocalTime, getDiffHours};

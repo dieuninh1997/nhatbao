@@ -69,7 +69,6 @@ const renderTopics = (data, headerTitle, navigation) => {
 
       {secondData.length > 0 &&
         secondData.map((sec, index) => {
-          const diffHours = getDiffHours(sec.timestamp);
           return (
             <View style={styles.secContainer} key={index}>
               <FastImage
@@ -79,11 +78,9 @@ const renderTopics = (data, headerTitle, navigation) => {
               />
               <View style={styles.flexOne}>
                 <Text style={styles.secTitle}>{sec.title}</Text>
-                <Text style={styles.secTime}>
-                  {diffHours > 24 || diffHours === 0
-                    ? getDateTime(sec.timestamp)
-                    : `${diffHours} hours ago`}
-                </Text>
+                <Text style={styles.secTime}>{`${getDiffHours(
+                  sec.timestamp,
+                )} ago`}</Text>
               </View>
             </View>
           );
