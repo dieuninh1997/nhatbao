@@ -43,7 +43,7 @@ const renderItem = (item, index, navigation, feeds) => {
     <TouchableOpacity
       style={styles.itemContainer}
       onPress={() => {
-        navigation.navigate('FollowItem', {
+        navigation.navigate('FollowCard', {
           value: item,
         });
       }}>

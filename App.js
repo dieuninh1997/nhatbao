@@ -17,6 +17,7 @@ import WebviewScreen from './app/components/WebviewScreen';
 import FollowItem from './app/screens/follow/FollowItem';
 import HomeItem from './app/screens/home/HomeItem';
 import SettingScreen from './app/screens/setting/SettingScreen';
+import FollowCard from './app/screens/follow/FollowCard';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -65,9 +66,6 @@ const MyTabs = () => {
         name="FollowScreen"
         component={FollowScreen}
         options={{
-          // tabBarLabel: ({focused}) => (
-          //   <LabelComponent title="Follow" focused={focused} />
-          // ),
           tabBarIcon: ({focused}) =>
             focused ? (
               <FollowIcon color={CommonColors.activeTintColor} />
@@ -76,7 +74,7 @@ const MyTabs = () => {
             ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="ExploreScreen"
         component={ExploreScreen}
         options={{
@@ -91,7 +89,7 @@ const MyTabs = () => {
             ),
         }}
       />
-      {/*  <Tab.Screen
+      <Tab.Screen
         name="NotificationScreen"
         component={NotificationScreen}
         options={{
@@ -118,9 +116,6 @@ const MyTabs = () => {
         name="AccountScreen"
         component={AccountScreen}
         options={{
-          // tabBarLabel: ({focused}) => (
-          //   <LabelComponent title="Account" focused={focused} />
-          // ),
           tabBarIcon: ({focused}) =>
             focused ? (
               <AccountIcon
@@ -152,6 +147,7 @@ const MyStack = () => {
       <Stack.Screen name="WebviewScreen" component={WebviewScreen} />
       <Stack.Screen name="HomeItem" component={HomeItem} />
       <Stack.Screen name="SettingScreen" component={SettingScreen} />
+      <Stack.Screen name="FollowCard" component={FollowCard} />
     </Stack.Navigator>
   );
 };

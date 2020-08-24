@@ -51,10 +51,6 @@ export default class Flipboard extends React.Component {
       outputRange,
       extrapolate: Extrapolate.CLAMP,
     });
-    console.log('================================================');
-    console.log('back', back);
-    console.log('front', front);
-    console.log('================================================');
 
     const rotateX = add(rotateXAsDeg, 'deg');
     const coef = bottom ? -1 : 1;

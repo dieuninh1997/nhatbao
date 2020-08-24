@@ -1,14 +1,23 @@
 import {call, fork, put, take} from 'redux-saga/effects';
 import * as actionTypes from '../actions/types';
 import database from '@react-native-firebase/database';
+import _ from 'lodash';
 
 async function loadAllFeeds() {
-  let ref = database().ref('/public_resource/feeds').orderByValue('timestamp');
+  const ref = database()
+    .ref('/public_resource/feeds')
+    .orderByValue('timestamp');
   if (ref) {
-    let data = await ref.once('value');
-    return data.val();
+    const data = await ref.once('value');
+    const res = data.val();
+
+    for (let key in res) {
+      let item = res[key];
+      res[key] = _.values(item);
+    }
+    return res;
   } else {
-    return {};
+    return [];
   }
 }
 

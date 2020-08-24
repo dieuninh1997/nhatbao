@@ -169,7 +169,7 @@ const renderItemPage = (item, index) => {
 
 function FollowItem({navigation, route, value}) {
   const item = route?.params?.value;
-  const feeds = _.get(value, 'feeds', {});
+  const feeds = _.get(value, 'feeds', []);
   const data = feeds[`${item}`];
   const arrData = _.map(data, (val, key) => ({key, val}));
   const topPage = arrData && arrData.length > 3 ? arrData.slice(0, 3) : [];

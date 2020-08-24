@@ -57,32 +57,44 @@ const renderTopics = (data, headerTitle, navigation) => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.topContent}>
-        <FastImage
-          style={styles.topImage}
-          source={{uri: firstData.image}}
-          resizeMode={FastImage.resizeMode.cover}
-        />
-        <Text style={styles.itemTime}>{getDiffHours(firstData.timestamp)}</Text>
-        <Text style={styles.itemTitle}>{firstData.title}</Text>
-      </View>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('WebviewScreen', {linkUrl: firstData.link});
+        }}>
+        <View style={styles.topContent}>
+          <FastImage
+            style={styles.topImage}
+            source={{uri: firstData.image}}
+            resizeMode={FastImage.resizeMode.cover}
+          />
+          <Text style={styles.itemTime}>
+            {getDiffHours(firstData.timestamp)}
+          </Text>
+          <Text style={styles.itemTitle}>{firstData.title}</Text>
+        </View>
+      </TouchableOpacity>
 
       {secondData.length > 0 &&
         secondData.map((sec, index) => {
           return (
-            <View style={styles.secContainer} key={index}>
-              <FastImage
-                style={styles.secImage}
-                source={{uri: sec.image}}
-                resizeMode={FastImage.resizeMode.cover}
-              />
-              <View style={styles.flexOne}>
-                <Text style={styles.secTitle}>{sec.title}</Text>
-                <Text style={styles.secTime}>
-                  {getDiffHours(sec.timestamp)}
-                </Text>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('WebviewScreen', {linkUrl: sec.link});
+              }}>
+              <View style={styles.secContainer} key={index}>
+                <FastImage
+                  style={styles.secImage}
+                  source={{uri: sec.image}}
+                  resizeMode={FastImage.resizeMode.cover}
+                />
+                <View style={styles.flexOne}>
+                  <Text style={styles.secTitle}>{sec.title}</Text>
+                  <Text style={styles.secTime}>
+                    {getDiffHours(sec.timestamp)}
+                  </Text>
+                </View>
               </View>
-            </View>
+            </TouchableOpacity>
           );
         })}
       <TouchableOpacity
@@ -97,9 +109,6 @@ const renderTopics = (data, headerTitle, navigation) => {
 };
 
 function HomeScreen({navigation, value, language}) {
-  console.log('================================================');
-  console.log('language', language);
-  console.log('================================================');
   const [refreshing, setRefreshing] = useState(false);
   const _onRefresh = () => {
     setRefreshing(true);
