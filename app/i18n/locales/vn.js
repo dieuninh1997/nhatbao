@@ -12,6 +12,7 @@ export default {
     film: 'Phim ảnh',
     golds: 'Giá vàng',
     more: 'Xem thêm',
+    trend: 'Thịnh hành',
   },
   AccountScreen: {
     header: 'Tài Khoản',

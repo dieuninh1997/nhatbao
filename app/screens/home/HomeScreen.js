@@ -78,6 +78,7 @@ const renderTopics = (data, headerTitle, navigation) => {
         secondData.map((sec, index) => {
           return (
             <TouchableOpacity
+              key={index}
               onPress={() => {
                 navigation.navigate('WebviewScreen', {linkUrl: sec.link});
               }}>
@@ -121,6 +122,10 @@ function HomeScreen({navigation, value, language}) {
   const hotNews = topics.hot_news;
   const films = topics.film;
   const golds = topics.gold;
+  const trend = topics.trend;
+  console.log('================================================');
+  console.log('topics', topics);
+  console.log('================================================');
 
   return (
     <ScrollView
@@ -134,6 +139,7 @@ function HomeScreen({navigation, value, language}) {
         {renderTopics(hotNews, I18n.t('HomeScreen.hotNews'), navigation)}
         {renderTopics(films, I18n.t('HomeScreen.film'), navigation)}
         {renderTopics(golds, I18n.t('HomeScreen.golds'), navigation)}
+        {renderTopics(trend, I18n.t('HomeScreen.trend'), navigation)}
       </View>
     </ScrollView>
   );
@@ -170,10 +176,10 @@ const styles = ScaledSheet.create({
   },
   topicHeaderTitle: {
     flex: 1,
-    fontSize: '22@ms',
+    fontSize: '16@ms',
     color: CommonColors.indicatorColor,
     ...Fonts.defaultBold,
-    marginVertical: '10@s',
+    marginVertical: '6@s',
   },
   topContent: {
     flex: 1,
@@ -183,48 +189,51 @@ const styles = ScaledSheet.create({
     width: '100%',
   },
   itemTitle: {
-    fontSize: '18@ms',
+    fontSize: '13@ms',
     color: CommonColors.mainText,
     ...Fonts.defaultBold,
-    marginVertical: '10@s',
+    marginVertical: '6@s',
   },
   itemTime: {
-    fontSize: '16@ms',
+    fontSize: '13@ms',
     color: CommonColors.mainText,
     ...Fonts.defaultRegular,
-    marginTop: '10@s',
+    marginTop: '6@s',
+    fontStyle: 'italic',
   },
   secImage: {
     height: '80@s',
     width: '100@s',
+    backgroundColor: '#dddeef',
   },
   secContainer: {
     flexDirection: 'row',
-    marginTop: '20@s',
-  },
-  secTitle: {
-    fontSize: '16@ms',
-    color: CommonColors.mainText,
-    ...Fonts.defaultRegular,
-    marginLeft: '10@s',
-  },
-  secTime: {
-    fontSize: '14@ms',
-    color: CommonColors.mainText,
-    ...Fonts.defaultRegular,
-    marginLeft: '10@s',
     marginTop: '10@s',
   },
+  secTitle: {
+    fontSize: '13@ms',
+    color: CommonColors.mainText,
+    marginLeft: '10@s',
+    fontWeight: 'bold',
+  },
+  secTime: {
+    fontSize: '12@ms',
+    color: CommonColors.mainText,
+    ...Fonts.defaultRegular,
+    marginLeft: '10@s',
+    marginTop: '6@s',
+    fontStyle: 'italic',
+  },
   btnSeeMore: {
-    height: '45@s',
+    height: '35@s',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: CommonColors.lightBgColor,
-    marginTop: '20@s',
+    marginTop: '10@s',
     borderRadius: '25@s',
   },
   btnName: {
-    fontSize: '14@ms',
+    fontSize: '13@ms',
     color: CommonColors.mainText,
     ...Fonts.defaultRegular,
   },

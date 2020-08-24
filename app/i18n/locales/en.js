@@ -12,6 +12,7 @@ export default {
     film: 'Film',
     golds: 'Golds',
     more: 'See more',
+    trend: 'Trending',
   },
   AccountScreen: {
     header: 'Account',

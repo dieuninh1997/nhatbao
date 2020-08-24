@@ -3,55 +3,22 @@ import * as actionTypes from '../actions/types';
 import database from '@react-native-firebase/database';
 import _ from 'lodash';
 
-async function loadHotNews() {
-  let ref = database().ref('/public_resource/topics/hot_news');
-  if (ref) {
-    let data = await ref.once('value');
-    return data.val();
-  } else {
-    return {};
-  }
-}
-
-async function loadFilm() {
-  let ref = database().ref('/public_resource/topics/film');
-  if (ref) {
-    let data = await ref.once('value');
-    return data.val();
-  } else {
-    return {};
-  }
-}
-
-async function loadGold() {
-  let ref = database().ref('/public_resource/topics/gold');
-  if (ref) {
-    let data = await ref.once('value');
-    return data.val();
-  } else {
-    return {};
-  }
-}
-
 async function loadAllTopics() {
-  const res = await Promise.all([loadFilm(), loadGold(), loadHotNews()]);
-  const response = {};
-  if (res[0]) {
-    response.film = _.values(res[0]).sort((a, b) => {
-      return b.timestamp - a.timestamp;
-    });
+  const ref = database().ref('/public_resource/topics');
+  if (ref) {
+    const data = await ref.once('value');
+    const res = data.val();
+
+    for (let key in res) {
+      let item = res[key];
+      res[key] = _.values(item).sort((a, b) => {
+        return b.timestamp - a.timestamp;
+      });
+    }
+    return res;
+  } else {
+    return [];
   }
-  if (res[1]) {
-    response.gold = _.values(res[1]).sort((a, b) => {
-      return b.timestamp - a.timestamp;
-    });
-  }
-  if (res[2]) {
-    response.hot_news = _.values(res[2]).sort((a, b) => {
-      return b.timestamp - a.timestamp;
-    });
-  }
-  return response;
 }
 
 function* fetchAllTopics() {

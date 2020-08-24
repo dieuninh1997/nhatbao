@@ -13,7 +13,9 @@ async function loadAllFeeds() {
 
     for (let key in res) {
       let item = res[key];
-      res[key] = _.values(item);
+      res[key] = _.values(item).sort((a, b) => {
+        return b.timestamp - a.timestamp;
+      });
     }
     return res;
   } else {
