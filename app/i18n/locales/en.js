@@ -23,6 +23,7 @@ export default {
   },
   FollowScreen: {
     header: 'Following',
+    viewAll: 'View all >>',
   },
   NotificationScreen: {
     header: 'Notifications',

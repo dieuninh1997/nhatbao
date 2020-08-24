@@ -22,6 +22,7 @@ import {scale} from '../../libs/reactSizeMatter/scalingUtils';
 import {CommonColors, Fonts, CommonStyles} from '../../utils/CommonStyles';
 import BackButton from '../../components/BackButton';
 import Header from '../../components/Header';
+import I18n from '../../i18n/i18n';
 
 const renderHeader = (title) => {
   return (
@@ -35,13 +36,9 @@ const renderHeader = (title) => {
 };
 
 const renderItem = ({item, index}, navigation) => {
+  const tags = item.detail_keywords;
   return (
-    <TouchableOpacity
-      activeOpacity={1}
-      style={styles.slideInnerContainer}
-      onPress={() => {
-        navigation.navigate('WebviewScreen', {linkUrl: item.link});
-      }}>
+    <View activeOpacity={1} style={styles.slideInnerContainer}>
       <View style={styles.shadow} />
       <View
         style={[
@@ -71,8 +68,30 @@ const renderItem = ({item, index}, navigation) => {
           style={[styles.subtitle, index % 2 === 0 ? styles.subtitleEven : {}]}>
           {item.description}
         </Text>
+
+        {tags ? (
+          <View style={styles.tagContainer}>
+            {tags.map((tag) => (
+              <TouchableOpacity
+                style={styles.tagTitle}
+                onPress={() => {
+                  navigation.navigate('WebviewScreen', {linkUrl: tag.link});
+                }}>
+                <Text style={styles.tagText}>{tag.keyword}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        ) : null}
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('WebviewScreen', {linkUrl: item.link});
+          }}>
+          <Text style={styles.viewAllTitle}>
+            {I18n.t('FollowScreen.viewAll')}
+          </Text>
+        </TouchableOpacity>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
@@ -242,7 +261,7 @@ const styles = ScaledSheet.create({
     backgroundColor: '#000',
   },
   textContainer: {
-    justifyContent: 'center',
+    flex: 1,
     paddingTop: 12,
     paddingBottom: 20,
     paddingHorizontal: 16,
@@ -276,5 +295,28 @@ const styles = ScaledSheet.create({
     fontStyle: 'italic',
     color: '#000',
     ...Fonts.defaultBold,
+  },
+  tagContainer: {
+    marginTop: 6,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  tagTitle: {
+    backgroundColor: CommonColors.indicatorColor,
+    marginRight: 5,
+    marginBottom: 5,
+    padding: 5,
+    borderRadius: 12,
+  },
+  tagText: {
+    color: CommonColors.lightText,
+    fontSize: 12,
+    fontStyle: 'italic',
+  },
+  viewAllTitle: {
+    marginTop: 6,
+    color: '#ccc',
+    fontSize: 12,
+    fontStyle: 'italic',
   },
 });

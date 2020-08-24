@@ -23,6 +23,7 @@ export default {
   },
   FollowScreen: {
     header: 'Theo Dõi',
+    viewAll: 'Xem toàn bộ >>',
   },
   NotificationScreen: {
     header: 'Thông báo',
@@ -33,6 +34,6 @@ export default {
     en: 'English',
     vn: 'Tiếng Việt',
     signUp: 'Đăng kí',
-    logIn: 'Đăng nhập'
+    logIn: 'Đăng nhập',
   },
 };
