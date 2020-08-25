@@ -73,6 +73,7 @@ const renderItem = ({item, index}, navigation) => {
           <View style={styles.tagContainer}>
             {tags.map((tag) => (
               <TouchableOpacity
+                key={tag.id}
                 style={styles.tagTitle}
                 onPress={() => {
                   navigation.navigate('WebviewScreen', {linkUrl: tag.link});

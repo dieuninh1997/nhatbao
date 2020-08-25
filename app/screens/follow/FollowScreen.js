@@ -14,7 +14,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import Text from '../../components/Text';
 import Header from '../../components/Header';
-import {CommonStyles, CommonColors} from '../../utils/CommonStyles';
+import {CommonStyles, CommonColors, CommonSize} from '../../utils/CommonStyles';
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import I18n from '../../i18n/i18n';
 import ReloadIcon from '../../../assets/svg/ic_reload.svg';
@@ -105,7 +105,6 @@ const {width, height} = Dimensions.get('window');
 const styles = ScaledSheet.create({
   container: {
     flex: 1,
-    marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   header: {
     textTransform: 'uppercase',

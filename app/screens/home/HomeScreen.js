@@ -13,7 +13,12 @@ import FastImage from 'react-native-fast-image';
 
 import Text from '../../components/Text';
 import Header from '../../components/Header';
-import {CommonStyles, CommonColors, Fonts} from '../../utils/CommonStyles';
+import {
+  CommonStyles,
+  CommonColors,
+  Fonts,
+  CommonSize,
+} from '../../utils/CommonStyles';
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import I18n from '../../i18n/i18n';
 import {getDateTime, getDiffHours} from '../../utils/Filter';
@@ -123,9 +128,6 @@ function HomeScreen({navigation, value, language}) {
   const films = topics.film;
   const golds = topics.gold;
   const trend = topics.trend;
-  console.log('================================================');
-  console.log('topics', topics);
-  console.log('================================================');
 
   return (
     <ScrollView
@@ -153,7 +155,6 @@ const styles = ScaledSheet.create({
   container: {
     flex: 1,
     backgroundColor: CommonColors.lightSeparator,
-    marginTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   flexOne: {
     flex: 1,
