@@ -10,7 +10,7 @@ import {connect} from 'react-redux';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import _ from 'lodash';
 import FastImage from 'react-native-fast-image';
-import Slideshow from 'react-native-image-slider-show';
+import Slideshow from '../../components/Slideshow';
 
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import Text from '../../components/Text';
@@ -19,6 +19,7 @@ import BackButton from '../../components/BackButton';
 import Header from '../../components/Header';
 import I18n from '../../i18n/i18n';
 import {scale} from '../../libs/reactSizeMatter/scalingUtils';
+import {getDiffHours} from '../../utils/Filter';
 
 const renderHeader = (title) => {
   return (
@@ -53,8 +54,8 @@ const renderItem = ({item, index}, navigation) => {
         ) : (
           <Slideshow
             dataSource={dataSource}
-            containerStyle={[styles.image, {overflow: 'hidden'}]}
-            height={scale(310)}
+            containerStyle={[styles.sliderImage]}
+            height={(height * 0.75) / 2}
             indicatorSize={scale(6)}
           />
         )}
@@ -78,6 +79,13 @@ const renderItem = ({item, index}, navigation) => {
 
         <Text
           style={[styles.subtitle, index % 2 === 0 ? styles.subtitleEven : {}]}>
+          {getDiffHours(item.timestamp)}
+        </Text>
+
+        <Text
+          style={[styles.subtitle, index % 2 === 0 ? styles.subtitleEven : {}]}>
+          <Text style={styles.domainText}>{`(${item.domain}) `}</Text>
+
           {item.description}
         </Text>
 
@@ -96,6 +104,7 @@ const renderItem = ({item, index}, navigation) => {
           </View>
         ) : null}
         <TouchableOpacity
+          style={styles.btnViewAll}
           onPress={() => {
             navigation.navigate('WebviewScreen', {linkUrl: item.link});
           }}>
@@ -206,14 +215,6 @@ const styles = ScaledSheet.create({
     textTransform: 'uppercase',
     color: CommonColors.primaryText,
   },
-  slide: {
-    backgroundColor: 'floralwhite',
-    borderRadius: 5,
-    height: 250,
-    padding: 50,
-    marginLeft: 25,
-    marginRight: 25,
-  },
   paginationDot: {
     width: 8,
     height: 8,
@@ -231,9 +232,8 @@ const styles = ScaledSheet.create({
     paddingVertical: 10, // for custom animation
   },
   slideInnerContainer: {
-    width: width * 0.85,
+    width: width * 0.8,
     height: height * 0.75,
-    paddingHorizontal: '10@s',
     paddingBottom: 18, // needed for shadow
   },
   shadow: {
@@ -253,7 +253,7 @@ const styles = ScaledSheet.create({
     marginBottom: Platform.OS === 'ios' ? 0 : -1, // Prevent a random Android rendering issue
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
-    backgroundColor: '#dddeef',
+    backgroundColor: '#FFF',
   },
   imageContainerEven: {
     backgroundColor: '#000',
@@ -261,9 +261,15 @@ const styles = ScaledSheet.create({
   image: {
     ...StyleSheet.absoluteFillObject,
     resizeMode: 'cover',
-    borderRadius: Platform.OS === 'ios' ? 8 : 0,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,
+  },
+  sliderImage: {
+    ...StyleSheet.absoluteFillObject,
+    resizeMode: 'contain',
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    overflow: 'hidden',
   },
   // image's border radius is buggy on iOS; let's hack it!
   radiusMask: {
@@ -307,6 +313,18 @@ const styles = ScaledSheet.create({
   subtitleEven: {
     color: 'rgba(255, 255, 255, 0.7)',
   },
+  domainText: {
+    marginTop: 6,
+    color: CommonColors.indicatorColor,
+    fontSize: 12,
+    textTransform: 'uppercase',
+  },
+  timeText: {
+    marginTop: 6,
+    color: '#424949',
+    fontSize: 12,
+    fontStyle: 'italic',
+  },
   indexTitle: {
     fontSize: '20@ms',
     fontStyle: 'italic',
@@ -333,10 +351,15 @@ const styles = ScaledSheet.create({
   viewAllTitle: {
     marginTop: 6,
     color: '#424949',
-    fontSize: 12,
+    fontSize: 14,
     fontStyle: 'italic',
   },
   viewAllTitleEven: {
     color: 'rgba(255, 255, 255, 0.7)',
+  },
+  btnViewAll: {
+    position: 'absolute',
+    bottom: '26@s',
+    alignSelf: 'center',
   },
 });
