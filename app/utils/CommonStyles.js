@@ -116,6 +116,23 @@ const SeparatorStyle = {
   backgroundColor: CommonColors.separator,
 };
 
+const Shadows = {
+  shadowCard: {
+    elevation: 20,
+    shadowColor: 'rgba(0, 0, 0, 0.4)',
+    shadowOffset: {width: 0, height: 15},
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+  },
+  shadowButton: {
+    elevation: 3,
+    shadowColor: 'rgba(0, 0, 0, 0.4)',
+    shadowOffset: {width: 2, height: 5},
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+  },
+};
+
 export {
   CommonStyles,
   CommonColors,
@@ -124,4 +141,5 @@ export {
   ShadowStyle,
   TextButtonStyle,
   SeparatorStyle,
+  Shadows,
 };

@@ -18,6 +18,7 @@ import FollowItem from './app/screens/follow/FollowItem';
 import HomeItem from './app/screens/home/HomeItem';
 import SettingScreen from './app/screens/setting/SettingScreen';
 import FollowCard from './app/screens/follow/FollowCard';
+import HomeTabs from './app/screens/home/HomeTabs';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -32,7 +33,7 @@ const Stack = createStackNavigator();
 const MyTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName={'HomeScreen'}
+      initialRouteName={'HomeTabs'}
       tabBarOptions={{
         showLabel: false,
         activeTintColor: CommonColors.activeTintColor,
@@ -48,8 +49,10 @@ const MyTabs = () => {
         },
       }}>
       <Tab.Screen
-        name="HomeScreen"
-        component={HomeScreen}
+        // name="HomeScreen"
+        // component={HomeScreen}
+        name="HomeTabs"
+        component={HomeTabs}
         options={{
           tabBarLabel: ({focused}) => (
             <LabelComponent title="Home" focused={focused} />

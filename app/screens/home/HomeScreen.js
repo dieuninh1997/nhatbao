@@ -170,7 +170,7 @@ const styles = ScaledSheet.create({
   itemTopicContainer: {
     backgroundColor: '#FFF',
     marginTop: '5@s',
-    padding: '10@s',
+    padding: '16@s',
   },
   topicHeaderTitle: {
     flex: 1,
@@ -185,42 +185,41 @@ const styles = ScaledSheet.create({
   topImage: {
     height: '300@s',
     width: '100%',
+    borderRadius: '10@s',
   },
   itemTitle: {
-    fontSize: '13@ms',
-    color: CommonColors.mainText,
+    fontSize: '14@ms',
+    color: '#000',
     ...Fonts.defaultBold,
     marginVertical: '6@s',
   },
   itemTime: {
-    fontSize: '13@ms',
-    color: CommonColors.mainText,
+    fontSize: '12@ms',
+    color: '#424949',
     ...Fonts.defaultRegular,
     marginTop: '6@s',
-    fontStyle: 'italic',
   },
   secImage: {
     height: '80@s',
     width: '100@s',
     backgroundColor: '#dddeef',
+    borderRadius: '10@s',
   },
   secContainer: {
     flexDirection: 'row',
     marginTop: '10@s',
   },
   secTitle: {
-    fontSize: '13@ms',
-    color: CommonColors.mainText,
+    fontSize: '14@ms',
+    color: '#000',
     marginLeft: '10@s',
     fontWeight: 'bold',
   },
   secTime: {
     fontSize: '12@ms',
-    color: CommonColors.mainText,
+    color: '#424949',
     ...Fonts.defaultRegular,
     marginLeft: '10@s',
-    marginTop: '6@s',
-    fontStyle: 'italic',
   },
   secDomainText: {
     fontSize: '12@ms',

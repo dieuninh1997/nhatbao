@@ -8,7 +8,6 @@ async function loadAllTopics() {
   if (ref) {
     const data = await ref.once('value');
     const res = data.val();
-
     for (let key in res) {
       let item = res[key];
       res[key] = _.values(item).sort((a, b) => {

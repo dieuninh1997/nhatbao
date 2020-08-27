@@ -9,10 +9,13 @@ export default {
     header: 'Trang Chủ',
     forYou: 'Sự kiện',
     hotNews: 'Tin tức sự kiện nóng',
+    hot_news: 'Tin tức sự kiện nóng',
     film: 'Phim ảnh',
     golds: 'Giá vàng',
+    gold: 'Giá vàng',
     more: 'Xem thêm',
     trend: 'Thịnh hành',
+    viewMore: 'Xem thêm',
   },
   AccountScreen: {
     header: 'Tài Khoản',

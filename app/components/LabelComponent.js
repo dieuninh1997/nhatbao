@@ -25,7 +25,7 @@ export default function LabelComponent(props) {
 
 const styles = ScaledSheet.create({
   container: {
-    fontSize: moderateScale(12),
+    fontSize: moderateScale(14),
     fontWeight: 'bold',
     ...Fonts.defaultRegular,
     // textAlign: 'center',

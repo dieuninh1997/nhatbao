@@ -9,10 +9,13 @@ export default {
     header: 'Home',
     forYou: 'For you',
     hotNews: 'Hot News',
+    hot_news: 'Hot News',
     film: 'Film',
     golds: 'Golds',
+    gold: 'Gold',
     more: 'See more',
     trend: 'Trending',
+    viewMore: 'More',
   },
   AccountScreen: {
     header: 'Account',
