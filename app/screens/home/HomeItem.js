@@ -56,6 +56,7 @@ function HomeItem({navigation, route}) {
                 source={{uri: item.val.image}}
                 resizeMode={FastImage.resizeMode.cover}
               />
+              <Text style={styles.domainText}>{item.val.domain}</Text>
               <Text style={styles.itemContent}>{item.val.description}</Text>
 
               <Text style={styles.itemTime}>
@@ -110,5 +111,12 @@ const styles = ScaledSheet.create({
     fontSize: '12@ms',
     color: 'rgba(75, 75, 75, 0.8)',
     ...Fonts.defaultRegular,
+  },
+  domainText: {
+    fontSize: '14@ms',
+    color: CommonColors.indicatorColor,
+    ...Fonts.defaultRegular,
+    marginTop: '10@s',
+    textTransform: 'uppercase',
   },
 });

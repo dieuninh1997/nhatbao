@@ -52,15 +52,7 @@ const renderTopics = (data, headerTitle, navigation) => {
   });
   return (
     <View style={styles.itemTopicContainer}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.topicHeaderTitle}>{headerTitle}</Text>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('HomeItem', {value: {headerTitle, data}});
-          }}>
-          <MoreIcon width={15} height={15} color="#000" />
-        </TouchableOpacity>
-      </View>
+      <Text style={styles.topicHeaderTitle}>{headerTitle}</Text>
 
       <TouchableOpacity
         onPress={() => {
@@ -72,10 +64,14 @@ const renderTopics = (data, headerTitle, navigation) => {
             source={{uri: firstData.image}}
             resizeMode={FastImage.resizeMode.cover}
           />
+
           <Text style={styles.itemTime}>
             {getDiffHours(firstData.timestamp)}
           </Text>
-          <Text style={styles.itemTitle}>{firstData.title}</Text>
+          <Text style={styles.itemTitle}>
+            <Text style={styles.domainText}>{`(${firstData.domain}) `}</Text>
+            {`- ${firstData.title}`}
+          </Text>
         </View>
       </TouchableOpacity>
 
@@ -95,6 +91,7 @@ const renderTopics = (data, headerTitle, navigation) => {
                 />
                 <View style={styles.flexOne}>
                   <Text style={styles.secTitle}>{sec.title}</Text>
+                  <Text style={styles.secDomainText}>{firstData.domain}</Text>
                   <Text style={styles.secTime}>
                     {getDiffHours(sec.timestamp)}
                   </Text>
@@ -225,6 +222,14 @@ const styles = ScaledSheet.create({
     marginTop: '6@s',
     fontStyle: 'italic',
   },
+  secDomainText: {
+    fontSize: '12@ms',
+    color: CommonColors.indicatorColor,
+    ...Fonts.defaultRegular,
+    marginLeft: '10@s',
+    marginTop: '6@s',
+    textTransform: 'uppercase',
+  },
   btnSeeMore: {
     height: '35@s',
     alignItems: 'center',
@@ -237,5 +242,11 @@ const styles = ScaledSheet.create({
     fontSize: '13@ms',
     color: CommonColors.mainText,
     ...Fonts.defaultRegular,
+  },
+  domainText: {
+    fontSize: '13@ms',
+    color: CommonColors.indicatorColor,
+    textTransform: 'uppercase',
+    ...Fonts.defaultBold,
   },
 });

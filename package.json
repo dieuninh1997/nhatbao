@@ -28,6 +28,7 @@
     "react-native-flip-page": "https://github.com/dieuninh1997/react-native-flip-page.git",
     "react-native-gesture-handler": "^1.7.0",
     "react-native-i18n": "^2.0.15",
+    "react-native-image-slider-show": "^1.0.3",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-localize": "^1.4.1",
     "react-native-reanimated": "^1.10.1",

@@ -2,27 +2,23 @@ import React, {useRef, useState} from 'react';
 import {
   View,
   TouchableOpacity,
-  TouchableWithoutFeedback,
-  Image,
   Dimensions,
-  ActivityIndicator,
   Platform,
   StyleSheet,
 } from 'react-native';
 import {connect} from 'react-redux';
-
 import Carousel, {Pagination} from 'react-native-snap-carousel';
 import _ from 'lodash';
-import LinearGradient from 'react-native-linear-gradient';
 import FastImage from 'react-native-fast-image';
+import Slideshow from 'react-native-image-slider-show';
 
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import Text from '../../components/Text';
-import {scale} from '../../libs/reactSizeMatter/scalingUtils';
 import {CommonColors, Fonts, CommonStyles} from '../../utils/CommonStyles';
 import BackButton from '../../components/BackButton';
 import Header from '../../components/Header';
 import I18n from '../../i18n/i18n';
+import {scale} from '../../libs/reactSizeMatter/scalingUtils';
 
 const renderHeader = (title) => {
   return (
@@ -36,7 +32,14 @@ const renderHeader = (title) => {
 };
 
 const renderItem = ({item, index}, navigation) => {
-  const tags = item.detail_keywords;
+  const tags = item?.detail_keywords?.slice(0, 3);
+  const images = item?.detail_images;
+  const dataSource = images
+    ? images.map((img) => {
+        return {url: img};
+      })
+    : [];
+
   return (
     <View activeOpacity={1} style={styles.slideInnerContainer}>
       <View style={styles.shadow} />
@@ -45,7 +48,16 @@ const renderItem = ({item, index}, navigation) => {
           styles.imageContainer,
           index % 2 === 0 ? styles.imageContainerEven : {},
         ]}>
-        <Image source={{uri: item.image}} style={styles.image} />
+        {!images || images.length < 2 ? (
+          <FastImage source={{uri: item.image}} style={styles.image} />
+        ) : (
+          <Slideshow
+            dataSource={dataSource}
+            containerStyle={[styles.image, {overflow: 'hidden'}]}
+            height={scale(310)}
+            indicatorSize={scale(6)}
+          />
+        )}
         <View
           style={[
             styles.radiusMask,
@@ -87,7 +99,11 @@ const renderItem = ({item, index}, navigation) => {
           onPress={() => {
             navigation.navigate('WebviewScreen', {linkUrl: item.link});
           }}>
-          <Text style={styles.viewAllTitle}>
+          <Text
+            style={[
+              styles.viewAllTitle,
+              index % 2 === 0 ? styles.viewAllTitleEven : {},
+            ]}>
             {I18n.t('FollowScreen.viewAll')}
           </Text>
         </TouchableOpacity>
@@ -104,10 +120,10 @@ const CarouselPaginationBar = (props) => {
       }}>
       <View
         style={{
-          width: props.width / 5,
-          height: 3,
+          width: props.width / 10,
+          height: props.width / 10,
           borderRadius: 5,
-          marginHorizontal: 10,
+          marginHorizontal: 7,
         }}
         backgroundColor={
           props.inactive ? 'rgba(0, 0, 0, 0.20)' : 'rgba(0, 0, 0, 0.90)'
@@ -122,7 +138,7 @@ function FollowCard({navigation, route, value}) {
   const feeds = _.get(value, 'feeds', {});
   const data = feeds[`${title}`];
   const _slider1Ref = useRef(null);
-  const [slider1ActiveSlide, setSlider1ActiveSlide] = useState(1);
+  const [slider1ActiveSlide, setSlider1ActiveSlide] = useState(0);
   const [indexTitle, setIndexTitle] = useState(1);
 
   return (
@@ -134,22 +150,22 @@ function FollowCard({navigation, route, value}) {
           data={data}
           renderItem={({item, index}) => renderItem({item, index}, navigation)}
           sliderWidth={width}
-          itemWidth={width * 0.7}
+          itemWidth={width * 0.82}
           onSnapToItem={(index) => {
-            setIndexTitle(index);
+            setIndexTitle(index + 1);
             if (index >= data.length / 10) {
               index = index % 10;
             }
             setSlider1ActiveSlide(index);
           }}
-          firstItem={1}
+          firstItem={0}
           inactiveSlideScale={0.94}
           inactiveSlideOpacity={0.7}
           containerCustomStyle={styles.slider}
           contentContainerCustomStyle={styles.sliderContentContainer}
         />
         <Pagination
-          dotsLength={data.length / 10}
+          dotsLength={parseInt(data.length / 10)}
           activeDotIndex={slider1ActiveSlide}
           containerStyle={styles.paginationContainer}
           dotColor={'rgba(255, 255, 255, 0.92)'}
@@ -215,7 +231,7 @@ const styles = ScaledSheet.create({
     paddingVertical: 10, // for custom animation
   },
   slideInnerContainer: {
-    width: width * 0.7,
+    width: width * 0.85,
     height: height * 0.75,
     paddingHorizontal: '10@s',
     paddingBottom: 18, // needed for shadow
@@ -284,7 +300,7 @@ const styles = ScaledSheet.create({
   },
   subtitle: {
     marginTop: 6,
-    color: '#ccc',
+    color: '#424949',
     fontSize: 12,
     fontStyle: 'italic',
   },
@@ -316,8 +332,11 @@ const styles = ScaledSheet.create({
   },
   viewAllTitle: {
     marginTop: 6,
-    color: '#ccc',
+    color: '#424949',
     fontSize: 12,
     fontStyle: 'italic',
+  },
+  viewAllTitleEven: {
+    color: 'rgba(255, 255, 255, 0.7)',
   },
 });
