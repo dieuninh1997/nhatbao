@@ -1,6 +1,6 @@
 export default {
   common: {
-    appName: 'nhatbao',
+    appName: 'NewsCard',
     daysAgo: '{{d}} ngày trước',
     hoursAgo: '{{h}} giờ trước',
     minutesAgo: '{{m}} phút trước',

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Dimensions} from 'react-native';
+import {View, Dimensions, Platform} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {connect} from 'react-redux';
 import _ from 'lodash';
@@ -109,5 +109,10 @@ const styles = ScaledSheet.create({
   container: {
     flex: 1,
     backgroundColor: CommonColors.lightSeparator,
+  },
+  header: {
+    fontFamily: Platform.OS === 'ios' ? 'IowanOldStyle-Bold' : 'serif',
+    fontSize: '20@ms',
+    fontWeight: 'bold',
   },
 });

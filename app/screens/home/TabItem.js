@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   FlatList,
   StyleSheet,
+  ScrollView,
 } from 'react-native';
 import FlipPage, {FlipPagePage} from 'react-native-flip-page';
 import {useNavigation} from '@react-navigation/native';
@@ -29,16 +30,32 @@ function TabItem(props) {
   const navigation = useNavigation();
   const topics = _.get(value, 'topics', {});
   const trend = topics?.trend;
-  const top2FirstTrend = trend.slice(0, 2);
+  const top3FirstTrend = trend.slice(0, 3);
   const top3FirstNew = data?.val.slice(0, 3);
-  const top3FirstNewMore = [...top3FirstNew];
-  top3FirstNewMore.push('see_more');
+  top3FirstNew.push('see_more');
   const topFirstNew = data?.val[0];
   const isHotNewTab = data?.key === 'hot_news';
+
+  const secNew = [];
+  data?.val.map((eData, index) => {
+    if (index > 0 && index < 4) {
+      secNew.push(eData);
+    }
+  });
+
   const renderTrendHeader = () => (
     <View style={styles.trendHeader}>
       <Text style={styles.trendTitle}>{I18n.t('HomeScreen.trend')}</Text>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('HomeItem', {
+            value: {
+              headerTitle: I18n.t('HomeScreen.trend'),
+              data: trend,
+            },
+          });
+        }}>
         <Text style={styles.btnName}>{I18n.t('HomeScreen.viewMore')}</Text>
       </TouchableOpacity>
     </View>
@@ -64,33 +81,38 @@ function TabItem(props) {
       );
     }
     return (
-      <View
-        style={[styles.card, index === 0 ? {marginRight: scale(40)} : null]}>
-        <View style={styles.imageContainer}>
-          <FastImage
-            source={{uri: item.image}}
-            style={styles.image}
-            resizeMode={FastImage.resizeMode.cover}
-          />
-          {index === 0 && (
-            <TouchableWithoutFeedback onPress={() => {}}>
-              <View style={styles.btnNext}>
-                <ArrowIcon
-                  width={15}
-                  height={15}
-                  color={CommonColors.indicatorColor}
-                />
-              </View>
-            </TouchableWithoutFeedback>
-          )}
-        </View>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('WebviewScreen', {linkUrl: item.link});
+        }}>
+        <View
+          style={[styles.card, index === 0 ? {marginRight: scale(40)} : null]}>
+          <View style={styles.imageContainer}>
+            <FastImage
+              source={{uri: item.image}}
+              style={styles.image}
+              resizeMode={FastImage.resizeMode.cover}
+            />
+            {index === 0 && (
+              <TouchableWithoutFeedback onPress={() => {}}>
+                <View style={styles.btnNext}>
+                  <ArrowIcon
+                    width={15}
+                    height={15}
+                    color={CommonColors.indicatorColor}
+                  />
+                </View>
+              </TouchableWithoutFeedback>
+            )}
+          </View>
 
-        <View style={styles.topContent}>
-          <Text style={styles.topTitle}>{item.title}</Text>
-          <Text style={styles.domainTitle}>{item.domain}</Text>
-          <Text style={styles.subtitle}>{getDiffHours(item.timestamp)}</Text>
+          <View style={styles.topContent}>
+            <Text style={styles.topTitle}>{item.title}</Text>
+            <Text style={styles.domainTitle}>{item.domain}</Text>
+            <Text style={styles.subtitle}>{getDiffHours(item.timestamp)}</Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -120,7 +142,7 @@ function TabItem(props) {
           </Text>
         </View>
       </View>
-      {top3FirstNew.map((it, index) => {
+      {secNew.map((it, index) => {
         return (
           <TouchableOpacity
             key={index}
@@ -162,31 +184,31 @@ function TabItem(props) {
       <View style={styles.topView}>
         <FlatList
           horizontal
-          data={top3FirstNewMore}
+          data={top3FirstNew}
           renderItem={renderItem}
           showsHorizontalScrollIndicator={false}
         />
       </View>
       <View style={styles.trendingView}>
         {renderTrendHeader()}
-        {top2FirstTrend.map((trend, index) => {
+        {top3FirstTrend.map((etrend, index) => {
           return (
             <TouchableOpacity
               key={index}
               onPress={() => {
-                navigation.navigate('WebviewScreen', {linkUrl: trend.link});
+                navigation.navigate('WebviewScreen', {linkUrl: etrend.link});
               }}>
               <View style={styles.secContainer} key={index}>
                 <FastImage
                   style={styles.secImage}
-                  source={{uri: trend.image}}
+                  source={{uri: etrend.image}}
                   resizeMode={FastImage.resizeMode.cover}
                 />
                 <View style={styles.secContent}>
-                  <Text style={styles.secTitle}>{trend.title}</Text>
-                  <Text style={styles.secDomainText}>{trend.domain}</Text>
+                  <Text style={styles.secTitle}>{etrend.title}</Text>
+                  <Text style={styles.secDomainText}>{etrend.domain}</Text>
                   <Text style={styles.secTime}>
-                    {getDiffHours(trend.timestamp)}
+                    {getDiffHours(etrend.timestamp)}
                   </Text>
                 </View>
               </View>
@@ -198,9 +220,11 @@ function TabItem(props) {
   );
 
   return (
-    <View style={styles.container}>
-      {isHotNewTab ? renderTabHotNews() : renderTabOther()}
-    </View>
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.container}>
+        {isHotNewTab ? renderTabHotNews() : renderTabOther()}
+      </View>
+    </ScrollView>
   );
 }
 
@@ -213,14 +237,15 @@ const {width, height} = Dimensions.get('window');
 const styles = ScaledSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFFFFF',
   },
   topView: {
     backgroundColor: CommonColors.lightSeparator,
     paddingTop: 0,
-    flex: 1.2,
+    height: width * 0.7,
   },
   trendingView: {
-    flex: 1.5,
+    flex: 1,
     backgroundColor: '#FFFFFF',
     padding: 10,
   },
@@ -321,7 +346,7 @@ const styles = ScaledSheet.create({
   },
   secContainer: {
     flexDirection: 'row',
-    marginTop: '10@s',
+    marginTop: '20@s',
   },
   secContent: {
     flex: 1,
