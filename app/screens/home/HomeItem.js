@@ -91,7 +91,7 @@ const styles = ScaledSheet.create({
     paddingBottom: '10@s',
   },
   itemTitle: {
-    fontSize: '18@ms',
+    fontSize: '14@ms',
     color: CommonColors.mainText,
     ...Fonts.defaultBold,
     marginVertical: '10@s',

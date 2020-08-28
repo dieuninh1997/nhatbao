@@ -6,10 +6,14 @@ import {
   ScrollView,
   RefreshControl,
   StatusBar,
+  FlatList,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import {connect} from 'react-redux';
 import _ from 'lodash';
 import FastImage from 'react-native-fast-image';
+import LinearGradient from 'react-native-linear-gradient';
 
 import Text from '../../components/Text';
 import Header from '../../components/Header';
@@ -18,98 +22,15 @@ import {
   CommonColors,
   Fonts,
   CommonSize,
+  Shadows,
 } from '../../utils/CommonStyles';
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import I18n from '../../i18n/i18n';
 import {getDateTime, getDiffHours} from '../../utils/Filter';
 import store from '../../store';
 import * as actions from '../../actions';
-import MoreIcon from '../../../assets/svg/ic_more_arrow_right.svg';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-
-const renderHeader = () => {
-  return (
-    <Header
-      left={
-        <Text style={[CommonStyles.headerTitle, styles.header]}>
-          {I18n.t('common.appName')}
-        </Text>
-      }
-    />
-  );
-};
-
-const renderTopics = (data, headerTitle, navigation) => {
-  if (!data || data.length === 0) {
-    return null;
-  }
-  const firstData = data[0];
-  const secondData = [];
-  data.map((item, index) => {
-    if (index > 0 && index < 4) {
-      secondData.push(item);
-    }
-  });
-  return (
-    <View style={styles.itemTopicContainer}>
-      <Text style={styles.topicHeaderTitle}>{headerTitle}</Text>
-
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('WebviewScreen', {linkUrl: firstData.link});
-        }}>
-        <View style={styles.topContent}>
-          <FastImage
-            style={styles.topImage}
-            source={{uri: firstData.image}}
-            resizeMode={FastImage.resizeMode.cover}
-          />
-
-          <Text style={styles.itemTime}>
-            {getDiffHours(firstData.timestamp)}
-          </Text>
-          <Text style={styles.itemTitle}>
-            <Text style={styles.domainText}>{`(${firstData.domain}) `}</Text>
-            {`- ${firstData.title}`}
-          </Text>
-        </View>
-      </TouchableOpacity>
-
-      {secondData.length > 0 &&
-        secondData.map((sec, index) => {
-          return (
-            <TouchableOpacity
-              key={index}
-              onPress={() => {
-                navigation.navigate('WebviewScreen', {linkUrl: sec.link});
-              }}>
-              <View style={styles.secContainer} key={index}>
-                <FastImage
-                  style={styles.secImage}
-                  source={{uri: sec.image}}
-                  resizeMode={FastImage.resizeMode.cover}
-                />
-                <View style={styles.flexOne}>
-                  <Text style={styles.secTitle}>{sec.title}</Text>
-                  <Text style={styles.secDomainText}>{firstData.domain}</Text>
-                  <Text style={styles.secTime}>
-                    {getDiffHours(sec.timestamp)}
-                  </Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-          );
-        })}
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('HomeItem', {value: {headerTitle, data}});
-        }}
-        style={styles.btnSeeMore}>
-        <Text style={styles.btnName}>{I18n.t('HomeScreen.more')}</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
+import ArrowIcon from '../../../assets/svg/ic_arrow_next.svg';
+import {scale} from '../../libs/reactSizeMatter/scalingUtils';
 
 function HomeScreen({navigation, value, language}) {
   const [refreshing, setRefreshing] = useState(false);
@@ -121,26 +42,231 @@ function HomeScreen({navigation, value, language}) {
     }, 500);
   };
   const topics = _.get(value, 'topics', {});
-  const hotNews = topics.hot_news;
-  const films = topics.film;
-  const golds = topics.gold;
-  const trend = topics.trend;
+  const hotNews = topics?.hot_news;
+  const film = topics?.film;
+  const gold = topics?.gold;
+  const trend = topics?.trend;
+
+  const top3FirstTrend = trend.slice(0, 3);
+  const top3FirstNew = hotNews.slice(0, 3);
+  top3FirstNew.push('see_more');
+  const topFirstFilm = film[0];
+  const topFirstGold = gold[0];
+
+  const secFilm = [];
+  film.map((eData, index) => {
+    if (index > 0 && index < 4) {
+      secFilm.push(eData);
+    }
+  });
+  const secGold = [];
+  gold.map((eData, index) => {
+    if (index > 0 && index < 4) {
+      secGold.push(eData);
+    }
+  });
+
+  const renderHeader = () => {
+    return (
+      <Header
+        left={
+          <Text style={[CommonStyles.headerTitle, styles.header]}>
+            {I18n.t('common.appName')}
+          </Text>
+        }
+      />
+    );
+  };
+
+  const renderTrendHeader = (title, data, style = {}) => (
+    <View style={[styles.trendHeader, style]}>
+      <Text style={styles.trendTitle}>{title}</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          navigation.navigate('HomeItem', {
+            value: {
+              headerTitle: title,
+              data,
+            },
+          });
+        }}>
+        <Text style={styles.btnName}>{I18n.t('HomeScreen.viewMore')}</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
+  const renderItem = ({item, index}) => {
+    if (index === 3) {
+      return (
+        <TouchableOpacity
+          style={styles.btnSeeMore}
+          onPress={() => {
+            navigation.navigate('HomeItem', {
+              value: {
+                headerTitle: I18n.t('HomeScreen.hotNews'),
+                data: hotNews,
+              },
+            });
+          }}>
+          <Text style={styles.seeMoreText}>
+            {I18n.t('HomeScreen.viewMore')}
+          </Text>
+        </TouchableOpacity>
+      );
+    }
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('WebviewScreen', {linkUrl: item.link});
+        }}>
+        <View
+          style={[styles.card, index === 0 ? {marginRight: scale(40)} : null]}>
+          <View style={styles.imageContainer}>
+            <FastImage
+              source={{uri: item.image}}
+              style={styles.image}
+              resizeMode={FastImage.resizeMode.cover}
+            />
+            {index === 0 && (
+              <TouchableWithoutFeedback onPress={() => {}}>
+                <View style={styles.btnNext}>
+                  <ArrowIcon
+                    width={15}
+                    height={15}
+                    color={CommonColors.indicatorColor}
+                  />
+                </View>
+              </TouchableWithoutFeedback>
+            )}
+          </View>
+
+          <View style={styles.topContent}>
+            <Text style={styles.topTitle}>{item.title}</Text>
+            <Text style={styles.domainTitle}>{item.domain}</Text>
+            <Text style={styles.subtitle}>{getDiffHours(item.timestamp)}</Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderHotNews = () => (
+    <View style={styles.container}>
+      {renderTrendHeader(I18n.t('HomeScreen.hotNews'), hotNews, {
+        paddingHorizontal: scale(16),
+        marginTop: 0,
+      })}
+
+      <View style={styles.topView}>
+        <FlatList
+          horizontal
+          data={top3FirstNew}
+          renderItem={renderItem}
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
+      <View style={styles.trendingView}>
+        {renderTrendHeader(I18n.t('HomeScreen.trend'), trend)}
+        {top3FirstTrend.map((etrend, index) => {
+          return (
+            <TouchableOpacity
+              key={index}
+              onPress={() => {
+                navigation.navigate('WebviewScreen', {linkUrl: etrend.link});
+              }}>
+              <View style={styles.secContainer} key={index}>
+                <FastImage
+                  style={styles.secImage}
+                  source={{uri: etrend.image}}
+                  resizeMode={FastImage.resizeMode.cover}
+                />
+                <View style={styles.secContent}>
+                  <Text style={styles.secTitle}>{etrend.title}</Text>
+                  <Text style={styles.secDomainText}>{etrend.domain}</Text>
+                  <Text style={styles.secTime}>
+                    {getDiffHours(etrend.timestamp)}
+                  </Text>
+                </View>
+              </View>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    </View>
+  );
+
+  const renderTabOther = (first, sec, title, data) => (
+    <View style={styles.tabContent}>
+      <View>
+        <FastImage
+          source={{uri: first.image}}
+          style={styles.tabTopImage}
+          resizeMode={FastImage.resizeMode.cover}
+        />
+        <LinearGradient
+          start={{x: 0, y: 1}}
+          end={{x: 0, y: 0}}
+          colors={[
+            'rgba(0, 0, 0, 0.8)',
+            'rgba(0, 0, 0, 0.2)',
+            'rgba(238, 238, 238, 0.1)',
+          ]}
+          style={styles.gradientView}
+        />
+        <View style={styles.tabTopTitleContainer}>
+          <Text style={styles.tabTopTitle}>{first.title}</Text>
+          <Text style={styles.tabTopDomain}>{first.domain}</Text>
+          <Text style={styles.tabTopTime}>{getDiffHours(first.timestamp)}</Text>
+        </View>
+      </View>
+      {sec.map((it, index) => {
+        return (
+          <TouchableOpacity
+            key={index}
+            onPress={() => {
+              navigation.navigate('WebviewScreen', {linkUrl: it.link});
+            }}>
+            <View style={styles.itContainer} key={index}>
+              <View style={styles.itContent}>
+                <Text style={styles.itTitle}>{it.title}</Text>
+                <Text style={styles.secDomainText}>{it.domain}</Text>
+                <Text style={styles.secTime}>{getDiffHours(it.timestamp)}</Text>
+              </View>
+              <FastImage
+                style={styles.itImage}
+                source={{uri: it.image}}
+                resizeMode={FastImage.resizeMode.cover}
+              />
+            </View>
+          </TouchableOpacity>
+        );
+      })}
+    </View>
+  );
 
   return (
-    <ScrollView
-      scrollEnabled={true}
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />
-      }>
-      <View style={styles.container}>
-        {/* <HomeTabs /> */}
-        {renderHeader()}
-        {renderTopics(hotNews, I18n.t('HomeScreen.hotNews'), navigation)}
-        {renderTopics(films, I18n.t('HomeScreen.film'), navigation)}
-        {renderTopics(golds, I18n.t('HomeScreen.golds'), navigation)}
-        {renderTopics(trend, I18n.t('HomeScreen.trend'), navigation)}
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      {/* <HomeTabs /> */}
+      {renderHeader()}
+      <ScrollView
+        scrollEnabled={true}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />
+        }>
+        {renderHotNews()}
+        {renderTrendHeader(I18n.t('HomeScreen.film'), film, {
+          paddingHorizontal: scale(16),
+          marginTop: 0,
+        })}
+        {renderTabOther(topFirstFilm, secFilm, film, 'film')}
+        {renderTrendHeader(I18n.t('HomeScreen.gold'), gold, {
+          paddingHorizontal: scale(16),
+          marginTop: 0,
+        })}
+        {renderTabOther(topFirstGold, secGold, gold, 'gold')}
+      </ScrollView>
+    </View>
   );
 }
 export default connect((state) => ({
@@ -148,56 +274,115 @@ export default connect((state) => ({
   language: state.user.language,
 }))(HomeScreen);
 
+const {width, height} = Dimensions.get('window');
 const styles = ScaledSheet.create({
   container: {
     flex: 1,
-    backgroundColor: CommonColors.lightSeparator,
-  },
-  flexOne: {
-    flex: 1,
-  },
-  row: {
-    flexDirection: 'row',
+    backgroundColor: '#FFFFFF',
   },
   header: {
-    textTransform: 'uppercase',
-    color: CommonColors.primaryText,
+    fontFamily: Platform.OS === 'ios' ? 'IowanOldStyle-Bold' : 'serif',
+    fontWeight: 'bold',
+    color: '#000',
   },
-  headerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  topView: {
+    backgroundColor: CommonColors.lightSeparator,
+    paddingTop: 0,
+    height: width * 0.7,
   },
-  itemTopicContainer: {
-    backgroundColor: '#FFF',
-    marginTop: '5@s',
+  trendingView: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    padding: 10,
+  },
+  card: {
+    width: width * 0.8,
+    height: width * 0.6,
+    backgroundColor: '#FFFFFF',
+    borderRadius: '15@s',
+    marginTop: '20@s',
+    borderColor: '#F8F8F8',
+    borderWidth: '1@s',
+    ...Shadows.shadowCard,
+    marginRight: '20@s',
+    marginLeft: '30@s',
+  },
+  tabContent: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
     padding: '16@s',
   },
-  topicHeaderTitle: {
+  tabTopImage: {
+    height: '200@s',
+    width: '100%',
+    borderRadius: 8,
+  },
+  imageContainer: {
+    flex: 2,
+    justifyContent: 'center',
+  },
+  image: {
     flex: 1,
-    fontSize: '16@ms',
-    color: CommonColors.indicatorColor,
-    ...Fonts.defaultBold,
-    marginVertical: '6@s',
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
   },
   topContent: {
     flex: 1,
+    padding: '16@s',
   },
-  topImage: {
-    height: '300@s',
-    width: '100%',
-    borderRadius: '10@s',
+  btnNext: {
+    width: '40@s',
+    height: '40@s',
+    borderRadius: '20@s',
+    backgroundColor: '#FFF',
+    position: 'absolute',
+    right: -20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  itemTitle: {
-    fontSize: '14@ms',
+  topTitle: {
     color: '#000',
-    ...Fonts.defaultBold,
-    marginVertical: '6@s',
+    fontSize: '14@ms',
+    fontWeight: 'bold',
+    letterSpacing: 0.5,
   },
-  itemTime: {
-    fontSize: '12@ms',
-    color: '#424949',
-    ...Fonts.defaultRegular,
+  subtitle: {
     marginTop: '6@s',
+    color: '#424949',
+    fontSize: '12@ms',
+    fontStyle: 'italic',
+  },
+  domainTitle: {
+    marginTop: '6@s',
+    color: CommonColors.indicatorColor,
+    fontSize: '12@ms',
+    textTransform: 'uppercase',
+  },
+  trendHeader: {
+    flexDirection: 'row',
+    height: '45@s',
+    alignItems: 'center',
+    marginTop: '6@s',
+  },
+  trendTitle: {
+    flex: 1,
+    color: '#000',
+    fontSize: '14@ms',
+    fontWeight: 'bold',
+    letterSpacing: 0.5,
+  },
+  button: {
+    width: '80@s',
+    height: '30@s',
+    backgroundColor: CommonColors.lightBgColor,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '25@s',
+  },
+  btnName: {
+    fontSize: '12@ms',
+    color: CommonColors.mainText,
+    ...Fonts.defaultRegular,
   },
   secImage: {
     height: '80@s',
@@ -207,45 +392,96 @@ const styles = ScaledSheet.create({
   },
   secContainer: {
     flexDirection: 'row',
-    marginTop: '10@s',
+    marginTop: Platform.OS === 'ios' ? '20@s' : '14@s',
+  },
+  secContent: {
+    flex: 1,
+    flexWrap: 'nowrap',
+    marginLeft: '10@s',
   },
   secTitle: {
-    fontSize: '14@ms',
     color: '#000',
-    marginLeft: '10@s',
-    fontWeight: 'bold',
+    fontSize: 13,
   },
   secTime: {
     fontSize: '12@ms',
     color: '#424949',
     ...Fonts.defaultRegular,
-    marginLeft: '10@s',
   },
   secDomainText: {
     fontSize: '12@ms',
     color: CommonColors.indicatorColor,
     ...Fonts.defaultRegular,
-    marginLeft: '10@s',
-    marginTop: '6@s',
     textTransform: 'uppercase',
+    marginTop: '7@s',
   },
   btnSeeMore: {
+    alignSelf: 'center',
+    marginRight: '20@s',
+  },
+  seeMoreText: {
+    fontSize: '14@ms',
+    color: CommonColors.mainText,
+    ...Fonts.defaultRegular,
+  },
+  gradientView: {
+    position: 'absolute',
+    zIndex: 100,
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    borderRadius: 8,
+  },
+  tabTopTitleContainer: {
+    position: 'absolute',
+    bottom: 0,
+    zIndex: 1000,
+    padding: '15@s',
+  },
+  tabTopTitle: {
+    fontSize: '14@s',
+    color: '#FFF',
+    ...Fonts.defaultBold,
+    flexWrap: 'wrap',
+  },
+  tabTopTime: {
+    fontSize: '12@s',
+    color: CommonColors.lightText,
+    fontStyle: 'italic',
+  },
+  tabTopDomain: {
+    fontSize: '12@s',
+    color: CommonColors.indicatorColor,
+    textTransform: 'uppercase',
+    width: 'auto',
+  },
+  itContainer: {
+    flexDirection: 'row',
+    marginTop: '25@s',
+  },
+  itImage: {
+    height: '100@s',
+    width: '100@s',
+    backgroundColor: '#dddeef',
+    borderRadius: '10@s',
+  },
+  itContent: {
+    flex: 1,
+    flexWrap: 'nowrap',
+    marginRight: '10@s',
+    marginTop: '10@s',
+  },
+  itTitle: {
+    color: '#000',
+    fontSize: 14,
+  },
+  btnMore: {
     height: '35@s',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: CommonColors.lightBgColor,
-    marginTop: '10@s',
+    marginTop: '25@s',
     borderRadius: '25@s',
-  },
-  btnName: {
-    fontSize: '13@ms',
-    color: CommonColors.mainText,
-    ...Fonts.defaultRegular,
-  },
-  domainText: {
-    fontSize: '13@ms',
-    color: CommonColors.indicatorColor,
-    textTransform: 'uppercase',
-    ...Fonts.defaultBold,
   },
 });
