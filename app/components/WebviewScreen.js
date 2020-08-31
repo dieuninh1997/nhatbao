@@ -24,7 +24,7 @@ function WebviewScreen({navigation, route, netInfo}, props) {
         right={
           <View style={styles.row}>
             <ShareIcon width={18} height={18} color={'#000'} />
-            <View style={styles.space} />
+            {/* <View style={styles.space} />
             <PlusIcon width={18} height={18} color={'#000'} />
             <View style={styles.space} />
             <HeartIcon width={18} height={18} color={'#000'} />
@@ -33,7 +33,7 @@ function WebviewScreen({navigation, route, netInfo}, props) {
             <View style={styles.space} />
             <BookmarkIcon width={18} height={18} color={'#000'} />
             <View style={styles.space} />
-            <MenuIcon width={18} height={18} color={'#000'} />
+            <MenuIcon width={18} height={18} color={'#000'} /> */}
           </View>
         }
       />

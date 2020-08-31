@@ -189,28 +189,35 @@ function HomeScreen({navigation, value, language}) {
 
   const renderTabOther = (first, sec, title, data) => (
     <View style={styles.tabContent}>
-      <View>
-        <FastImage
-          source={{uri: first.image}}
-          style={styles.tabTopImage}
-          resizeMode={FastImage.resizeMode.cover}
-        />
-        <LinearGradient
-          start={{x: 0, y: 1}}
-          end={{x: 0, y: 0}}
-          colors={[
-            'rgba(0, 0, 0, 0.8)',
-            'rgba(0, 0, 0, 0.2)',
-            'rgba(238, 238, 238, 0.1)',
-          ]}
-          style={styles.gradientView}
-        />
-        <View style={styles.tabTopTitleContainer}>
-          <Text style={styles.tabTopTitle}>{first.title}</Text>
-          <Text style={styles.tabTopDomain}>{first.domain}</Text>
-          <Text style={styles.tabTopTime}>{getDiffHours(first.timestamp)}</Text>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('WebviewScreen', {linkUrl: first.link});
+        }}>
+        <View>
+          <FastImage
+            source={{uri: first.image}}
+            style={styles.tabTopImage}
+            resizeMode={FastImage.resizeMode.cover}
+          />
+          <LinearGradient
+            start={{x: 0, y: 1}}
+            end={{x: 0, y: 0}}
+            colors={[
+              'rgba(0, 0, 0, 0.8)',
+              'rgba(0, 0, 0, 0.2)',
+              'rgba(238, 238, 238, 0.1)',
+            ]}
+            style={styles.gradientView}
+          />
+          <View style={styles.tabTopTitleContainer}>
+            <Text style={styles.tabTopTitle}>{first.title}</Text>
+            <Text style={styles.tabTopDomain}>{first.domain}</Text>
+            <Text style={styles.tabTopTime}>
+              {getDiffHours(first.timestamp)}
+            </Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
       {sec.map((it, index) => {
         return (
           <TouchableOpacity
