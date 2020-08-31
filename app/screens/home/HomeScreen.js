@@ -47,24 +47,29 @@ function HomeScreen({navigation, value, language}) {
   const gold = topics?.gold;
   const trend = topics?.trend;
 
-  const top3FirstTrend = trend.slice(0, 3);
-  const top3FirstNew = hotNews.slice(0, 3);
-  top3FirstNew.push('see_more');
-  const topFirstFilm = film[0];
-  const topFirstGold = gold[0];
+  const top3FirstTrend = trend?.slice(0, 3);
+  const top3FirstNew = hotNews?.slice(0, 3);
+  top3FirstNew?.push('see_more');
+  const topFirstFilm = film && film[0];
+  const topFirstGold = gold && gold[0];
 
   const secFilm = [];
-  film.map((eData, index) => {
-    if (index > 0 && index < 4) {
-      secFilm.push(eData);
-    }
-  });
+  if (film) {
+    film.map((eData, index) => {
+      if (index > 0 && index < 4) {
+        secFilm.push(eData);
+      }
+    });
+  }
+
   const secGold = [];
-  gold.map((eData, index) => {
-    if (index > 0 && index < 4) {
-      secGold.push(eData);
-    }
-  });
+  if (gold) {
+    gold.map((eData, index) => {
+      if (index > 0 && index < 4) {
+        secGold.push(eData);
+      }
+    });
+  }
 
   const renderHeader = () => {
     return (
