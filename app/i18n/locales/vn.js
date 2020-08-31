@@ -16,6 +16,7 @@ export default {
     more: 'Xem thêm',
     trend: 'Thịnh hành',
     viewMore: 'Xem thêm',
+    review_film: 'Đánh giá phim',
   },
   AccountScreen: {
     header: 'Tài Khoản',

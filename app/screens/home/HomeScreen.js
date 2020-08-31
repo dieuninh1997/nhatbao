@@ -6,6 +6,7 @@ import {
   ScrollView,
   RefreshControl,
   StatusBar,
+  Image,
   FlatList,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -42,34 +43,19 @@ function HomeScreen({navigation, value, language}) {
     }, 500);
   };
   const topics = _.get(value, 'topics', {});
-  const hotNews = topics?.hot_news;
-  const film = topics?.film;
-  const gold = topics?.gold;
-  const trend = topics?.trend;
+  const keys = Object.keys(topics);
+  const otherData = [];
+  keys.map((key) => {
+    if (key !== 'trend' && key !== 'hot_news') {
+      otherData.push(key);
+    }
+  });
 
+  const hotNews = topics?.hot_news;
+  const trend = topics?.trend;
   const top3FirstTrend = trend?.slice(0, 3);
   const top3FirstNew = hotNews?.slice(0, 3);
   top3FirstNew?.push('see_more');
-  const topFirstFilm = film && film[0];
-  const topFirstGold = gold && gold[0];
-
-  const secFilm = [];
-  if (film) {
-    film.map((eData, index) => {
-      if (index > 0 && index < 4) {
-        secFilm.push(eData);
-      }
-    });
-  }
-
-  const secGold = [];
-  if (gold) {
-    gold.map((eData, index) => {
-      if (index > 0 && index < 4) {
-        secGold.push(eData);
-      }
-    });
-  }
 
   const renderHeader = () => {
     return (
@@ -250,6 +236,18 @@ function HomeScreen({navigation, value, language}) {
     </View>
   );
 
+  const getSec = (othData) => {
+    const sec = [];
+    if (othData) {
+      othData.map((eData, index) => {
+        if (index > 0 && index < 4) {
+          sec.push(eData);
+        }
+      });
+    }
+    return sec;
+  };
+
   return (
     <View style={styles.container}>
       {/* <HomeTabs /> */}
@@ -260,16 +258,32 @@ function HomeScreen({navigation, value, language}) {
           <RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />
         }>
         {renderHotNews()}
-        {renderTrendHeader(I18n.t('HomeScreen.film'), film, {
-          paddingHorizontal: scale(16),
-          marginTop: 0,
+        {otherData.map((key, index) => {
+          const othData = topics[`${key}`];
+          const topFirst = othData && othData[0];
+          const sec = getSec(othData);
+
+          return (
+            <View>
+              {renderTrendHeader(I18n.t(`HomeScreen.${key}`), othData, {
+                paddingHorizontal: scale(16),
+                marginTop: 0,
+              })}
+              {renderTabOther(
+                topFirst,
+                sec,
+                othData,
+                key,
+                index % 2 !== 0
+                  ? {
+                      paddingHorizontal: scale(16),
+                      marginTop: 0,
+                    }
+                  : {},
+              )}
+            </View>
+          );
         })}
-        {renderTabOther(topFirstFilm, secFilm, film, 'film')}
-        {renderTrendHeader(I18n.t('HomeScreen.gold'), gold, {
-          paddingHorizontal: scale(16),
-          marginTop: 0,
-        })}
-        {renderTabOther(topFirstGold, secGold, gold, 'gold')}
       </ScrollView>
     </View>
   );
