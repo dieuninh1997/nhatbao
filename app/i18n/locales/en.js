@@ -16,18 +16,17 @@ export default {
     more: 'See more',
     trend: 'Trending',
     viewMore: 'More',
+    review_film: 'Review Film',
   },
   AccountScreen: {
     header: 'Account',
     yourProfile: 'Your Profile',
   },
-  ExploreScreen: {
-    header: 'Explore',
-    hintSearch: 'Search Flipboard',
-  },
   FollowScreen: {
     header: 'Following',
     viewAll: 'View all >>',
+    hintSearch: 'Search',
+    domain: 'Domain',
   },
   NotificationScreen: {
     header: 'Notifications',

@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   Platform,
   StatusBar,
+  TextInput,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import {connect} from 'react-redux';
 import _ from 'lodash';
@@ -20,6 +22,7 @@ import I18n from '../../i18n/i18n';
 import ReloadIcon from '../../../assets/svg/ic_reload.svg';
 import {scale} from '../../libs/reactSizeMatter/scalingUtils';
 import MenuIcon from '../../../assets/svg/ic_menu.svg';
+import SearchIcon from '../../../assets/svg/ic_search.svg';
 
 const renderHeader = () => {
   return (
@@ -82,6 +85,23 @@ function FollowScreen({navigation, value}) {
   return (
     <View style={styles.container}>
       {renderHeader()}
+      {/* search keywords */}
+      <TouchableWithoutFeedback
+        onPress={() => {
+          navigation.navigate('FollowSearch');
+        }}>
+        <View style={styles.searchContainer}>
+          <SearchIcon
+            width={20}
+            height={20}
+            color={CommonColors.inActiveTintColor}
+          />
+          <Text style={styles.textEnter}>
+            {I18n.t('FollowScreen.hintSearch')}
+          </Text>
+        </View>
+      </TouchableWithoutFeedback>
+
       {/* list feeds */}
       <FlatList
         style={styles.flexOne}
@@ -105,6 +125,7 @@ const {width, height} = Dimensions.get('window');
 const styles = ScaledSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF',
   },
   header: {
     textTransform: 'uppercase',
@@ -150,5 +171,21 @@ const styles = ScaledSheet.create({
     color: '#f8f8f8',
     textTransform: 'uppercase',
     fontWeight: 'bold',
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    marginVertical: '10@s',
+    marginHorizontal: '16@s',
+    backgroundColor: CommonColors.lightSeparator,
+    height: '40@s',
+    alignItems: 'center',
+    paddingHorizontal: '16@s',
+    borderRadius: '4@s',
+  },
+  textEnter: {
+    fontSize: '14@ms',
+    color: CommonColors.inActiveTintColor,
+    marginLeft: '16@s',
+    flex: 1,
   },
 });

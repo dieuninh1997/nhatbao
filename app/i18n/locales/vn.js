@@ -22,13 +22,12 @@ export default {
     header: 'Tài Khoản',
     yourProfile: 'Thông tin tài khoản',
   },
-  ExploreScreen: {
-    header: 'Khám Phá',
-    hintSearch: 'Tìm kiếm',
-  },
+
   FollowScreen: {
     header: 'Theo Dõi',
     viewAll: 'Xem toàn bộ >>',
+    hintSearch: 'Tìm kiếm',
+    domain: 'Domain',
   },
   NotificationScreen: {
     header: 'Thông báo',
