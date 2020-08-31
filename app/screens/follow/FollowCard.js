@@ -104,7 +104,12 @@ const renderItem = ({item, index}, navigation) => {
           </View>
         ) : null}
         <TouchableOpacity
-          style={styles.btnViewAll}
+          style={[
+            styles.btnViewAll,
+            index % 2 === 0
+              ? {backgroundColor: CommonColors.indicatorColor}
+              : null,
+          ]}
           onPress={() => {
             navigation.navigate('WebviewScreen', {linkUrl: item.link});
           }}>
@@ -349,17 +354,25 @@ const styles = ScaledSheet.create({
     fontStyle: 'italic',
   },
   viewAllTitle: {
-    marginTop: 6,
-    color: '#424949',
+    color: CommonColors.indicatorColor,
     fontSize: 14,
     fontStyle: 'italic',
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
   },
   viewAllTitleEven: {
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: '#FFF',
   },
   btnViewAll: {
     position: 'absolute',
     bottom: '26@s',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '45@s',
+    borderWidth: 1,
+    borderColor: CommonColors.indicatorColor,
+    width: '100%',
+    borderRadius: '8@s',
     alignSelf: 'center',
   },
 });
