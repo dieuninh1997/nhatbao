@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {View, TextInput, FlatList} from 'react-native';
 import {connect} from 'react-redux';
 import _ from 'lodash';
+import LottieView from 'lottie-react-native';
 
 import Text from '../../components/Text';
 import {CommonColors, CommonSize, Fonts} from '../../utils/CommonStyles';
@@ -98,29 +99,40 @@ function FollowSearch({navigation, value}) {
               {I18n.t('FollowScreen.domain')}
             </Text>
             <View style={styles.separatorDark} />
-            <View style={styles.listDomain}>
-              {keyDomain?.map((kd, index) => {
-                return (
-                  <TouchableOpacity
-                    key={index}
-                    onPress={() => {
-                      handleChangeInput(kd.domain);
-                      setShowSuggestDomain(false);
-                    }}>
-                    <View style={styles.itemContainer}>
-                      <View style={styles.kdImageContainer}>
-                        <FastImage
-                          source={{uri: kd.image}}
-                          style={styles.kdImage}
-                          resizeMode={FastImage.resizeMode.contain}
-                        />
+            {keyDomain.length > 0 ? (
+              <View style={styles.listDomain}>
+                {keyDomain?.map((kd, index) => {
+                  return (
+                    <TouchableOpacity
+                      key={index}
+                      onPress={() => {
+                        handleChangeInput(kd.domain);
+                        setShowSuggestDomain(false);
+                      }}>
+                      <View style={styles.itemContainer}>
+                        <View style={styles.kdImageContainer}>
+                          <FastImage
+                            source={{uri: kd.image}}
+                            style={styles.kdImage}
+                            resizeMode={FastImage.resizeMode.contain}
+                          />
+                        </View>
+                        <Text style={styles.domainText}>{kd.domain}</Text>
                       </View>
-                      <Text style={styles.domainText}>{kd.domain}</Text>
-                    </View>
-                  </TouchableOpacity>
-                );
-              })}
-            </View>
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
+            ) : (
+              <View style={styles.loadingContainer}>
+                <LottieView
+                  style={styles.loadingIcon}
+                  source={require('../../../assets/animations/loading1.json')}
+                  autoPlay
+                  loop
+                />
+              </View>
+            )}
           </View>
         ) : (
           <View style={styles.resultContainer}>
@@ -235,5 +247,16 @@ const styles = ScaledSheet.create({
     borderRadius: '8@s',
     marginRight: '10@s',
     overflow: 'hidden',
+  },
+  loadingContainer: {
+    flex: 1,
+    marginTop: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loadingIcon: {
+    width: '200@s',
+    height: '200@s',
+    alignSelf: 'center',
   },
 });
