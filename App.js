@@ -1,23 +1,18 @@
 import React from 'react';
 import AccountScreen from './app/screens/account/AccountScreen';
 import HomeScreen from './app/screens/home/HomeScreen';
-import ExploreScreen from './app/screens/explore/ExploreScreen';
 import FollowScreen from './app/screens/follow/FollowScreen';
-import NotificationScreen from './app/screens/notification/NotificationScreen';
 import SplashScreen from './app/screens/splash/SplashScreen';
-import {scale} from './app/libs/reactSizeMatter/scalingUtils';
 import {CommonColors} from './app/utils/CommonStyles';
 import HomeIcon from './assets/svg/ic_home.svg';
-import NotificationIcon from './assets/svg/ic_bell.svg';
 import FollowIcon from './assets/svg/ic_follow.svg';
-import ExploreIcon from './assets/svg/ic_search.svg';
 import AccountIcon from './assets/svg/ic_user.svg';
 import store from './app/store';
 import WebviewScreen from './app/components/WebviewScreen';
-import FollowItem from './app/screens/follow/FollowItem';
 import HomeItem from './app/screens/home/HomeItem';
 import SettingScreen from './app/screens/setting/SettingScreen';
 import FollowCard from './app/screens/follow/FollowCard';
+import FollowSearch from './app/screens/follow/FollowSearch';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -74,44 +69,6 @@ const MyTabs = () => {
             ),
         }}
       />
-      {/* <Tab.Screen
-        name="ExploreScreen"
-        component={ExploreScreen}
-        options={{
-          // tabBarLabel: ({focused}) => (
-          //   <LabelComponent title="Explore" focused={focused} />
-          // ),
-          tabBarIcon: ({focused}) =>
-            focused ? (
-              <ExploreIcon color={CommonColors.activeTintColor} />
-            ) : (
-              <ExploreIcon color={CommonColors.inActiveTintColor} />
-            ),
-        }}
-      />
-      <Tab.Screen
-        name="NotificationScreen"
-        component={NotificationScreen}
-        options={{
-          // tabBarLabel: ({focused}) => (
-          //   <LabelComponent title="Notification" focused={focused} />
-          // ),
-          tabBarIcon: ({focused}) =>
-            focused ? (
-              <NotificationIcon
-                color={CommonColors.activeTintColor}
-                width={20}
-                height={20}
-              />
-            ) : (
-              <NotificationIcon
-                color={CommonColors.inActiveTintColor}
-                width={20}
-                height={20}
-              />
-            ),
-        }}
-      />*/}
       <Tab.Screen
         name="AccountScreen"
         component={AccountScreen}
@@ -143,11 +100,11 @@ const MyStack = () => {
       <Stack.Screen name="SplashScreen" component={SplashScreen} />
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="FollowScreen" component={FollowScreen} />
-      <Stack.Screen name="FollowItem" component={FollowItem} />
       <Stack.Screen name="WebviewScreen" component={WebviewScreen} />
       <Stack.Screen name="HomeItem" component={HomeItem} />
       <Stack.Screen name="SettingScreen" component={SettingScreen} />
       <Stack.Screen name="FollowCard" component={FollowCard} />
+      <Stack.Screen name="FollowSearch" component={FollowSearch} />
     </Stack.Navigator>
   );
 };

@@ -44,6 +44,7 @@ const renderItem = (item, index, navigation, feeds) => {
 
   return (
     <TouchableOpacity
+      keys={index}
       style={styles.itemContainer}
       onPress={() => {
         navigation.navigate('FollowCard', {

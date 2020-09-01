@@ -44,8 +44,9 @@ function HomeItem({navigation, route}) {
       <FlatList
         style={styles.list}
         data={arrData}
-        renderItem={({item}) => (
+        renderItem={({item, index}) => (
           <TouchableOpacity
+            key={index}
             onPress={() => {
               navigation.navigate('WebviewScreen', {linkUrl: item.val.link});
             }}>

@@ -91,6 +91,7 @@ function HomeScreen({navigation, value, language}) {
     if (index === 3) {
       return (
         <TouchableOpacity
+          key={index}
           style={styles.btnSeeMore}
           onPress={() => {
             navigation.navigate('HomeItem', {
@@ -108,6 +109,7 @@ function HomeScreen({navigation, value, language}) {
     }
     return (
       <TouchableOpacity
+        key={index}
         onPress={() => {
           navigation.navigate('WebviewScreen', {linkUrl: item.link});
         }}>
@@ -159,7 +161,7 @@ function HomeScreen({navigation, value, language}) {
       </View>
       <View style={styles.trendingView}>
         {renderTrendHeader(I18n.t('HomeScreen.trend'), trend)}
-        {top3FirstTrend.map((etrend, index) => {
+        {top3FirstTrend?.map((etrend, index) => {
           return (
             <TouchableOpacity
               key={index}
@@ -218,7 +220,7 @@ function HomeScreen({navigation, value, language}) {
           </View>
         </View>
       </TouchableOpacity>
-      {sec.map((it, index) => {
+      {sec?.map((it, index) => {
         return (
           <TouchableOpacity
             key={index}
@@ -265,13 +267,13 @@ function HomeScreen({navigation, value, language}) {
           <RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />
         }>
         {renderHotNews()}
-        {otherData.map((key, index) => {
+        {otherData?.map((key, index) => {
           const othData = topics[`${key}`];
           const topFirst = othData && othData[0];
           const sec = getSec(othData);
 
           return (
-            <View>
+            <View key={index}>
               {renderTrendHeader(I18n.t(`HomeScreen.${key}`), othData, {
                 paddingHorizontal: scale(16),
                 marginTop: 0,

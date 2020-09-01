@@ -78,7 +78,7 @@ function FollowSearch({navigation, value}) {
             </Text>
             <View style={styles.separatorDark} />
             <View style={styles.listDomain}>
-              {keyDomain.map((kd, index) => {
+              {keyDomain?.map((kd, index) => {
                 return (
                   <TouchableOpacity
                     onPress={() => {
@@ -98,6 +98,7 @@ function FollowSearch({navigation, value}) {
             <FlatList
               data={getArticles(searchText) || []}
               renderItem={renderItem}
+              keyExtractor={(item, index) => `${item.id}_${index}`}
             />
           </View>
         )}
