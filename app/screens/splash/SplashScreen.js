@@ -9,7 +9,7 @@ import * as actions from '../../actions';
 import store from '../../store';
 import I18n from '../../i18n/i18n';
 
-async function initData(navigation, dataLoadingState, feeds, topics, domain) {
+async function initData(navigation, dataLoadingState, topics) {
   //check internet
   NetInfo.fetch().then((state) => {
     store.dispatch(actions.changeNetInfo(state.isConnected));
@@ -22,14 +22,10 @@ async function initData(navigation, dataLoadingState, feeds, topics, domain) {
       // Utils.showErrorToast({message: 'No internet'});
     } else {
       if (!dataLoadingState) {
-        store.dispatch(actions.fetchAllFeeds());
         store.dispatch(actions.fetchAllTopics());
-        store.dispatch(actions.fetchAllDomain());
       } else {
-        if (_.isEmpty(feeds) || _.isEmpty(topics) || _.isEmpty(domain)) {
-          store.dispatch(actions.fetchAllFeeds());
+        if (_.isEmpty(topics)) {
           store.dispatch(actions.fetchAllTopics());
-          store.dispatch(actions.fetchAllDomain());
         } else {
           navigation.dispatch(
             CommonActions.reset({
@@ -51,15 +47,12 @@ async function initData(navigation, dataLoadingState, feeds, topics, domain) {
   });
 }
 
-function SplashScreen(
-  {navigation, dataLoadingState, feeds, topics, domain},
-  props,
-) {
+function SplashScreen({navigation, dataLoadingState, topics}, props) {
   useEffect(() => {
-    initData(navigation, dataLoadingState, feeds, topics, domain)
+    initData(navigation, dataLoadingState, topics)
       .then((r) => {})
       .catch();
-  }, [feeds, topics, domain, dataLoadingState, navigation]);
+  }, [topics, dataLoadingState, navigation]);
 
   return (
     <View style={{flex: 1, backgroundColor: 'rgb(100, 200, 300)'}}>
@@ -74,7 +67,5 @@ function SplashScreen(
 
 export default connect((state) => ({
   dataLoadingState: state.loading.dataLoadingState,
-  feeds: state.feeds,
   topics: state.topics,
-  domain: state.domain,
 }))(SplashScreen);

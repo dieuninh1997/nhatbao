@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, TextInput, FlatList} from 'react-native';
 import {connect} from 'react-redux';
 import _ from 'lodash';
@@ -11,15 +11,25 @@ import BackButton from '../../components/BackButton';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import FastImage from 'react-native-fast-image';
 import {getDiffHours} from '../../utils/Filter';
+import store from '../../store';
+import * as actions from '../../actions';
+import CloseIcon from '../../../assets/svg/ic_close.svg';
 
 function FollowSearch({navigation, value}) {
   const [searchText, setSearchText] = useState('');
   const [isShowSuggestDomain, setShowSuggestDomain] = useState(true);
   const domain = _.get(value, 'domain', {});
+
+  useEffect(() => {
+    store.dispatch(actions.fetchAllDomain());
+  }, [domain]);
+
   const keyDomain = [];
-  domain?.map((k) => {
-    keyDomain.push(k.domain);
-  });
+  if (!_.isEmpty(domain)) {
+    domain.map((k) => {
+      keyDomain.push(k.domain);
+    });
+  }
 
   const getArticles = (kd) => {
     for (let index in domain) {
@@ -57,17 +67,25 @@ function FollowSearch({navigation, value}) {
     <View style={styles.container}>
       <View style={styles.searchContainer}>
         <BackButton />
-        {/* <SearchIcon
-          width={20}
-          height={20}
-          color={CommonColors.inActiveTintColor}
-        /> */}
         <TextInput
           value={searchText}
           style={styles.textEnter}
           placeholder={I18n.t('FollowScreen.hintSearch')}
           onChangeText={handleChangeInput}
         />
+        {searchText ? (
+          <TouchableOpacity
+            onPress={() => {
+              setSearchText('');
+              setShowSuggestDomain(true);
+            }}>
+            <CloseIcon
+              width={15}
+              height={15}
+              color={CommonColors.inActiveTintColor}
+            />
+          </TouchableOpacity>
+        ) : null}
       </View>
       <View style={styles.separator} />
       <View style={styles.content}>
@@ -81,12 +99,13 @@ function FollowSearch({navigation, value}) {
               {keyDomain?.map((kd, index) => {
                 return (
                   <TouchableOpacity
+                    key={index}
                     onPress={() => {
                       handleChangeInput(kd);
                       setShowSuggestDomain(false);
                     }}>
                     <View style={styles.itemContainer}>
-                      <Text style={styles.domainText}>{`${kd}`}</Text>
+                      <Text style={styles.domainText}>{kd}</Text>
                     </View>
                   </TouchableOpacity>
                 );
