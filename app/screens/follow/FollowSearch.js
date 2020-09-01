@@ -27,7 +27,10 @@ function FollowSearch({navigation, value}) {
   const keyDomain = [];
   if (!_.isEmpty(domain)) {
     domain.map((k) => {
-      keyDomain.push(k.domain);
+      keyDomain.push({domain: k.domain, image: k.image});
+    });
+    keyDomain.sort((a, b) => {
+      return a.domain.localeCompare(b.domain);
     });
   }
 
@@ -101,11 +104,18 @@ function FollowSearch({navigation, value}) {
                   <TouchableOpacity
                     key={index}
                     onPress={() => {
-                      handleChangeInput(kd);
+                      handleChangeInput(kd.domain);
                       setShowSuggestDomain(false);
                     }}>
                     <View style={styles.itemContainer}>
-                      <Text style={styles.domainText}>{kd}</Text>
+                      <View style={styles.kdImageContainer}>
+                        <FastImage
+                          source={{uri: kd.image}}
+                          style={styles.kdImage}
+                          resizeMode={FastImage.resizeMode.contain}
+                        />
+                      </View>
+                      <Text style={styles.domainText}>{kd.domain}</Text>
                     </View>
                   </TouchableOpacity>
                 );
@@ -169,6 +179,7 @@ const styles = ScaledSheet.create({
   domainText: {
     fontSize: '14@ms',
     color: '#000',
+    marginTop: '5@s',
   },
   itemContainer: {
     borderRadius: '16@s',
@@ -176,6 +187,7 @@ const styles = ScaledSheet.create({
     margin: '5@s',
     paddingVertical: '5@s',
     paddingHorizontal: '10@s',
+    alignItems: 'center',
   },
   listDomain: {
     flexDirection: 'row',
@@ -213,5 +225,15 @@ const styles = ScaledSheet.create({
     color: '#424949',
     ...Fonts.defaultRegular,
     marginTop: '5@s',
+  },
+  kdImage: {
+    flex: 1,
+  },
+  kdImageContainer: {
+    width: '80@s',
+    height: '30@s',
+    borderRadius: '8@s',
+    marginRight: '10@s',
+    overflow: 'hidden',
   },
 });

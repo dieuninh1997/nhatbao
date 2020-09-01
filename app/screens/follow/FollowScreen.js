@@ -191,7 +191,7 @@ const styles = ScaledSheet.create({
   },
   searchContainer: {
     flexDirection: 'row',
-    marginVertical: '10@s',
+    marginBottom: '20@s',
     marginHorizontal: '16@s',
     backgroundColor: CommonColors.lightSeparator,
     height: '40@s',
