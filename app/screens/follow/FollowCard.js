@@ -41,6 +41,17 @@ const renderItem = ({item, index}, navigation) => {
       })
     : [];
 
+    if(index===0) {
+      console.log('================================================');
+      console.log('item.color', item?.color);
+      console.log('================================================');
+    }
+    let bgColor = null
+    if (item?.color) {
+      bgColor = `rgb(${item.color[0]}, ${item.color[1]}, ${item.color[2]})`
+    }
+   
+   
   return (
     <View activeOpacity={1} style={styles.slideInnerContainer}>
       <View style={styles.shadow} />
@@ -48,42 +59,53 @@ const renderItem = ({item, index}, navigation) => {
         style={[
           styles.imageContainer,
           index % 2 === 0 ? styles.imageContainerEven : {},
+          bgColor ? {backgroundColor: bgColor} : null
         ]}>
         {!images || images.length < 2 ? (
-          <FastImage source={{uri: item.image}} style={styles.image} />
+          <FastImage source={{uri: item.image}} style={styles.image}  resizeMode={FastImage.resizeMode.cover}/>
         ) : (
           <Slideshow
             dataSource={dataSource}
             containerStyle={[styles.sliderImage]}
-            height={(height * 0.75) / 2}
+            height={(height * 0.68) / 2}
             indicatorSize={scale(6)}
           />
         )}
-        <View
+        {/* <View
           style={[
             styles.radiusMask,
             index % 2 === 0 ? styles.radiusMaskEven : {},
           ]}
-        />
+        /> */}
       </View>
       <View
         style={[
           styles.textContainer,
           index % 2 === 0 ? styles.textContainerEven : {},
+          bgColor ? {backgroundColor: bgColor} : null
         ]}>
         <Text
-          style={[styles.title, index % 2 === 0 ? styles.titleEven : {}]}
+          style={[
+            styles.title, 
+            // index % 2 === 0 ? styles.titleEven : {}
+          ]}
           numberOfLines={2}>
           {item.title}
         </Text>
 
         <Text
-          style={[styles.subtitle, index % 2 === 0 ? styles.subtitleEven : {}]}>
+          style={[
+            styles.subtitle, 
+            // index % 2 === 0 ? styles.subtitleEven : {}
+          ]}>
           {getDiffHours(item.timestamp)}
         </Text>
 
         <Text
-          style={[styles.subtitle, index % 2 === 0 ? styles.subtitleEven : {}]}>
+          style={[
+            styles.subtitle, 
+            // index % 2 === 0 ? styles.subtitleEven : {}
+          ]}>
           <Text style={styles.domainText}>{`(${item.domain}) `}</Text>
 
           {item.description}
@@ -106,9 +128,10 @@ const renderItem = ({item, index}, navigation) => {
         <TouchableOpacity
           style={[
             styles.btnViewAll,
-            index % 2 === 0
-              ? {backgroundColor: CommonColors.indicatorColor}
-              : null,
+            {backgroundColor: CommonColors.indicatorColor}
+            // index % 2 === 0
+            //   ? {backgroundColor: CommonColors.indicatorColor}
+            //   : null,
           ]}
           onPress={() => {
             navigation.navigate('WebviewScreen', {linkUrl: item.link});
@@ -116,7 +139,8 @@ const renderItem = ({item, index}, navigation) => {
           <Text
             style={[
               styles.viewAllTitle,
-              index % 2 === 0 ? styles.viewAllTitleEven : {},
+              styles.viewAllTitleEven
+              // index % 2 === 0 ? styles.viewAllTitleEven : {},
             ]}>
             {I18n.t('FollowScreen.viewAll')}
           </Text>
@@ -311,7 +335,8 @@ const styles = ScaledSheet.create({
   },
   subtitle: {
     marginTop: 6,
-    color: '#424949',
+    color: '#000',
+    // color: '#424949',
     fontSize: 12,
     fontStyle: 'italic',
   },
@@ -326,7 +351,8 @@ const styles = ScaledSheet.create({
   },
   timeText: {
     marginTop: 6,
-    color: '#424949',
+    // color: '#424949',
+    color: '#000',
     fontSize: 12,
     fontStyle: 'italic',
   },
