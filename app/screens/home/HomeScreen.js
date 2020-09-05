@@ -114,7 +114,7 @@ function HomeScreen({navigation, value, language}) {
           navigation.navigate('WebviewScreen', {linkUrl: item.link});
         }}>
         <View
-          style={[styles.card, index === 0 ? {marginRight: scale(40)} : null]}>
+          style={styles.card}>
           <View style={styles.imageContainer}>
             <FastImage
               source={{uri: item.image}}
@@ -135,7 +135,7 @@ function HomeScreen({navigation, value, language}) {
           </View>
 
           <View style={styles.topContent}>
-            <Text style={styles.topTitle}>{item.title}</Text>
+            <Text style={styles.topTitle} numberOfLines={2}>{item.title}</Text>
             <Text style={styles.domainTitle}>{item.domain}</Text>
             <Text style={styles.subtitle}>{getDiffHours(item.timestamp)}</Text>
           </View>
@@ -159,33 +159,35 @@ function HomeScreen({navigation, value, language}) {
           showsHorizontalScrollIndicator={false}
         />
       </View>
-      <View style={styles.trendingView}>
-        {renderTrendHeader(I18n.t('HomeScreen.trend'), trend)}
-        {top3FirstTrend?.map((etrend, index) => {
-          return (
-            <TouchableOpacity
-              key={index}
-              onPress={() => {
-                navigation.navigate('WebviewScreen', {linkUrl: etrend.link});
-              }}>
-              <View style={styles.secContainer} key={index}>
-                <FastImage
-                  style={styles.secImage}
-                  source={{uri: etrend.image}}
-                  resizeMode={FastImage.resizeMode.cover}
-                />
-                <View style={styles.secContent}>
-                  <Text style={styles.secTitle}>{etrend.title}</Text>
-                  <Text style={styles.secDomainText}>{etrend.domain}</Text>
-                  <Text style={styles.secTime}>
-                    {getDiffHours(etrend.timestamp)}
-                  </Text>
+      {top3FirstTrend ? (
+        <View style={styles.trendingView}>
+          {renderTrendHeader(I18n.t('HomeScreen.trend'), trend)}
+          {top3FirstTrend?.map((etrend, index) => {
+            return (
+              <TouchableOpacity
+                key={index}
+                onPress={() => {
+                  navigation.navigate('WebviewScreen', {linkUrl: etrend.link});
+                }}>
+                <View style={styles.secContainer} key={index}>
+                  <FastImage
+                    style={styles.secImage}
+                    source={{uri: etrend.image}}
+                    resizeMode={FastImage.resizeMode.cover}
+                  />
+                  <View style={styles.secContent}>
+                    <Text style={styles.secTitle}>{etrend.title}</Text>
+                    <Text style={styles.secDomainText}>{etrend.domain}</Text>
+                    <Text style={styles.secTime}>
+                      {getDiffHours(etrend.timestamp)}
+                    </Text>
+                  </View>
                 </View>
-              </View>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      ) : null}
     </View>
   );
 
@@ -276,7 +278,6 @@ function HomeScreen({navigation, value, language}) {
             <View key={index}>
               {renderTrendHeader(I18n.t(`HomeScreen.${key}`), othData, {
                 paddingHorizontal: scale(16),
-                marginTop: 0,
               })}
               {renderTabOther(
                 topFirst,
@@ -324,7 +325,7 @@ const styles = ScaledSheet.create({
     padding: 10,
   },
   card: {
-    width: width * 0.8,
+    width: width * 0.7,
     height: width * 0.6,
     backgroundColor: '#FFFFFF',
     borderRadius: '15@s',

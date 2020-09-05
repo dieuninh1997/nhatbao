@@ -32,12 +32,12 @@ async function initData(navigation, dataLoadingState, topics) {
         if (_.isEmpty(topics)) {
           store.dispatch(actions.fetchAllTopics());
         } else {
-          // navigation.dispatch(
-          //   CommonActions.reset({
-          //     index: 1,
-          //     routes: [{name: 'MainScreen'}],
-          //   }),
-          // );
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 1,
+              routes: [{name: 'MainScreen'}],
+            }),
+          );
         }
       }
     }
@@ -112,8 +112,8 @@ const styles = ScaledSheet.create({
     alignItems: 'center',
   },
   cirlce: {
-    width: height,
-    height,
+    width: height * 2,
+    height: height * 2,
     borderRadius: height / 2,
     backgroundColor: '#c9340a',
   },

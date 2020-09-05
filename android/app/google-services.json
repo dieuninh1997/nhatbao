@@ -1,35 +1,42 @@
 {
   "project_info": {
-    "project_number": "828063111001",
-    "firebase_url": "https://nhatbao-9497.firebaseio.com",
-    "project_id": "nhatbao-9497",
-    "storage_bucket": "nhatbao-9497.appspot.com"
+    "project_number": "168391150013",
+    "firebase_url": "https://newscard-9497.firebaseio.com",
+    "project_id": "newscard-9497",
+    "storage_bucket": "newscard-9497.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:828063111001:android:8c97878e0e8b90ef9b9e48",
+        "mobilesdk_app_id": "1:168391150013:android:4d5f5c7b43e484b391aad4",
         "android_client_info": {
-          "package_name": "com.nhatbao"
+          "package_name": "com.newscard"
         }
       },
       "oauth_client": [
         {
-          "client_id": "828063111001-luqu5u6ihjsuesfljh4h3j2125gqqe43.apps.googleusercontent.com",
+          "client_id": "168391150013-r65vfjhjq1p8mgedinvndgqtbbfj47ok.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAPQwkUmTztzRbdzbkDI3qCbDNe1GLQ2Nk"
+          "current_key": "AIzaSyD4hiQ7e4gg_r3pr7TFAkttUeF8fztz5Z8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "828063111001-luqu5u6ihjsuesfljh4h3j2125gqqe43.apps.googleusercontent.com",
+              "client_id": "168391150013-r65vfjhjq1p8mgedinvndgqtbbfj47ok.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "168391150013-n3bf4bpql7j6h0afqqfn12g9caen5r3b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "newscard"
+              }
             }
           ]
         }

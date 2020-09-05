@@ -17,6 +17,7 @@ export default {
     trend: 'Trending',
     viewMore: 'More',
     review_film: 'Review Film',
+    make_food: 'Make Food'
   },
   AccountScreen: {
     header: 'Account',
