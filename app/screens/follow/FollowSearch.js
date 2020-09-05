@@ -5,7 +5,8 @@ import _ from 'lodash';
 import LottieView from 'lottie-react-native';
 
 import Text from '../../components/Text';
-import {CommonColors, CommonSize, Fonts} from '../../utils/CommonStyles';
+import Header from '../../components/Header';
+import {CommonColors, CommonSize, Fonts, CommonStyles} from '../../utils/CommonStyles';
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import I18n from '../../i18n/i18n';
 import BackButton from '../../components/BackButton';
@@ -15,6 +16,7 @@ import {getDiffHours} from '../../utils/Filter';
 import store from '../../store';
 import * as actions from '../../actions';
 import CloseIcon from '../../../assets/svg/ic_close.svg';
+import SearchIcon from '../../../assets/svg//ic_search.svg';
 
 function FollowSearch({navigation, value}) {
   const [searchText, setSearchText] = useState('');
@@ -53,28 +55,48 @@ function FollowSearch({navigation, value}) {
 
   const renderItem = ({item, index}) => {
     return (
-      <View key={index} style={styles.itemRow}>
-        <FastImage
-          source={{uri: item.image}}
-          style={styles.image}
-          resizeMode={FastImage.resizeMode.cover}
-        />
-        <View style={styles.itemContent}>
-          <Text style={styles.itemTitle}>{item.title}</Text>
-          <Text style={styles.itemTime}>{getDiffHours(item.timestamp)}</Text>
+      <TouchableOpacity onPress={() => { 
+        navigation.navigate('WebviewScreen', {linkUrl: item.link});
+      }}>
+        <View key={index} style={styles.itemRow}>
+          <FastImage
+            source={{uri: item.image}}
+            style={styles.image}
+            resizeMode={FastImage.resizeMode.cover}
+          />
+          <View style={styles.itemContent}>
+            <Text style={styles.itemTitle}>{item.title}</Text>
+            <Text style={styles.itemTime}>{getDiffHours(item.timestamp)}</Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
+    );
+  };
+  const renderHeader = () => {
+    return (
+      <Header
+        left={
+          <Text style={[CommonStyles.headerTitle, styles.header]}>
+            {I18n.t('FollowSearch.header')}
+          </Text>
+        }
+      />
     );
   };
 
   return (
     <View style={styles.container}>
+          {renderHeader()}
       <View style={styles.searchContainer}>
-        <BackButton />
+        <SearchIcon  
+          width={20}
+          height={20}
+          color={CommonColors.inActiveTintColor}
+        />
         <TextInput
           value={searchText}
           style={styles.textEnter}
-          placeholder={I18n.t('FollowScreen.hintSearch')}
+          placeholder={I18n.t('FollowSearch.hintSearch')}
           onChangeText={handleChangeInput}
         />
         {searchText ? (
@@ -157,6 +179,10 @@ const styles = ScaledSheet.create({
     flex: 1,
     backgroundColor: '#FFF',
   },
+  header: {
+    textTransform: 'uppercase',
+    color: CommonColors.primaryText,
+  },
   separator: {
     height: 1,
     backgroundColor: CommonColors.lightBgColor,
@@ -167,7 +193,6 @@ const styles = ScaledSheet.create({
   },
   searchContainer: {
     flexDirection: 'row',
-    marginTop: CommonSize.paddingTopHeader,
     height: '45@s',
     alignItems: 'center',
     paddingHorizontal: '16@s',
@@ -175,12 +200,13 @@ const styles = ScaledSheet.create({
   content: {
     flex: 1,
     padding: '10@s',
+    marginTop: '16@s'
   },
   textEnter: {
     fontSize: '14@ms',
     color: CommonColors.inActiveTintColor,
-    marginLeft: '16@s',
     flex: 1,
+    marginLeft: '10@s'
   },
   headerTitle: {
     fontSize: '14@ms',

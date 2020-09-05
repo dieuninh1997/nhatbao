@@ -104,7 +104,7 @@ function FollowScreen({navigation, value}) {
         </View>
       ) : (
         <View style={styles.content}>
-          <TouchableWithoutFeedback
+          {/* <TouchableWithoutFeedback
             onPress={() => {
               navigation.navigate('FollowSearch');
             }}>
@@ -118,7 +118,7 @@ function FollowScreen({navigation, value}) {
                 {I18n.t('FollowScreen.hintSearch')}
               </Text>
             </View>
-          </TouchableWithoutFeedback>
+          </TouchableWithoutFeedback> */}
 
           <FlatList
             style={styles.flexOne}

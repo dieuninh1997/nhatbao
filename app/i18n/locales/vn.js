@@ -25,10 +25,13 @@ export default {
   },
 
   FollowScreen: {
-    header: 'Theo Dõi',
+    header: 'Thể loại',
     viewAll: 'Xem toàn bộ >>',
-    hintSearch: 'Tìm kiếm',
     domain: 'Domain',
+  },
+  FollowSearch: {
+    header: 'Tìm kiếm',
+    hintSearch: 'Bạn muốn tìm kiếm gì?',
   },
   NotificationScreen: {
     header: 'Thông báo',

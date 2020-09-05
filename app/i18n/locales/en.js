@@ -24,10 +24,14 @@ export default {
     yourProfile: 'Your Profile',
   },
   FollowScreen: {
-    header: 'Following',
+    header: 'Category',
     viewAll: 'View all >>',
     hintSearch: 'Search',
     domain: 'Domain',
+  },
+  FollowSearch: {
+    header: 'Search',
+    hintSearch: 'Search something',
   },
   NotificationScreen: {
     header: 'Notifications',
