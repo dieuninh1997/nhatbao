@@ -36,6 +36,7 @@ class CommonColors {
   static lightBgColor = '#e5e5e5';
   static bgColor = '#FFF';
   static border = '#c8c8c8';
+  static orange = 'rgb(222, 85, 2)'
 }
 
 class CommonSize {

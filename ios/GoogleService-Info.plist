@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>168391150013-n3bf4bpql7j6h0afqqfn12g9caen5r3b.apps.googleusercontent.com</string>
+	<string>1085564335309-4pkgipdvk7gspr4epgcbg2ctepmfuifv.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.168391150013-n3bf4bpql7j6h0afqqfn12g9caen5r3b</string>
+	<string>com.googleusercontent.apps.1085564335309-4pkgipdvk7gspr4epgcbg2ctepmfuifv</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDdruKXqsrRmS-KZoaXL3D6mOBEtqmspKw</string>
+	<string>AIzaSyD4jw87Jb8aGxYjjbL4uxptMeCgKXEApnQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>168391150013</string>
+	<string>1085564335309</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>newscard</string>
+	<string>com.newscard</string>
 	<key>PROJECT_ID</key>
-	<string>newscard-9497</string>
+	<string>newscard-1</string>
 	<key>STORAGE_BUCKET</key>
-	<string>newscard-9497.appspot.com</string>
+	<string>newscard-1.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:168391150013:ios:a313744fe936337591aad4</string>
+	<string>1:1085564335309:ios:33311e61eb73d5f585a584</string>
 	<key>DATABASE_URL</key>
-	<string>https://newscard-9497.firebaseio.com</string>
+	<string>https://newscard-1.firebaseio.com</string>
 </dict>
 </plist>

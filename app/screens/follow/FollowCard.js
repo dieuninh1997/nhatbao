@@ -41,15 +41,11 @@ const renderItem = ({item, index}, navigation) => {
       })
     : [];
 
-    if(index===0) {
-      console.log('================================================');
-      console.log('item.color', item?.color);
-      console.log('================================================');
-    }
-    let bgColor = null
-    if (item?.color) {
-      bgColor = `rgb(${item.color[0]}, ${item.color[1]}, ${item.color[2]})`
-    }
+    
+  let bgColor = null
+  if (item?.color) {
+    bgColor = `rgb(${item.color[0]}, ${item.color[1]}, ${item.color[2]})`
+  }
    
    
   return (
@@ -84,9 +80,17 @@ const renderItem = ({item, index}, navigation) => {
           index % 2 === 0 ? styles.textContainerEven : {},
           bgColor ? {backgroundColor: bgColor} : null
         ]}>
+        
+        <Text 
+          style={[
+            styles.domainText, 
+            item?.text_color === 1 ? {color: '#FFF'} : null
+          ]}>{item.domain}</Text>
+        
         <Text
           style={[
             styles.title, 
+            item?.text_color === 1 ? {color: '#FFF'} : null
             // index % 2 === 0 ? styles.titleEven : {}
           ]}
           numberOfLines={2}>
@@ -96,6 +100,7 @@ const renderItem = ({item, index}, navigation) => {
         <Text
           style={[
             styles.subtitle, 
+            item?.text_color === 1 ? {color: '#FFF'} : null
             // index % 2 === 0 ? styles.subtitleEven : {}
           ]}>
           {getDiffHours(item.timestamp)}
@@ -104,9 +109,10 @@ const renderItem = ({item, index}, navigation) => {
         <Text
           style={[
             styles.subtitle, 
+            item?.text_color === 1 ? {color: '#FFF'} : null
             // index % 2 === 0 ? styles.subtitleEven : {}
           ]}>
-          <Text style={styles.domainText}>{`(${item.domain}) `}</Text>
+         
 
           {item.description}
         </Text>
@@ -326,7 +332,7 @@ const styles = ScaledSheet.create({
   },
   title: {
     color: '#000',
-    fontSize: 13,
+    fontSize: 16,
     fontWeight: 'bold',
     letterSpacing: 0.5,
   },
@@ -344,10 +350,11 @@ const styles = ScaledSheet.create({
     color: 'rgba(255, 255, 255, 0.7)',
   },
   domainText: {
-    marginTop: 6,
-    color: CommonColors.indicatorColor,
+    marginBottom: 6,
+    color: '#000',
     fontSize: 12,
     textTransform: 'uppercase',
+    fontWeight: 'bold',
   },
   timeText: {
     marginTop: 6,

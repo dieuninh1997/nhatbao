@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "168391150013",
-    "firebase_url": "https://newscard-9497.firebaseio.com",
-    "project_id": "newscard-9497",
-    "storage_bucket": "newscard-9497.appspot.com"
+    "project_number": "1085564335309",
+    "firebase_url": "https://newscard-1.firebaseio.com",
+    "project_id": "newscard-1",
+    "storage_bucket": "newscard-1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:168391150013:android:4d5f5c7b43e484b391aad4",
+        "mobilesdk_app_id": "1:1085564335309:android:7ce7459228eed52285a584",
         "android_client_info": {
           "package_name": "com.newscard"
         }
       },
       "oauth_client": [
         {
-          "client_id": "168391150013-r65vfjhjq1p8mgedinvndgqtbbfj47ok.apps.googleusercontent.com",
+          "client_id": "1085564335309-88ke0uclkrhli3hn38vjupun8kg2472d.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD4hiQ7e4gg_r3pr7TFAkttUeF8fztz5Z8"
+          "current_key": "AIzaSyDKHStDKFRofinaR4BpAKL3Qhhbt9oLmlE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "168391150013-r65vfjhjq1p8mgedinvndgqtbbfj47ok.apps.googleusercontent.com",
+              "client_id": "1085564335309-88ke0uclkrhli3hn38vjupun8kg2472d.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "168391150013-n3bf4bpql7j6h0afqqfn12g9caen5r3b.apps.googleusercontent.com",
+              "client_id": "1085564335309-4pkgipdvk7gspr4epgcbg2ctepmfuifv.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "newscard"
+                "bundle_id": "com.newscard"
               }
             }
           ]
