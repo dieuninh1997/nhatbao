@@ -242,6 +242,7 @@ const {width, height} = Dimensions.get('window');
 const styles = ScaledSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFF'
   },
   content: {
     padding: '10@s',

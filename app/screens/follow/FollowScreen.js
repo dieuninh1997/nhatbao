@@ -142,7 +142,7 @@ const {width, height} = Dimensions.get('window');
 const styles = ScaledSheet.create({
   container: {
     flex: 1,
-    backgroundColor: CommonColors.lightBgColor,
+    backgroundColor: '#FFF',
   },
   header: {
     textTransform: 'uppercase',
