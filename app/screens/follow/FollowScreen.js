@@ -1,44 +1,42 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   FlatList,
   Image,
   Dimensions,
   TouchableOpacity,
-  Platform,
-  StatusBar,
-  TextInput,
-  TouchableWithoutFeedback,
-  ActivityIndicator,
 } from 'react-native';
-import {connect, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import _ from 'lodash';
 import LinearGradient from 'react-native-linear-gradient';
 import LottieView from 'lottie-react-native';
 
 import Text from '../../components/Text';
 import Header from '../../components/Header';
-import {CommonStyles, CommonColors, CommonSize} from '../../utils/CommonStyles';
+import {CommonStyles, CommonColors} from '../../utils/CommonStyles';
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import I18n from '../../i18n/i18n';
 import ReloadIcon from '../../../assets/svg/ic_reload.svg';
 import {scale} from '../../libs/reactSizeMatter/scalingUtils';
-import MenuIcon from '../../../assets/svg/ic_menu.svg';
-import SearchIcon from '../../../assets/svg/ic_search.svg';
 import store from '../../store';
 import * as actions from '../../actions';
+import {useNavigation} from '@react-navigation/native';
 
-function FollowScreen({navigation, value}) {
-  const feeds = _.get(value, 'feeds', {});
+export default function FollowScreen(props) {
+  const feeds = useSelector((state) => state.feeds.feeds);
+  const gender = useSelector((state) => state.user.gender);
+  const navigation = useNavigation();
 
   useEffect(() => {
-    store.dispatch(actions.fetchAllFeeds());
+    if (_.isEmpty(feeds)) {
+      store.dispatch(actions.fetchAllFeeds());
+    }
   }, [feeds]);
 
+  const genderFeeds = !_.isEmpty(feeds) ? feeds[`${gender}`] : [];
+
   const renderItem = ({item, index}) => {
-    const data = feeds[`${item}`];
-    const arrData = _.map(data, (val, key) => ({key, val}));
-    const thumbnai = arrData.length > 0 ? arrData[0].val.image : null;
+    const thumbnai = genderFeeds[`${item}`];
 
     return (
       <TouchableOpacity
@@ -70,7 +68,6 @@ function FollowScreen({navigation, value}) {
           />
           <View style={[styles.row, styles.itemHeader]}>
             <Text style={styles.title}>{item}</Text>
-            <MenuIcon width={15} height={15} color={'#f8f8f8'} />
           </View>
         </View>
       </TouchableOpacity>
@@ -85,7 +82,6 @@ function FollowScreen({navigation, value}) {
             {I18n.t('FollowScreen.header')}
           </Text>
         }
-        right={<ReloadIcon color={'#989898'} width={20} height={20} />}
       />
     );
   };
@@ -97,32 +93,16 @@ function FollowScreen({navigation, value}) {
         <View style={styles.loadingContainer}>
           <LottieView
             style={styles.loadingIcon}
-            source={require('../../../assets/animations/loading1.json')}
+            source={require('../../../assets/animations/row_loading.json')}
             autoPlay
             loop
           />
         </View>
       ) : (
         <View style={styles.content}>
-          {/* <TouchableWithoutFeedback
-            onPress={() => {
-              navigation.navigate('FollowSearch');
-            }}>
-            <View style={styles.searchContainer}>
-              <SearchIcon
-                width={20}
-                height={20}
-                color={CommonColors.inActiveTintColor}
-              />
-              <Text style={styles.textEnter}>
-                {I18n.t('FollowScreen.hintSearch')}
-              </Text>
-            </View>
-          </TouchableWithoutFeedback> */}
-
           <FlatList
             style={styles.flexOne}
-            data={Object.keys(feeds)}
+            data={genderFeeds ? Object.keys(genderFeeds) : []}
             keyExtractor={(item, index) => `${item.id}_${index}`}
             renderItem={renderItem}
             numColumns={2}
@@ -134,11 +114,7 @@ function FollowScreen({navigation, value}) {
   );
 }
 
-export default connect((state) => ({
-  value: state.feeds,
-}))(FollowScreen);
-
-const {width, height} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 const styles = ScaledSheet.create({
   container: {
     flex: 1,
@@ -216,8 +192,8 @@ const styles = ScaledSheet.create({
     backgroundColor: '#FFF',
   },
   loadingIcon: {
-    width: '200@s',
-    height: '200@s',
+    width: '100@s',
+    height: '100@s',
     alignSelf: 'center',
   },
 });

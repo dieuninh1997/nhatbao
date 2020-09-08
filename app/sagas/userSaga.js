@@ -12,3 +12,15 @@ function* _changeLanguage(action) {
 export function* watchChangeLanguage() {
   yield takeLatest(actionTypes.CHANGE_LANGUAGE, _changeLanguage);
 }
+
+function* _chooseGender(action) {
+  try {
+    yield put({type: actionTypes.UPDATE_GENDER, payload: action.params});
+  } catch (err) {
+    console.log('Choose gender error', err);
+  }
+}
+
+export function* watchChooseGender() {
+  yield takeLatest(actionTypes.CHOOSE_GENDER, _chooseGender);
+}

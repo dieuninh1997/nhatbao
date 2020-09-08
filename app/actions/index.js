@@ -20,3 +20,8 @@ export const changeLanguage = (params) => ({
   type: actionTypes.CHANGE_LANGUAGE,
   params,
 });
+
+export const chooseGender = (params) => ({
+  type: actionTypes.CHOOSE_GENDER,
+  params,
+});

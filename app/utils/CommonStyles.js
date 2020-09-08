@@ -18,7 +18,7 @@ const Fonts = {
 };
 
 class CommonColors {
-  static headerBarBgColor = '#FFF';
+  // static headerBarBgColor = '#FFF';
   static mainText = '#4B4B4B';
   static primaryText = '#262626';
   static secondaryText = '#cbcbcb';
@@ -36,7 +36,10 @@ class CommonColors {
   static lightBgColor = '#e5e5e5';
   static bgColor = '#FFF';
   static border = '#c8c8c8';
-  static orange = 'rgb(222, 85, 2)'
+  static orange = 'rgb(222, 85, 2)';
+
+  static activeTintColor = '#2ea6d6';
+  static headerBarBgColor = '#0d298a';
 }
 
 class CommonSize {
@@ -69,7 +72,7 @@ const CommonStyles = {
     flex: 1,
   },
   header: {
-    backgroundColor: CommonColors.headerBarBgColor,
+    backgroundColor: '#FFF',
     height: CommonSize.headerHeight,
     paddingTop: CommonSize.paddingTopHeader,
     flexDirection: 'row',

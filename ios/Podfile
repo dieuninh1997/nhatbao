@@ -12,10 +12,8 @@ target 'nhatbao' do
 
   pod 'RNLocalize', :path => '../node_modules/react-native-localize'
 
-  target 'nhatbaoTests' do
-    inherit! :complete
-    # Pods for testing
-  end
+  # pod 'RNFBStorage', :path => '../node_modules/@react-native-firebase/storage'
+
 
   # Enables Flipper.
   #
@@ -27,11 +25,3 @@ target 'nhatbao' do
   end
 end
 
-target 'nhatbao-tvOS' do
-  # Pods for nhatbao-tvOS
-
-  target 'nhatbao-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-end

@@ -8,4 +8,12 @@ export default class AppPreferences {
   static async getLocale() {
     return await AsyncStorage.getItem('user_locale');
   }
+
+  static saveGender(gender) {
+    AsyncStorage.setItem('user_gender', gender);
+  }
+
+  static async getGender() {
+    return await AsyncStorage.getItem('user_gender');
+  }
 }

@@ -5,16 +5,15 @@ import {
   Platform,
   ScrollView,
   RefreshControl,
-  StatusBar,
-  Image,
   FlatList,
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from 'react-native';
-import {connect} from 'react-redux';
-import _ from 'lodash';
+import {useSelector} from 'react-redux';
 import FastImage from 'react-native-fast-image';
 import LinearGradient from 'react-native-linear-gradient';
+import _ from 'lodash';
+import LottieView from 'lottie-react-native';
 
 import Text from '../../components/Text';
 import Header from '../../components/Header';
@@ -22,27 +21,21 @@ import {
   CommonStyles,
   CommonColors,
   Fonts,
-  CommonSize,
   Shadows,
 } from '../../utils/CommonStyles';
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import I18n from '../../i18n/i18n';
-import {getDateTime, getDiffHours} from '../../utils/Filter';
+import {getDiffHours} from '../../utils/Filter';
 import store from '../../store';
 import * as actions from '../../actions';
 import ArrowIcon from '../../../assets/svg/ic_arrow_next.svg';
 import {scale} from '../../libs/reactSizeMatter/scalingUtils';
+import {useNavigation} from '@react-navigation/native';
 
-function HomeScreen({navigation, value, language}) {
+export default function HomeScreen(props) {
+  const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
-  const _onRefresh = () => {
-    setRefreshing(true);
-    store.dispatch(actions.fetchAllTopics());
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 500);
-  };
-  const topics = _.get(value, 'topics', {});
+  const topics = useSelector((state) => state.topics.topics);
   const keys = Object.keys(topics);
   const otherData = [];
   keys.map((key) => {
@@ -56,6 +49,14 @@ function HomeScreen({navigation, value, language}) {
   const top3FirstTrend = trend?.slice(0, 3);
   const top3FirstNew = hotNews?.slice(0, 3);
   top3FirstNew?.push('see_more');
+
+  const _onRefresh = () => {
+    setRefreshing(true);
+    store.dispatch(actions.fetchAllTopics());
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 500);
+  };
 
   const renderHeader = () => {
     return (
@@ -113,8 +114,7 @@ function HomeScreen({navigation, value, language}) {
         onPress={() => {
           navigation.navigate('WebviewScreen', {linkUrl: item.link});
         }}>
-        <View
-          style={styles.card}>
+        <View style={styles.card}>
           <View style={styles.imageContainer}>
             <FastImage
               source={{uri: item.image}}
@@ -127,7 +127,7 @@ function HomeScreen({navigation, value, language}) {
                   <ArrowIcon
                     width={15}
                     height={15}
-                    color={CommonColors.indicatorColor}
+                    color={CommonColors.activeTintColor}
                   />
                 </View>
               </TouchableWithoutFeedback>
@@ -135,7 +135,9 @@ function HomeScreen({navigation, value, language}) {
           </View>
 
           <View style={styles.topContent}>
-            <Text style={styles.topTitle} numberOfLines={2}>{item.title}</Text>
+            <Text style={styles.topTitle} numberOfLines={2}>
+              {item.title}
+            </Text>
             <Text style={styles.domainTitle}>{item.domain}</Text>
             <Text style={styles.subtitle}>{getDiffHours(item.timestamp)}</Text>
           </View>
@@ -157,6 +159,7 @@ function HomeScreen({navigation, value, language}) {
           data={top3FirstNew}
           renderItem={renderItem}
           showsHorizontalScrollIndicator={false}
+          keyExtractor={(item, index) => `${item.id}_${index}`}
         />
       </View>
       {top3FirstTrend ? (
@@ -263,47 +266,54 @@ function HomeScreen({navigation, value, language}) {
     <View style={styles.container}>
       {/* <HomeTabs /> */}
       {renderHeader()}
-      <ScrollView
-        scrollEnabled={true}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />
-        }>
-        {renderHotNews()}
-        {otherData?.map((key, index) => {
-          const othData = topics[`${key}`];
-          const topFirst = othData && othData[0];
-          const sec = getSec(othData);
+      {_.isEmpty(topics) ? (
+        <View style={styles.loadingContainer}>
+          <LottieView
+            style={styles.loadingIcon}
+            source={require('../../../assets/animations/row_loading.json')}
+            autoPlay
+            loop
+          />
+        </View>
+      ) : (
+        <ScrollView
+          scrollEnabled={true}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />
+          }>
+          {renderHotNews()}
+          {otherData?.map((key, index) => {
+            const othData = topics[`${key}`];
+            const topFirst = othData && othData[0];
+            const sec = getSec(othData);
 
-          return (
-            <View key={index}>
-              {renderTrendHeader(I18n.t(`HomeScreen.${key}`), othData, {
-                paddingHorizontal: scale(16),
-              })}
-              {renderTabOther(
-                topFirst,
-                sec,
-                othData,
-                key,
-                index % 2 !== 0
-                  ? {
-                      paddingHorizontal: scale(16),
-                      marginTop: 0,
-                    }
-                  : {},
-              )}
-            </View>
-          );
-        })}
-      </ScrollView>
+            return (
+              <View key={index}>
+                {renderTrendHeader(I18n.t(`HomeScreen.${key}`), othData, {
+                  paddingHorizontal: scale(16),
+                })}
+                {renderTabOther(
+                  topFirst,
+                  sec,
+                  othData,
+                  key,
+                  index % 2 !== 0
+                    ? {
+                        paddingHorizontal: scale(16),
+                        marginTop: 0,
+                      }
+                    : {},
+                )}
+              </View>
+            );
+          })}
+        </ScrollView>
+      )}
     </View>
   );
 }
-export default connect((state) => ({
-  value: state.topics,
-  language: state.user.language,
-}))(HomeScreen);
 
-const {width, height} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 const styles = ScaledSheet.create({
   container: {
     flex: 1,
@@ -383,7 +393,7 @@ const styles = ScaledSheet.create({
   },
   domainTitle: {
     marginTop: '6@s',
-    color: CommonColors.indicatorColor,
+    color: CommonColors.activeTintColor,
     fontSize: '12@ms',
     textTransform: 'uppercase',
   },
@@ -439,7 +449,7 @@ const styles = ScaledSheet.create({
   },
   secDomainText: {
     fontSize: '12@ms',
-    color: CommonColors.indicatorColor,
+    color: CommonColors.activeTintColor,
     ...Fonts.defaultRegular,
     textTransform: 'uppercase',
     marginTop: '7@s',
@@ -512,5 +522,16 @@ const styles = ScaledSheet.create({
     backgroundColor: CommonColors.lightBgColor,
     marginTop: '25@s',
     borderRadius: '25@s',
+  },
+  loadingContainer: {
+    flex: 1,
+    marginTop: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loadingIcon: {
+    width: '100@s',
+    height: '100@s',
+    alignSelf: 'center',
   },
 });

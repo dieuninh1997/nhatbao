@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -6,12 +6,13 @@ import {
   Platform,
   StyleSheet,
 } from 'react-native';
-import {connect} from 'react-redux';
+import LottieView from 'lottie-react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
-import _ from 'lodash';
 import FastImage from 'react-native-fast-image';
-import Slideshow from '../../components/Slideshow';
+import Axios from 'axios';
+import {useNavigation} from '@react-navigation/native';
 
+import Slideshow from '../../components/Slideshow';
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import Text from '../../components/Text';
 import {CommonColors, Fonts, CommonStyles} from '../../utils/CommonStyles';
@@ -33,7 +34,7 @@ const renderHeader = (title) => {
 };
 
 const renderItem = ({item, index}, navigation) => {
-  const tags = item?.detail_keywords?.slice(0, 3);
+  const tags = item?.detail_keywords?.slice(0, 2);
   const images = item?.detail_images;
   const dataSource = images
     ? images.map((img) => {
@@ -41,13 +42,11 @@ const renderItem = ({item, index}, navigation) => {
       })
     : [];
 
-    
-  let bgColor = null
+  let bgColor = null;
   if (item?.color) {
-    bgColor = `rgb(${item.color[0]}, ${item.color[1]}, ${item.color[2]})`
+    bgColor = `rgb(${item.color[0]}, ${item.color[1]}, ${item.color[2]})`;
   }
-   
-   
+
   return (
     <View activeOpacity={1} style={styles.slideInnerContainer}>
       <View style={styles.shadow} />
@@ -55,10 +54,14 @@ const renderItem = ({item, index}, navigation) => {
         style={[
           styles.imageContainer,
           index % 2 === 0 ? styles.imageContainerEven : {},
-          bgColor ? {backgroundColor: bgColor} : null
+          bgColor ? {backgroundColor: bgColor} : null,
         ]}>
         {!images || images.length < 2 ? (
-          <FastImage source={{uri: item.image}} style={styles.image}  resizeMode={FastImage.resizeMode.cover}/>
+          <FastImage
+            source={{uri: item.image}}
+            style={styles.image}
+            resizeMode={FastImage.resizeMode.cover}
+          />
         ) : (
           <Slideshow
             dataSource={dataSource}
@@ -67,31 +70,25 @@ const renderItem = ({item, index}, navigation) => {
             indicatorSize={scale(6)}
           />
         )}
-        {/* <View
-          style={[
-            styles.radiusMask,
-            index % 2 === 0 ? styles.radiusMaskEven : {},
-          ]}
-        /> */}
       </View>
       <View
         style={[
           styles.textContainer,
           index % 2 === 0 ? styles.textContainerEven : {},
-          bgColor ? {backgroundColor: bgColor} : null
+          bgColor ? {backgroundColor: bgColor} : null,
         ]}>
-        
-        <Text 
-          style={[
-            styles.domainText, 
-            item?.text_color === 1 ? {color: '#FFF'} : null
-          ]}>{item.domain}</Text>
-        
         <Text
           style={[
-            styles.title, 
-            item?.text_color === 1 ? {color: '#FFF'} : null
-            // index % 2 === 0 ? styles.titleEven : {}
+            styles.domainText,
+            item?.text_color === 1 ? {color: '#FFF'} : null,
+          ]}>
+          {item.domain}
+        </Text>
+
+        <Text
+          style={[
+            styles.title,
+            item?.text_color === 1 ? {color: '#FFF'} : null,
           ]}
           numberOfLines={2}>
           {item.title}
@@ -99,21 +96,17 @@ const renderItem = ({item, index}, navigation) => {
 
         <Text
           style={[
-            styles.subtitle, 
-            item?.text_color === 1 ? {color: '#FFF'} : null
-            // index % 2 === 0 ? styles.subtitleEven : {}
+            styles.subtitle,
+            item?.text_color === 1 ? {color: '#FFF'} : null,
           ]}>
           {getDiffHours(item.timestamp)}
         </Text>
 
         <Text
           style={[
-            styles.subtitle, 
-            item?.text_color === 1 ? {color: '#FFF'} : null
-            // index % 2 === 0 ? styles.subtitleEven : {}
+            styles.subtitle,
+            item?.text_color === 1 ? {color: '#FFF'} : null,
           ]}>
-         
-
           {item.description}
         </Text>
 
@@ -132,22 +125,11 @@ const renderItem = ({item, index}, navigation) => {
           </View>
         ) : null}
         <TouchableOpacity
-          style={[
-            styles.btnViewAll,
-            {backgroundColor: CommonColors.indicatorColor}
-            // index % 2 === 0
-            //   ? {backgroundColor: CommonColors.indicatorColor}
-            //   : null,
-          ]}
+          style={styles.btnViewAll}
           onPress={() => {
             navigation.navigate('WebviewScreen', {linkUrl: item.link});
           }}>
-          <Text
-            style={[
-              styles.viewAllTitle,
-              styles.viewAllTitleEven
-              // index % 2 === 0 ? styles.viewAllTitleEven : {},
-            ]}>
+          <Text style={[styles.viewAllTitle, styles.viewAllTitleEven]}>
             {I18n.t('FollowScreen.viewAll')}
           </Text>
         </TouchableOpacity>
@@ -177,72 +159,97 @@ const CarouselPaginationBar = (props) => {
   );
 };
 
-function FollowCard({navigation, route, value}) {
-  const title = route?.params?.value;
-  const feeds = _.get(value, 'feeds', {});
-  const data = feeds[`${title}`];
+export default function FollowCard(props) {
+  const title = props?.route?.params?.value;
+  const navigation = useNavigation();
+  const [data, setData] = useState([]);
   const _slider1Ref = useRef(null);
   const [slider1ActiveSlide, setSlider1ActiveSlide] = useState(0);
   const [indexTitle, setIndexTitle] = useState(1);
 
+  const loadData = async () => {
+    try {
+      const res = await Axios.get(
+        `https://newscard9497.herokuapp.com/feeds/${title}`,
+      );
+      console.log('================================================');
+      console.log('res', res);
+      console.log('================================================');
+      setData(res?.data?.result);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
     <View style={styles.container}>
       {renderHeader(title)}
-      <View style={styles.content}>
-        <Carousel
-          ref={_slider1Ref}
-          data={data}
-          renderItem={({item, index}) => renderItem({item, index}, navigation)}
-          sliderWidth={width}
-          itemWidth={width * 0.82}
-          onSnapToItem={(index) => {
-            setIndexTitle(index + 1);
-            if (index >= data.length / 10) {
-              index = index % 10;
+      {data.length > 0 ? (
+        <View style={styles.content}>
+          <Carousel
+            ref={_slider1Ref}
+            data={data}
+            renderItem={({item, index}) =>
+              renderItem({item, index}, navigation)
             }
-            setSlider1ActiveSlide(index);
-          }}
-          firstItem={0}
-          inactiveSlideScale={0.94}
-          inactiveSlideOpacity={0.7}
-          containerCustomStyle={styles.slider}
-          contentContainerCustomStyle={styles.sliderContentContainer}
-        />
-        <Pagination
-          dotsLength={parseInt(data.length / 10)}
-          activeDotIndex={slider1ActiveSlide}
-          containerStyle={styles.paginationContainer}
-          dotColor={'rgba(255, 255, 255, 0.92)'}
-          dotStyle={styles.paginationDot}
-          inactiveDotColor={'#000'}
-          inactiveDotOpacity={0.4}
-          inactiveDotScale={0.6}
-          carouselRef={_slider1Ref}
-          tappableDots={!!_slider1Ref}
-          dotElement={<Text style={styles.indexTitle}>{indexTitle}</Text>}
-          inactiveDotElement={
-            <CarouselPaginationBar
-              width={width / 10}
-              carouselRef={_slider1Ref}
-              inactive
-            />
-          }
-        />
-      </View>
+            sliderWidth={width}
+            itemWidth={width * 0.82}
+            onSnapToItem={(index) => {
+              setIndexTitle(index + 1);
+              if (index >= data.length / 10) {
+                index = index % 10;
+              }
+              setSlider1ActiveSlide(index);
+            }}
+            firstItem={0}
+            inactiveSlideScale={0.94}
+            inactiveSlideOpacity={0.7}
+            containerCustomStyle={styles.slider}
+            contentContainerCustomStyle={styles.sliderContentContainer}
+          />
+          <Pagination
+            dotsLength={parseInt(data.length / 10)}
+            activeDotIndex={slider1ActiveSlide}
+            containerStyle={styles.paginationContainer}
+            dotColor={'rgba(255, 255, 255, 0.92)'}
+            dotStyle={styles.paginationDot}
+            inactiveDotColor={'#000'}
+            inactiveDotOpacity={0.4}
+            inactiveDotScale={0.6}
+            carouselRef={_slider1Ref}
+            tappableDots={!!_slider1Ref}
+            dotElement={<Text style={styles.indexTitle}>{indexTitle}</Text>}
+            inactiveDotElement={
+              <CarouselPaginationBar
+                width={width / 10}
+                carouselRef={_slider1Ref}
+                inactive
+              />
+            }
+          />
+        </View>
+      ) : (
+        <View style={styles.loadingContainer}>
+          <LottieView
+            style={styles.loadingIcon}
+            source={require('../../../assets/animations/row_loading.json')}
+            autoPlay
+            loop
+          />
+        </View>
+      )}
     </View>
   );
 }
-
-export default connect((state) => ({
-  value: state.feeds,
-}))(FollowCard);
 
 const {width, height} = Dimensions.get('window');
 
 const styles = ScaledSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF'
+    backgroundColor: '#FFF',
   },
   content: {
     padding: '10@s',
@@ -376,7 +383,7 @@ const styles = ScaledSheet.create({
     flexWrap: 'wrap',
   },
   tagTitle: {
-    backgroundColor: CommonColors.indicatorColor,
+    backgroundColor: CommonColors.activeTintColor,
     marginRight: 5,
     marginBottom: 5,
     padding: 5,
@@ -388,7 +395,7 @@ const styles = ScaledSheet.create({
     fontStyle: 'italic',
   },
   viewAllTitle: {
-    color: CommonColors.indicatorColor,
+    color: CommonColors.activeTintColor,
     fontSize: 14,
     fontStyle: 'italic',
     textTransform: 'uppercase',
@@ -403,10 +410,21 @@ const styles = ScaledSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: '45@s',
-    borderWidth: 1,
-    borderColor: CommonColors.indicatorColor,
+    backgroundColor: CommonColors.activeTintColor,
     width: '100%',
     borderRadius: '8@s',
+    marginTop: '20@s',
+    alignSelf: 'center',
+  },
+  loadingContainer: {
+    flex: 1,
+    marginTop: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loadingIcon: {
+    width: '100@s',
+    height: '100@s',
     alignSelf: 'center',
   },
 });

@@ -28,19 +28,13 @@ class Header extends Component {
       rightStyle,
       leftStyle,
     } = this.props;
-    const themeBgColor = '#FFFFFF';
     return (
-      <View
-        style={[
-          CommonStyles.header,
-          {backgroundColor: themeBgColor},
-          headerStyle,
-        ]}>
+      <View style={[CommonStyles.header, headerStyle]}>
         {showStatusBar && (
           <StatusBar
             backgroundColor="transparent"
             translucent
-            barStyle={'dark-content'}
+            barStyle={'light-content'}
           />
         )}
         <View style={[styles.center, centerStyle]}>{center}</View>

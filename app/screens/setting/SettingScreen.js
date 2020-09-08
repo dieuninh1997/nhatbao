@@ -72,7 +72,7 @@ function SettingScreen({navigation, language}) {
                   style={[
                     styles.titleLanguage,
                     userLocale === 'en'
-                      ? {color: CommonColors.indicatorColor}
+                      ? {color: CommonColors.activeTintColor}
                       : null,
                   ]}>
                   {I18n.t('SettingScreen.en')}
@@ -85,7 +85,7 @@ function SettingScreen({navigation, language}) {
                   style={[
                     styles.titleLanguage,
                     userLocale === 'vn'
-                      ? {color: CommonColors.indicatorColor}
+                      ? {color: CommonColors.activeTintColor}
                       : null,
                   ]}>
                   {I18n.t('SettingScreen.vn')}
@@ -142,7 +142,7 @@ const styles = ScaledSheet.create({
   },
   langTitle: {
     fontSize: '16@ms',
-    color: CommonColors.indicatorColor,
+    color: CommonColors.activeTintColor,
     ...Fonts.defaultRegular,
     marginRight: '10@s',
     textTransform: 'uppercase',
@@ -158,34 +158,5 @@ const styles = ScaledSheet.create({
     textTransform: 'uppercase',
     marginVertical: '10@s',
     paddingHorizontal: '10@s',
-  },
-  btnContainer: {
-    height: '40@s',
-    backgroundColor: CommonColors.indicatorColor,
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: '3@s',
-  },
-  roundBtnContainer: {
-    height: '40@s',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: '3@s',
-    borderWidth: 1,
-    borderColor: CommonColors.indicatorColor,
-  },
-  roundBtnName: {
-    fontSize: '16@ms',
-    color: CommonColors.indicatorColor,
-    ...Fonts.defaultBold,
-    textTransform: 'uppercase',
-  },
-  btnName: {
-    fontSize: '16@ms',
-    color: CommonColors.lightText,
-    ...Fonts.defaultBold,
-    textTransform: 'uppercase',
   },
 });

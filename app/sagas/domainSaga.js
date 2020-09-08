@@ -1,25 +1,23 @@
 import {call, fork, put, take} from 'redux-saga/effects';
 import * as actionTypes from '../actions/types';
-import database from '@react-native-firebase/database';
+import Axios from 'axios';
 
 async function loadAllDomain() {
-  const ref = database().ref('/public_resource/domain');
-  if (ref) {
-    const data = await ref.once('value');
-    return data.val();
-  } else {
-    return [];
-  }
+  return await Axios.get('https://newscard9497.herokuapp.com/metadata_domain');
 }
 
 function* fetchAllDomain() {
   try {
     const response = yield call(loadAllDomain);
+    console.log('================================================');
+    console.log('fetchAllDomain', response);
+    console.log('================================================');
     if (response) {
+      const data = response?.data?.result;
       yield put({
         type: actionTypes.FETCH_ALL_DOMAIN_SUCCESS,
         payload: {
-          domain: response,
+          domain: data,
         },
       });
     }

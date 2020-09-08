@@ -13,7 +13,7 @@ import HomeItem from './app/screens/home/HomeItem';
 import SettingScreen from './app/screens/setting/SettingScreen';
 import FollowCard from './app/screens/follow/FollowCard';
 import FollowSearch from './app/screens/follow/FollowSearch';
-import SearchIcon from "./assets/svg/ic_search.svg";
+import SearchIcon from './assets/svg/ic_search.svg';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';

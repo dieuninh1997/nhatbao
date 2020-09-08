@@ -17,11 +17,16 @@ export default {
     trend: 'Trending',
     viewMore: 'More',
     review_film: 'Review Film',
-    make_food: 'Make Food'
+    make_food: 'Make Food',
   },
   AccountScreen: {
     header: 'Account',
     yourProfile: 'Your Profile',
+    gender: 'Gender',
+    male: 'Male',
+    female: 'Female',
+    userName: 'Username',
+    email: 'Email',
   },
   FollowScreen: {
     header: 'Category',
@@ -43,5 +48,9 @@ export default {
     vn: 'Tiếng Việt',
     signUp: 'Sign up',
     logIn: 'Log in',
+  },
+  PopupGender: {
+    title: 'Welcome to NewsCard!',
+    whoAraYou: 'Who are you?',
   },
 };

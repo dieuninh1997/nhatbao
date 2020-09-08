@@ -2,35 +2,24 @@ import {call, fork, put, take} from 'redux-saga/effects';
 import * as actionTypes from '../actions/types';
 import database from '@react-native-firebase/database';
 import _ from 'lodash';
+import Axios from 'axios';
 
 async function loadAllFeeds() {
-  const ref = database()
-    .ref('/public_resource/feeds')
-    .orderByValue('timestamp');
-  if (ref) {
-    const data = await ref.once('value');
-    const res = data.val();
-
-    for (let key in res) {
-      let item = res[key];
-      res[key] = _.values(item).sort((a, b) => {
-        return b.timestamp - a.timestamp;
-      });
-    }
-    return res;
-  } else {
-    return [];
-  }
+  return await Axios.get('https://newscard9497.herokuapp.com/metadata_cat');
 }
 
 function* fetchAllFeeds() {
   try {
     const response = yield call(loadAllFeeds);
+    console.log('================================================');
+    console.log('fetchAllFeeds', response);
+    console.log('================================================');
     if (response) {
+      const data = response?.data?.result;
       yield put({
         type: actionTypes.FETCH_ALL_FEEDS_SUCCESS,
         payload: {
-          feeds: response,
+          feeds: data,
         },
       });
     }

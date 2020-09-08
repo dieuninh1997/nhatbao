@@ -1,15 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import {View, TextInput, FlatList} from 'react-native';
-import {connect} from 'react-redux';
+import {View, TextInput, FlatList, ScrollView} from 'react-native';
+import {useSelector} from 'react-redux';
 import _ from 'lodash';
 import LottieView from 'lottie-react-native';
 
 import Text from '../../components/Text';
 import Header from '../../components/Header';
-import {CommonColors, CommonSize, Fonts, CommonStyles} from '../../utils/CommonStyles';
+import {CommonColors, Fonts, CommonStyles} from '../../utils/CommonStyles';
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import I18n from '../../i18n/i18n';
-import BackButton from '../../components/BackButton';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import FastImage from 'react-native-fast-image';
 import {getDiffHours} from '../../utils/Filter';
@@ -17,25 +16,44 @@ import store from '../../store';
 import * as actions from '../../actions';
 import CloseIcon from '../../../assets/svg/ic_close.svg';
 import SearchIcon from '../../../assets/svg//ic_search.svg';
+import {useNavigation} from '@react-navigation/native';
+import Axios from 'axios';
 
-function FollowSearch({navigation, value}) {
+export default function FollowSearch(props) {
+  const navigation = useNavigation();
   const [searchText, setSearchText] = useState('');
   const [isShowSuggestDomain, setShowSuggestDomain] = useState(true);
-  const domain = _.get(value, 'domain', {});
+  const [dataSearch, setDataSearch] = useState([]);
+  const domain = useSelector((state) => state.domain.domain); // _.get(value, 'domain', {});
 
   useEffect(() => {
-    store.dispatch(actions.fetchAllDomain());
+    if (_.isEmpty(domain)) {
+      store.dispatch(actions.fetchAllDomain());
+    }
   }, [domain]);
 
-  const keyDomain = [];
   if (!_.isEmpty(domain)) {
-    domain.map((k) => {
-      keyDomain.push({domain: k.domain, image: k.image});
-    });
-    keyDomain.sort((a, b) => {
+    domain.sort((a, b) => {
       return a.domain.localeCompare(b.domain);
     });
   }
+
+  const handleSearch = async (text) => {
+    handleChangeInput(text);
+    setShowSuggestDomain(false);
+    try {
+      const res = await Axios.get(
+        `https://newscard9497.herokuapp.com/domain/${text}`,
+      );
+      if (res) {
+        setDataSearch(res?.data?.result);
+      }
+    } catch (error) {
+      console.log('================================================');
+      console.log('search domain error', error);
+      console.log('================================================');
+    }
+  };
 
   const getArticles = (kd) => {
     for (let index in domain) {
@@ -55,9 +73,10 @@ function FollowSearch({navigation, value}) {
 
   const renderItem = ({item, index}) => {
     return (
-      <TouchableOpacity onPress={() => { 
-        navigation.navigate('WebviewScreen', {linkUrl: item.link});
-      }}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('WebviewScreen', {linkUrl: item.link});
+        }}>
         <View key={index} style={styles.itemRow}>
           <FastImage
             source={{uri: item.image}}
@@ -83,15 +102,32 @@ function FollowSearch({navigation, value}) {
       />
     );
   };
+  const renderItemDomain = ({item, index}) => (
+    <TouchableOpacity key={index} onPress={() => handleSearch(item.domain)}>
+      <View style={styles.itemContainer}>
+        {item.images ? (
+          <View style={styles.kdImageContainer}>
+            <FastImage
+              source={{uri: item.images}}
+              style={styles.kdImage}
+              resizeMode={FastImage.resizeMode.contain}
+            />
+          </View>
+        ) : null}
+        <Text style={styles.domainText}>{item.domain}</Text>
+      </View>
+    </TouchableOpacity>
+  );
 
   return (
     <View style={styles.container}>
-          {renderHeader()}
+      {renderHeader()}
+
       <View style={styles.searchContainer}>
-        <SearchIcon  
+        <SearchIcon
           width={20}
           height={20}
-          color={CommonColors.inActiveTintColor}
+          color={CommonColors.activeTintColor}
         />
         <TextInput
           value={searchText}
@@ -116,50 +152,37 @@ function FollowSearch({navigation, value}) {
       <View style={styles.separator} />
       <View style={styles.content}>
         {isShowSuggestDomain ? (
-          <View style={styles.domainContainer}>
-            <Text style={styles.headerTitle}>
-              {I18n.t('FollowScreen.domain')}
-            </Text>
-            <View style={styles.separatorDark} />
-            {keyDomain.length > 0 ? (
-              <View style={styles.listDomain}>
-                {keyDomain?.map((kd, index) => {
-                  return (
-                    <TouchableOpacity
-                      key={index}
-                      onPress={() => {
-                        handleChangeInput(kd.domain);
-                        setShowSuggestDomain(false);
-                      }}>
-                      <View style={styles.itemContainer}>
-                        <View style={styles.kdImageContainer}>
-                          <FastImage
-                            source={{uri: kd.image}}
-                            style={styles.kdImage}
-                            resizeMode={FastImage.resizeMode.contain}
-                          />
-                        </View>
-                        <Text style={styles.domainText}>{kd.domain}</Text>
-                      </View>
-                    </TouchableOpacity>
-                  );
-                })}
-              </View>
-            ) : (
-              <View style={styles.loadingContainer}>
-                <LottieView
-                  style={styles.loadingIcon}
-                  source={require('../../../assets/animations/loading1.json')}
-                  autoPlay
-                  loop
-                />
-              </View>
-            )}
-          </View>
+          <ScrollView contentContainerStyle={{flex: 1}}>
+            <View style={styles.domainContainer}>
+              <Text style={styles.headerTitle}>
+                {I18n.t('FollowScreen.domain')}
+              </Text>
+              <View style={styles.separatorDark} />
+              {!_.isEmpty(domain) ? (
+                <View style={styles.listDomain}>
+                  <FlatList
+                    numColumns={3}
+                    data={domain}
+                    renderItem={renderItemDomain}
+                    keyExtractor={(item, index) => `${item.id}_${index}`}
+                  />
+                </View>
+              ) : (
+                <View style={styles.loadingContainer}>
+                  <LottieView
+                    style={styles.loadingIcon}
+                    source={require('../../../assets/animations/row_loading.json')}
+                    autoPlay
+                    loop
+                  />
+                </View>
+              )}
+            </View>
+          </ScrollView>
         ) : (
           <View style={styles.resultContainer}>
             <FlatList
-              data={getArticles(searchText) || []}
+              data={dataSearch}
               renderItem={renderItem}
               keyExtractor={(item, index) => `${item.id}_${index}`}
             />
@@ -169,10 +192,6 @@ function FollowSearch({navigation, value}) {
     </View>
   );
 }
-
-export default connect((state) => ({
-  value: state.domain,
-}))(FollowSearch);
 
 const styles = ScaledSheet.create({
   container: {
@@ -189,7 +208,7 @@ const styles = ScaledSheet.create({
   },
   separatorDark: {
     height: 1,
-    backgroundColor: CommonColors.indicatorColor,
+    backgroundColor: CommonColors.activeTintColor,
   },
   searchContainer: {
     flexDirection: 'row',
@@ -200,17 +219,17 @@ const styles = ScaledSheet.create({
   content: {
     flex: 1,
     padding: '10@s',
-    marginTop: '16@s'
+    marginTop: '16@s',
   },
   textEnter: {
     fontSize: '14@ms',
     color: CommonColors.inActiveTintColor,
     flex: 1,
-    marginLeft: '10@s'
+    marginLeft: '10@s',
   },
   headerTitle: {
     fontSize: '14@ms',
-    color: CommonColors.indicatorColor,
+    color: CommonColors.activeTintColor,
     textTransform: 'uppercase',
     marginBottom: '8@s',
   },
@@ -220,12 +239,16 @@ const styles = ScaledSheet.create({
     marginTop: '5@s',
   },
   itemContainer: {
-    borderRadius: '16@s',
+    width: '120@s',
+    height: '120@s',
+    borderRadius: '60@s',
     backgroundColor: CommonColors.lightBgColor,
     margin: '5@s',
     paddingVertical: '5@s',
     paddingHorizontal: '10@s',
     alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
   },
   listDomain: {
     flexDirection: 'row',
@@ -281,8 +304,8 @@ const styles = ScaledSheet.create({
     justifyContent: 'center',
   },
   loadingIcon: {
-    width: '200@s',
-    height: '200@s',
+    width: '100@s',
+    height: '100@s',
     alignSelf: 'center',
   },
 });

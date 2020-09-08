@@ -13,12 +13,12 @@ PODS:
     - React-Core (= 0.63.2)
     - React-jsi (= 0.63.2)
     - ReactCommon/turbomodule/core (= 0.63.2)
-  - Firebase/CoreOnly (6.28.1):
-    - FirebaseCore (= 6.9.1)
-  - Firebase/Database (6.28.1):
+  - Firebase/CoreOnly (6.30.0):
+    - FirebaseCore (= 6.10.0)
+  - Firebase/Database (6.30.0):
     - Firebase/CoreOnly
-    - FirebaseDatabase (~> 6.4.0)
-  - FirebaseCore (6.9.1):
+    - FirebaseDatabase (~> 6.5.0)
+  - FirebaseCore (6.10.0):
     - FirebaseCoreDiagnostics (~> 1.3)
     - GoogleUtilities/Environment (~> 6.7)
     - GoogleUtilities/Logger (~> 6.7)
@@ -27,8 +27,8 @@ PODS:
     - GoogleUtilities/Environment (~> 6.7)
     - GoogleUtilities/Logger (~> 6.7)
     - nanopb (~> 1.30906.0)
-  - FirebaseDatabase (6.4.0):
-    - FirebaseCore (~> 6.8)
+  - FirebaseDatabase (6.5.0):
+    - FirebaseCore (~> 6.10)
     - leveldb-library (~> 1.22)
   - Flipper (0.41.5):
     - Flipper-Folly (~> 2.2)
@@ -357,11 +357,11 @@ PODS:
     - React
     - SDWebImage (~> 5.8)
     - SDWebImageWebPCoder (~> 0.6.1)
-  - RNFBApp (8.3.1):
-    - Firebase/CoreOnly (~> 6.28.1)
+  - RNFBApp (8.4.1):
+    - Firebase/CoreOnly (~> 6.30.0)
     - React
   - RNFBDatabase (7.4.2):
-    - Firebase/Database (~> 6.28.1)
+    - Firebase/Database (~> 6.30.0)
     - React
     - RNFBApp
   - RNGestureHandler (1.7.0):
@@ -578,10 +578,10 @@ SPEC CHECKSUMS:
   DoubleConversion: cde416483dac037923206447da6e1454df403714
   FBLazyVector: 3ef4a7f62e7db01092f9d517d2ebc0d0677c4a37
   FBReactNativeSpec: dc7fa9088f0f2a998503a352b0554d69a4391c5a
-  Firebase: ed042590caa0029392257529a8003c25ee82bc18
-  FirebaseCore: 687b8e6a0a4337b898a6326d68254c2f80c143af
+  Firebase: 210f41ca352067d83b1ba4fd2e7fb49a0c017397
+  FirebaseCore: 9a41e2de78fef10f63cee30ab10e2945266bc1fc
   FirebaseCoreDiagnostics: 7415bfb3883b3500c5a95c42b6ba66baae78f600
-  FirebaseDatabase: 55e69fe802ccb438d9c6ee51eb32fd425d5409d3
+  FirebaseDatabase: d85b47213273708e48c972012b39105f76229588
   Flipper: 33585e2d9810fe5528346be33bcf71b37bb7ae13
   Flipper-DoubleConversion: 38631e41ef4f9b12861c67d17cb5518d06badc41
   Flipper-Folly: c12092ea368353b58e992843a990a3225d4533c3
@@ -627,8 +627,8 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 3eea36d9460c5159b592f9ecbe5a77f8aca98006
   RNCMaskedView: f5c7d14d6847b7b44853f7acb6284c1da30a3459
   RNFastImage: e19ba191922e7dab9d932a4d59d62d76660aa222
-  RNFBApp: abbab9c96e6d2f1cada6401c9138d3f8cb2ae930
-  RNFBDatabase: 654cc97f24c44395cc934aa6d661311fe31ff604
+  RNFBApp: e4321cad5dd23b43b3b4f0ca060300b9f85cb7a4
+  RNFBDatabase: dadf128b58c66a40167547fc5b8060f898d37137
   RNGestureHandler: b6b359bb800ae399a9c8b27032bdbf7c18f08a08
   RNI18n: e2f7e76389fcc6e84f2c8733ea89b92502351fd8
   RNLocalize: c388679af021ddd6069c215f7fdd2acf4e77ede5
@@ -640,6 +640,6 @@ SPEC CHECKSUMS:
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 48031aa46721de79c6ee591cfa31dad1621c3f97
+PODFILE CHECKSUM: 71b52557ab4c17b0d467ef41f7f59a8641e28c80
 
 COCOAPODS: 1.9.3

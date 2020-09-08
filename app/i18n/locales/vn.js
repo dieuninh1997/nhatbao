@@ -17,11 +17,16 @@ export default {
     trend: 'Thịnh hành',
     viewMore: 'Xem thêm',
     review_film: 'Đánh giá phim',
-    make_food: 'Nấu ăn'
+    make_food: 'Nấu ăn',
   },
   AccountScreen: {
     header: 'Tài Khoản',
     yourProfile: 'Thông tin tài khoản',
+    gender: 'Giới tính',
+    male: 'Nam',
+    female: 'Nữ',
+    userName: 'Username',
+    email: 'Email',
   },
 
   FollowScreen: {
@@ -43,5 +48,9 @@ export default {
     vn: 'Tiếng Việt',
     signUp: 'Đăng kí',
     logIn: 'Đăng nhập',
+  },
+  PopupGender: {
+    title: 'NewsCard xin chào!',
+    whoAraYou: 'Bạn là nam hay nữ?',
   },
 };
