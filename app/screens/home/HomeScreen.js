@@ -47,7 +47,7 @@ export default function HomeScreen(props) {
   const hotNews = topics?.hot_news;
   const trend = topics?.trend;
   const top3FirstTrend = trend?.slice(0, 3);
-  const top3FirstNew = hotNews?.slice(0, 3);
+  const top3FirstNew = hotNews?.slice(0, 5);
   top3FirstNew?.push('see_more');
 
   const _onRefresh = () => {
@@ -89,7 +89,7 @@ export default function HomeScreen(props) {
   );
 
   const renderItem = ({item, index}) => {
-    if (index === 3) {
+    if (index === 5) {
       return (
         <TouchableOpacity
           key={index}
@@ -98,7 +98,7 @@ export default function HomeScreen(props) {
             navigation.navigate('HomeItem', {
               value: {
                 headerTitle: I18n.t('HomeScreen.hotNews'),
-                data: hotNews,
+                data: 'hot_news',
               },
             });
           }}>
@@ -148,7 +148,7 @@ export default function HomeScreen(props) {
 
   const renderHotNews = () => (
     <View style={styles.container}>
-      {renderTrendHeader(I18n.t('HomeScreen.hotNews'), hotNews, {
+      {renderTrendHeader(I18n.t('HomeScreen.hotNews'), 'hot_news', {
         paddingHorizontal: scale(16),
         marginTop: 0,
       })}
@@ -164,7 +164,7 @@ export default function HomeScreen(props) {
       </View>
       {top3FirstTrend ? (
         <View style={styles.trendingView}>
-          {renderTrendHeader(I18n.t('HomeScreen.trend'), trend)}
+          {renderTrendHeader(I18n.t('HomeScreen.trend'), 'trend')}
           {top3FirstTrend?.map((etrend, index) => {
             return (
               <TouchableOpacity
@@ -289,7 +289,7 @@ export default function HomeScreen(props) {
 
             return (
               <View key={index}>
-                {renderTrendHeader(I18n.t(`HomeScreen.${key}`), othData, {
+                {renderTrendHeader(I18n.t(`HomeScreen.${key}`), key, {
                   paddingHorizontal: scale(16),
                 })}
                 {renderTabOther(

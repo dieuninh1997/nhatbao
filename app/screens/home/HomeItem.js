@@ -1,19 +1,9 @@
-import React from 'react';
-import {
-  View,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  Image,
-  Dimensions,
-  ActivityIndicator,
-  FlatList,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, TouchableOpacity, FlatList} from 'react-native';
 
-import FlipPage, {FlipPagePage} from 'react-native-flip-page';
-import {connect} from 'react-redux';
 import _ from 'lodash';
-import LinearGradient from 'react-native-linear-gradient';
 import FastImage from 'react-native-fast-image';
+import LottieView from 'lottie-react-native';
 
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import Text from '../../components/Text';
@@ -22,6 +12,8 @@ import {CommonColors, Fonts, CommonStyles} from '../../utils/CommonStyles';
 import BackButton from '../../components/BackButton';
 import Header from '../../components/Header';
 import {getDateTime} from '../../utils/Filter';
+import Axios from 'axios';
+import {useNavigation} from '@react-navigation/native';
 
 const renderHeader = (title) => {
   return (
@@ -34,45 +26,78 @@ const renderHeader = (title) => {
   );
 };
 
-function HomeItem({navigation, route}) {
-  const data = route?.params?.value;
-  const arrData = _.map(data.data, (val, key) => ({key, val}));
+export default function HomeItem(props) {
+  const {data, headerTitle} = props?.route?.params?.value;
+  console.log('================================================');
+  console.log('data', data);
+  console.log('================================================');
+  const navigation = useNavigation();
+  const [arrData, setArrData] = useState([]);
+  // const arrData = _.map(data.data, (val, key) => ({key, val}));
+
+  const loadData = async () => {
+    try {
+      const res = await Axios.get(
+        `https://newscard9497.herokuapp.com/topics/${data}`,
+      );
+      if (res) {
+        setArrData(res?.data?.result);
+      }
+    } catch (error) {
+      console.log('load more topics error', error);
+    }
+  };
+
+  useEffect(() => {
+    if (arrData?.length === 0) {
+      loadData();
+    }
+  }, []);
 
   return (
     <View style={styles.container}>
-      {renderHeader(data.headerTitle)}
-      <FlatList
-        style={styles.list}
-        data={arrData}
-        renderItem={({item, index}) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => {
-              navigation.navigate('WebviewScreen', {linkUrl: item.val.link});
-            }}>
-            <View style={styles.itemContainer}>
-              <Text style={styles.itemTitle}>{item.val.title}</Text>
-              <FastImage
-                style={styles.itemImage}
-                source={{uri: item.val.image}}
-                resizeMode={FastImage.resizeMode.cover}
-              />
-              <Text style={styles.domainText}>{item.val.domain}</Text>
-              <Text style={styles.itemContent}>{item.val.description}</Text>
+      {renderHeader(headerTitle)}
+      {arrData?.length > 0 ? (
+        <FlatList
+          style={styles.list}
+          data={arrData}
+          renderItem={({item, index}) => (
+            <TouchableOpacity
+              key={index}
+              onPress={() => {
+                navigation.navigate('WebviewScreen', {linkUrl: item.link});
+              }}>
+              <View style={styles.itemContainer}>
+                <Text style={styles.itemTitle}>{item.title}</Text>
+                <FastImage
+                  style={styles.itemImage}
+                  source={{uri: item.image}}
+                  resizeMode={FastImage.resizeMode.cover}
+                />
+                <Text style={styles.domainText}>{item.domain}</Text>
+                <Text style={styles.itemContent}>{item.description}</Text>
 
-              <Text style={styles.itemTime}>
-                {getDateTime(item.val.timestamp)}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        )}
-        keyExtractor={(item, index) => `${item.id}_${index}`}
-      />
+                <Text style={styles.itemTime}>
+                  {getDateTime(item.timestamp)}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          )}
+          keyExtractor={(item, index) => `${item.id}_${index}`}
+        />
+      ) : (
+        <View style={styles.loadingContainer}>
+          <LottieView
+            style={styles.loadingIcon}
+            source={require('../../../assets/animations/row_loading.json')}
+            autoPlay
+            loop
+          />
+        </View>
+      )}
     </View>
   );
 }
-
-export default HomeItem;
 
 const styles = ScaledSheet.create({
   container: {
@@ -115,9 +140,20 @@ const styles = ScaledSheet.create({
   },
   domainText: {
     fontSize: '14@ms',
-    color: CommonColors.indicatorColor,
+    color: CommonColors.activeTintColor,
     ...Fonts.defaultRegular,
     marginTop: '10@s',
     textTransform: 'uppercase',
+  },
+  loadingContainer: {
+    flex: 1,
+    marginTop: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loadingIcon: {
+    width: '100@s',
+    height: '100@s',
+    alignSelf: 'center',
   },
 });

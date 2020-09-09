@@ -40,14 +40,16 @@ export default function PopupGender(props) {
       avoidKeyboard
       useNativeDriver>
       <View style={styles.container}>
-        <TouchableOpacity style={styles.closeIcon} onPress={handleClosePopup()}>
+        <TouchableOpacity
+          style={styles.closeIcon}
+          onPress={() => handleClosePopup()}>
           <CloseIcon width={20} height={20} color="#FFF" />
         </TouchableOpacity>
         <View style={styles.content}>
           <Text style={styles.title}>{I18n.t('PopupGender.title')}</Text>
           <Text style={styles.question}>{I18n.t('PopupGender.whoAraYou')}</Text>
           <TouchableOpacity
-            onPress={chooseMale}
+            onPress={() => chooseMale()}
             style={[styles.inactiveFemaleCircle, styles.leftView]}>
             <View style={styles.femaleView}>
               <View style={styles.femaleCircle}>
@@ -56,7 +58,7 @@ export default function PopupGender(props) {
             </View>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={chooseFemale}
+            onPress={() => chooseFemale()}
             style={[styles.inactiveMaleCircle, styles.rightView]}>
             <View style={styles.maleView}>
               <View style={styles.maleCircle}>
@@ -77,8 +79,7 @@ const styles = ScaledSheet.create({
     flexDirection: 'column',
   },
   closeIcon: {
-    top: 30,
-    right: 0,
+    alignItems: 'flex-end',
   },
   content: {
     flex: 1,
