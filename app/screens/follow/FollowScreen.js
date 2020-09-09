@@ -33,7 +33,14 @@ export default function FollowScreen(props) {
     }
   }, [feeds]);
 
-  const genderFeeds = !_.isEmpty(feeds) ? feeds[`${gender}`] : [];
+  let genderFeeds = !_.isEmpty(feeds) ? feeds[`${gender}`] : [];
+  if (gender === 'male') {
+    genderFeeds = Object.assign(genderFeeds, feeds.female, feeds?.neutral);
+  } else if (gender === 'female') {
+    genderFeeds = Object.assign(genderFeeds, feeds?.male, feeds?.neutral);
+  } else {
+    genderFeeds = Object.assign(genderFeeds, feeds?.female, feeds?.male);
+  }
 
   const renderItem = ({item, index}) => {
     const thumbnai = genderFeeds[`${item}`];

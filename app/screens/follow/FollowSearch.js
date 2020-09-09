@@ -1,30 +1,36 @@
 import React, {useState, useEffect} from 'react';
-import {View, TextInput, FlatList, ScrollView} from 'react-native';
+import {
+  View,
+  TextInput,
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import {useSelector} from 'react-redux';
 import _ from 'lodash';
 import LottieView from 'lottie-react-native';
+import {useNavigation} from '@react-navigation/native';
+import Axios from 'axios';
+import FastImage from 'react-native-fast-image';
 
 import Text from '../../components/Text';
 import Header from '../../components/Header';
 import {CommonColors, Fonts, CommonStyles} from '../../utils/CommonStyles';
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import I18n from '../../i18n/i18n';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import FastImage from 'react-native-fast-image';
 import {getDiffHours} from '../../utils/Filter';
 import store from '../../store';
 import * as actions from '../../actions';
 import CloseIcon from '../../../assets/svg/ic_close.svg';
 import SearchIcon from '../../../assets/svg//ic_search.svg';
-import {useNavigation} from '@react-navigation/native';
-import Axios from 'axios';
+import {scale} from '../../libs/reactSizeMatter/scalingUtils';
 
 export default function FollowSearch(props) {
   const navigation = useNavigation();
   const [searchText, setSearchText] = useState('');
   const [isShowSuggestDomain, setShowSuggestDomain] = useState(true);
   const [dataSearch, setDataSearch] = useState([]);
-  const domain = useSelector((state) => state.domain.domain); // _.get(value, 'domain', {});
+  const domain = useSelector((state) => state.domain.domain);
 
   useEffect(() => {
     if (_.isEmpty(domain)) {
@@ -103,7 +109,10 @@ export default function FollowSearch(props) {
     );
   };
   const renderItemDomain = ({item, index}) => (
-    <TouchableOpacity key={index} onPress={() => handleSearch(item.domain)}>
+    <TouchableOpacity
+      key={index}
+      onPress={() => handleSearch(item.domain)}
+      style={styles.domainContent}>
       <View style={styles.itemContainer}>
         {item.images ? (
           <View style={styles.kdImageContainer}>
@@ -114,8 +123,8 @@ export default function FollowSearch(props) {
             />
           </View>
         ) : null}
-        <Text style={styles.domainText}>{item.domain}</Text>
       </View>
+      <Text style={styles.domainText}>{item.domain}</Text>
     </TouchableOpacity>
   );
 
@@ -152,7 +161,7 @@ export default function FollowSearch(props) {
       <View style={styles.separator} />
       <View style={styles.content}>
         {isShowSuggestDomain ? (
-          <ScrollView contentContainerStyle={{flex: 1}}>
+          <ScrollView>
             <View style={styles.domainContainer}>
               <Text style={styles.headerTitle}>
                 {I18n.t('FollowScreen.domain')}
@@ -236,12 +245,19 @@ const styles = ScaledSheet.create({
   domainText: {
     fontSize: '14@ms',
     color: '#000',
-    marginTop: '5@s',
+    // marginTop: '5@s',
+    textAlign: 'center',
+  },
+  domainContent: {
+    flex: 1,
+    marginBottom: scale(10),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   itemContainer: {
-    width: '120@s',
-    height: '120@s',
-    borderRadius: '60@s',
+    width: '100@s',
+    height: '100@s',
+    borderRadius: '50@s',
     backgroundColor: CommonColors.lightBgColor,
     margin: '5@s',
     paddingVertical: '5@s',
