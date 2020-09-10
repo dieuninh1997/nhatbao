@@ -1,11 +1,10 @@
-import React, {Component, useState} from 'react';
-import {View, StatusBar} from 'react-native';
+import React from 'react';
+import {View, StatusBar, TouchableOpacity} from 'react-native';
 import Modal from 'react-native-modal';
 import {Fonts} from '../utils/CommonStyles';
 import Text from '../components/Text';
 import I18n from '../i18n/i18n';
 import CloseIcon from '../../assets/svg/ic_close.svg';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import ScaledSheet from '../libs/reactSizeMatter/ScaledSheet';
 import MaleColorIcon from '../../assets/svg/ic_male_color.svg';
 import FemaleColorIcon from '../../assets/svg/ic_female_color.svg';

@@ -1,26 +1,30 @@
 import React from 'react';
-import AccountScreen from './app/screens/account/AccountScreen';
-import HomeScreen from './app/screens/home/HomeScreen';
-import FollowScreen from './app/screens/follow/FollowScreen';
-import SplashScreen from './app/screens/splash/SplashScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Provider} from 'react-redux';
+import {RootSiblingParent} from 'react-native-root-siblings';
+
 import {CommonColors} from './app/utils/CommonStyles';
 import HomeIcon from './assets/svg/ic_home.svg';
 import FollowIcon from './assets/svg/ic_follow.svg';
 import AccountIcon from './assets/svg/ic_user.svg';
+import SearchIcon from './assets/svg/ic_search.svg';
+import ClusterIcon from './assets/svg/ic_cluster.svg';
 import store from './app/store';
+import LabelComponent from './app/components/LabelComponent';
+//screens
 import WebviewScreen from './app/components/WebviewScreen';
 import HomeItem from './app/screens/home/HomeItem';
 import SettingScreen from './app/screens/setting/SettingScreen';
 import FollowCard from './app/screens/follow/FollowCard';
 import FollowSearch from './app/screens/follow/FollowSearch';
-import SearchIcon from './assets/svg/ic_search.svg';
-
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import LabelComponent from './app/components/LabelComponent';
-import {Provider} from 'react-redux';
-import {RootSiblingParent} from 'react-native-root-siblings';
+import ClusterScreen from './app/screens/cluster/ClusterScreen';
+import ClusterItem from './app/screens/cluster/ClusterItem';
+import AccountScreen from './app/screens/account/AccountScreen';
+import HomeScreen from './app/screens/home/HomeScreen';
+import FollowScreen from './app/screens/follow/FollowScreen';
+import SplashScreen from './app/screens/splash/SplashScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -28,7 +32,7 @@ const Stack = createStackNavigator();
 const MyTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName={'HomeScreen'}
+      initialRouteName={'ClusterScreen'}
       tabBarOptions={{
         showLabel: false,
         activeTintColor: CommonColors.activeTintColor,
@@ -67,6 +71,26 @@ const MyTabs = () => {
               <FollowIcon color={CommonColors.activeTintColor} />
             ) : (
               <FollowIcon color={CommonColors.inActiveTintColor} />
+            ),
+        }}
+      />
+      <Tab.Screen
+        name="ClusterScreen"
+        component={ClusterScreen}
+        options={{
+          tabBarIcon: ({focused}) =>
+            focused ? (
+              <ClusterIcon
+                color={CommonColors.activeTintColor}
+                width={30}
+                height={30}
+              />
+            ) : (
+              <ClusterIcon
+                color={CommonColors.inActiveTintColor}
+                width={30}
+                height={30}
+              />
             ),
         }}
       />
@@ -118,6 +142,7 @@ const MyStack = () => {
       <Stack.Screen name="SettingScreen" component={SettingScreen} />
       <Stack.Screen name="FollowCard" component={FollowCard} />
       <Stack.Screen name="FollowSearch" component={FollowSearch} />
+      <Stack.Screen name="ClusterItem" component={ClusterItem} />
     </Stack.Navigator>
   );
 };

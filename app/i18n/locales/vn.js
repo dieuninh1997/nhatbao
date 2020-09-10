@@ -33,6 +33,24 @@ export default {
     header: 'Thể loại',
     viewAll: 'Xem toàn bộ >>',
     domain: 'Domain',
+    beauty: 'Làm Đẹp',
+    celeb: 'Sự Kiện',
+    fashion: 'Thời Trang',
+    food: 'Ẩm Thực',
+    health: 'Sức Khoẻ',
+    business: 'Kinh Doanh',
+    finance: 'Kinh Tế',
+    law: 'Pháp Luật',
+    real_estate: 'Bất Động Sản',
+    sport: 'Thể Thao',
+    vehicle: 'Xe',
+    edu: 'Giáo Dục',
+    film: 'Phim',
+    science: 'Khoa Học',
+    social: 'Xã Hội',
+    tech: 'Công nghệ',
+    travel: 'Du Lịch',
+    world: 'Thế Giới',
   },
   FollowSearch: {
     header: 'Tìm kiếm',
@@ -52,5 +70,8 @@ export default {
   PopupGender: {
     title: 'NewsCard xin chào!',
     whoAraYou: 'Bạn là nam hay nữ?',
+  },
+  ClusterScreen: {
+    header: 'Cluster',
   },
 };

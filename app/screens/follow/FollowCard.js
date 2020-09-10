@@ -27,7 +27,9 @@ const renderHeader = (title) => {
     <Header
       left={<BackButton />}
       center={
-        <Text style={[CommonStyles.headerTitle, styles.header]}>{title}</Text>
+        <Text style={[CommonStyles.headerTitle, styles.header]}>
+          {I18n.t(`FollowScreen.${title}`)}
+        </Text>
       }
     />
   );
@@ -106,7 +108,8 @@ const renderItem = ({item, index}, navigation) => {
           style={[
             styles.subtitle,
             item?.text_color === 1 ? {color: '#FFF'} : null,
-          ]}>
+          ]}
+          numberOfLines={3}>
           {item.description}
         </Text>
 

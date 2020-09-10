@@ -74,7 +74,7 @@ export default function FollowScreen(props) {
             style={styles.linearGradient}
           />
           <View style={[styles.row, styles.itemHeader]}>
-            <Text style={styles.title}>{item}</Text>
+            <Text style={styles.title}>{I18n.t(`FollowScreen.${item}`)}</Text>
           </View>
         </View>
       </TouchableOpacity>

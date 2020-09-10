@@ -491,7 +491,7 @@ const styles = ScaledSheet.create({
   },
   tabTopDomain: {
     fontSize: '12@s',
-    color: CommonColors.indicatorColor,
+    color: CommonColors.activeTintColor,
     textTransform: 'uppercase',
     width: 'auto',
   },
