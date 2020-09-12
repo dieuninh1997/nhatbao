@@ -73,7 +73,7 @@ export default (props) => {
     navigation.dispatch(
       CommonActions.reset({
         index: 1,
-        routes: [{name: 'MainScreen'}],
+        routes: [{name: 'CoverScreen'}],
       }),
     );
   }
@@ -86,14 +86,15 @@ export default (props) => {
             navigation.dispatch(
               CommonActions.reset({
                 index: 1,
-                routes: [{name: 'MainScreen'}],
+                routes: [{name: 'CoverScreen'}],
               }),
             )
           }
         />
       ) : null}
-
-      <Text style={styles.appName}>{I18n.t('common.appName')}</Text>
+      {!showPopup ? (
+        <Text style={styles.appName}>{I18n.t('common.appName')}</Text>
+      ) : null}
     </View>
   );
 };

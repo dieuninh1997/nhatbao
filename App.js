@@ -25,6 +25,7 @@ import AccountScreen from './app/screens/account/AccountScreen';
 import HomeScreen from './app/screens/home/HomeScreen';
 import FollowScreen from './app/screens/follow/FollowScreen';
 import SplashScreen from './app/screens/splash/SplashScreen';
+import CoverScreen from './app/screens/cover/CoverScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -143,6 +144,7 @@ const MyStack = () => {
       <Stack.Screen name="FollowCard" component={FollowCard} />
       <Stack.Screen name="FollowSearch" component={FollowSearch} />
       <Stack.Screen name="ClusterItem" component={ClusterItem} />
+      <Stack.Screen name="CoverScreen" component={CoverScreen} />
     </Stack.Navigator>
   );
 };

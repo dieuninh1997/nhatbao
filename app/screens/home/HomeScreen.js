@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Dimensions,
@@ -8,8 +8,6 @@ import {
   FlatList,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Easing,
-  StatusBar,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import FastImage from 'react-native-fast-image';
@@ -33,18 +31,11 @@ import * as actions from '../../actions';
 import ArrowIcon from '../../../assets/svg/ic_arrow_next.svg';
 import {scale} from '../../libs/reactSizeMatter/scalingUtils';
 import {useNavigation} from '@react-navigation/native';
-import Animated from 'react-native-reanimated';
 
 export default function HomeScreen(props) {
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
   const topics = useSelector((state) => state.topics.topics);
-  const cover = useSelector((state) => state.cover.cover);
-  const [showCover, setShowCover] = useState(true);
-  const [animatedValue, setAnimatedValue] = useState(new Animated.Value(0));
-  console.log('================================================');
-  console.log('cover', cover);
-  console.log('================================================');
   const keys = Object.keys(topics);
   const otherData = [];
   keys.map((key) => {
@@ -271,127 +262,51 @@ export default function HomeScreen(props) {
     return sec;
   };
 
-  useEffect(() => {
-    Animated.timing(animatedValue, {
-      toValue: 1,
-      duration: 1500,
-      easing: Easing.linear,
-    }).start(() => {
-      setShowCover(false);
-    });
-  }, [animatedValue]);
-
-  const renderCover = () => {
-    if (_.isEmpty(cover)) {
-      return null;
-    }
-    const firstCover = cover && cover[0];
-    const img = firstCover.detail_images[0];
-    const title = firstCover.title;
-
-    return (
-      <View
-        style={{
-          width,
-          height,
-          position: 'absolute',
-          top: 0,
-          left: 0,
-        }}>
-        <Animated.Image
-          source={{uri: img}}
-          style={{
-            height,
-            width: width * 1.4,
-            zIndex: 2,
-            transform: [
-              {
-                translateX: animatedValue.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: [-width * 0.2, 0],
-                }),
-              },
-            ],
-          }}
-        />
-        <View
-          style={{
-            position: 'absolute',
-            zIndex: 1000,
-            padding: 16,
-            paddingBottom: width / 4,
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            width,
-            height,
-          }}>
-          <View style={{flex: 1}} />
-          <Text
-            style={{
-              color: 'rgba(255, 255, 255, 0.8)',
-              fontSize: 24,
-              textTransform: 'uppercase',
-            }}>
-            {title}
-          </Text>
-        </View>
-      </View>
-    );
-  };
-
   return (
     <View style={styles.container}>
-      {showCover ? (
-        renderCover()
-      ) : (
-        <View style={styles.container}>
-          {renderHeader()}
-          {_.isEmpty(topics) ? (
-            <View style={styles.loadingContainer}>
-              <LottieView
-                style={styles.loadingIcon}
-                source={require('../../../assets/animations/row_loading.json')}
-                autoPlay
-                loop
-              />
-            </View>
-          ) : (
-            <ScrollView
-              scrollEnabled={true}
-              refreshControl={
-                <RefreshControl
-                  refreshing={refreshing}
-                  onRefresh={_onRefresh}
-                />
-              }>
-              {renderHotNews()}
-              {otherData?.map((key, index) => {
-                const othData = topics[`${key}`];
-                const topFirst = othData && othData[0];
-                const sec = getSec(othData);
-
-                return (
-                  <View key={index}>
-                    {renderTrendHeader(I18n.t(`HomeScreen.${key}`), key, {
-                      paddingHorizontal: scale(16),
-                    })}
-                    {renderTabOther(
-                      topFirst,
-                      sec,
-                      othData,
-                      key,
-                      index % 2 !== 0
-                        ? {
-                            paddingHorizontal: scale(16),
-                            marginTop: 0,
-                          }
-                        : {},
-                    )}
-                  </View>
-                );
-              })}
-            </ScrollView>
-          )}
+      {renderHeader()}
+      {_.isEmpty(topics) ? (
+        <View style={styles.loadingContainer}>
+          <LottieView
+            style={styles.loadingIcon}
+            source={require('../../../assets/animations/row_loading.json')}
+            autoPlay
+            loop
+          />
         </View>
+      ) : (
+        <ScrollView
+          scrollEnabled={true}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={_onRefresh} />
+          }>
+          {renderHotNews()}
+          {otherData?.map((key, index) => {
+            const othData = topics[`${key}`];
+            const topFirst = othData && othData[0];
+            const sec = getSec(othData);
+
+            return (
+              <View key={index}>
+                {renderTrendHeader(I18n.t(`HomeScreen.${key}`), key, {
+                  paddingHorizontal: scale(16),
+                })}
+                {renderTabOther(
+                  topFirst,
+                  sec,
+                  othData,
+                  key,
+                  index % 2 !== 0
+                    ? {
+                        paddingHorizontal: scale(16),
+                        marginTop: 0,
+                      }
+                    : {},
+                )}
+              </View>
+            );
+          })}
+        </ScrollView>
       )}
     </View>
   );
