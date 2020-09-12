@@ -55,9 +55,7 @@ export default function FollowSearch(props) {
         setDataSearch(res?.data?.result);
       }
     } catch (error) {
-      console.log('================================================');
       console.log('search domain error', error);
-      console.log('================================================');
     }
   };
 

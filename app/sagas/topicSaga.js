@@ -11,9 +11,6 @@ async function loadAllTopics() {
 function* fetchAllTopics() {
   try {
     const response = yield call(loadAllTopics);
-    console.log('================================================');
-    console.log('loadAllTopics', response);
-    console.log('================================================');
     if (response) {
       const data = response?.data?.result;
       yield put({

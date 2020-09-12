@@ -9,9 +9,6 @@ async function loadAllCover() {
 function* fetchAllCover() {
   try {
     const response = yield call(loadAllCover);
-    console.log('================================================');
-    console.log('fetchAllCover', response);
-    console.log('================================================');
     if (response) {
       const data = response?.data?.result;
       yield put({

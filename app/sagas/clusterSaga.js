@@ -9,9 +9,6 @@ async function loadAllCluster() {
 function* fetchAllCluster() {
   try {
     const response = yield call(loadAllCluster);
-    console.log('================================================');
-    console.log('fetchAllCluster', response);
-    console.log('================================================');
     if (response) {
       const data = response?.data?.result;
       yield put({

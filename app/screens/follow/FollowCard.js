@@ -175,9 +175,6 @@ export default function FollowCard(props) {
       const res = await Axios.get(
         `https://newscard9497.herokuapp.com/feeds/${title}`,
       );
-      console.log('================================================');
-      console.log('res', res);
-      console.log('================================================');
       setData(res?.data?.result);
     } catch (error) {}
   };

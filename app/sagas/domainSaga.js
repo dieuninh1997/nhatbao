@@ -9,9 +9,6 @@ async function loadAllDomain() {
 function* fetchAllDomain() {
   try {
     const response = yield call(loadAllDomain);
-    console.log('================================================');
-    console.log('fetchAllDomain', response);
-    console.log('================================================');
     if (response) {
       const data = response?.data?.result;
       yield put({

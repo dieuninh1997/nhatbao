@@ -14,9 +14,6 @@ export default function (state = initialState, action) {
         language: action.payload,
       };
     case UPDATE_GENDER:
-      console.log('================================================');
-      console.log('UPDATE_GENDER -> action', action);
-      console.log('================================================');
       return {
         ...state,
         gender: action.payload,

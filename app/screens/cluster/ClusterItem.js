@@ -70,7 +70,7 @@ export default (props) => {
                   source={{uri: item.image}}
                   resizeMode={FastImage.resizeMode.cover}
                 />
-                {/* <Text style={styles.domainText}>{item.domain}</Text> */}
+                <Text style={styles.domainText}>{item.domain}</Text>
                 <Text style={styles.itemContent}>{item.description}</Text>
 
                 <Text style={styles.itemTime}>

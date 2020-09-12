@@ -9,9 +9,6 @@ async function loadAllFeeds() {
 function* fetchAllFeeds() {
   try {
     const response = yield call(loadAllFeeds);
-    console.log('================================================');
-    console.log('fetchAllFeeds', response);
-    console.log('================================================');
     if (response) {
       const data = response?.data?.result;
       yield put({

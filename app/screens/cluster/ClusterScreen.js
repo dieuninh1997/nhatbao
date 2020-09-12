@@ -17,9 +17,7 @@ import Header from '../../components/Header';
 import {CommonStyles, CommonColors, Fonts} from '../../utils/CommonStyles';
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import I18n from '../../i18n/i18n';
-import SettingIcon from '../../../assets/svg/ic_settings';
 import {scale} from '../../libs/reactSizeMatter/scalingUtils';
-import AvatarIcon from '../../../assets/svg/ic_avatar_user.svg';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import store from '../../store';
@@ -28,14 +26,13 @@ import * as actions from '../../actions';
 export default (props) => {
   const navigation = useNavigation();
   const cluster = useSelector((state) => state.cluster.cluster);
-
   const [refreshing, setRefreshing] = useState(false);
   const [arrCluster, setArrCluster] = useState([]);
   useEffect(() => {
     store.dispatch(actions.fetchAllCluster());
 
     if (!_.isEmpty(cluster)) {
-      const res = _.values(cluster);
+      const res = _.map(cluster, (val, key) => ({key, val}));
       setArrCluster(res);
     }
   }, [cluster]);
@@ -45,14 +42,14 @@ export default (props) => {
       <TouchableOpacity
         key={index}
         onPress={() => {
-          navigation.navigate('ClusterItem', {name: `cluster::${index + 1}`});
+          navigation.navigate('ClusterItem', {name: item.key});
         }}
         style={[
           styles.itemContainer,
           index % 2 === 0 ? {paddingLeft: scale(4)} : {paddingRight: scale(4)},
         ]}>
         <FastImage
-          source={{uri: item.image}}
+          source={{uri: item.val.image}}
           style={styles.itemImage}
           resizeMode={FastImage.resizeMode.cover}
         />
@@ -68,9 +65,9 @@ export default (props) => {
             },
             index % 2 === 0 ? {marginLeft: scale(4)} : {marginRight: scale(4)},
           ]}>
-          {index % 2 === 0 && <View style={styles.borderTop} />}
-          <Text style={[styles.titleText]}>{item.title}</Text>
-          {index % 2 !== 0 && <View style={styles.borderBottom} />}
+          <View style={styles.borderTop} />
+          <Text style={[styles.titleText]}>{item.val.title}</Text>
+          <View style={styles.borderBottom} />
         </View>
       </TouchableOpacity>
     );
@@ -89,9 +86,9 @@ export default (props) => {
     return (
       <FlatList
         data={data}
-        ListHeaderComponent={renderTopView()}
+        // ListHeaderComponent={renderTopView()}
         renderItem={renderItem}
-        numColumns={2}
+        // numColumns={2}
         style={{flex: 1}}
         onRefresh={_onRefresh}
         refreshing={refreshing}

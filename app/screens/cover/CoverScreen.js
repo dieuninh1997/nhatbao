@@ -20,10 +20,7 @@ import {CommonColors} from '../../utils/CommonStyles';
 export default (props) => {
   const navigation = useNavigation();
   const cover = useSelector((state) => state.cover.cover);
-  const [animatedValue, setAnimatedValue] = useState(new Animated.Value(0));
-  console.log('================================================');
-  console.log('cover', cover);
-  console.log('================================================');
+  const [animatedValue, setAnimatedValue] = useState(new Animated.Value(0))
   useEffect(() => {
     Animated.timing(animatedValue, {
       toValue: 1,
