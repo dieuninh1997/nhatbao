@@ -71,4 +71,7 @@ export default {
     title: 'Welcome to NewsCard!',
     whoAraYou: 'Who are you?',
   },
+  ClusterScreen: {
+    header: 'Tin cùng nội dung',
+  },
 };

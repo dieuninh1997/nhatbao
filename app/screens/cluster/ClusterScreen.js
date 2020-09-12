@@ -28,6 +28,9 @@ import * as actions from '../../actions';
 export default (props) => {
   const navigation = useNavigation();
   const cluster = useSelector((state) => state.cluster.cluster);
+  console.log('================================================');
+  console.log('cluster', cluster);
+  console.log('================================================');
   const [arrCluster, setArrCluster] = useState([]);
   useEffect(() => {
     if (_.isEmpty(cluster)) {
@@ -39,13 +42,11 @@ export default (props) => {
   }, [cluster]);
 
   const renderItem = ({item, index}) => {
-    console.log('================================================');
-    console.log('item', item);
-    console.log('================================================');
     return (
       <TouchableOpacity
+        key={index}
         onPress={() => {
-          navigation.navigate('ClusterItem');
+          navigation.navigate('ClusterItem', {name: `cluster::${index + 1}`});
         }}
         style={[
           styles.itemContainer,
@@ -97,7 +98,7 @@ export default (props) => {
         <TouchableOpacity
           style={styles.topContainer}
           onPress={() => {
-            navigation.navigate('ClusterItem');
+            navigation.navigate('ClusterItem', {name: 'cluster::0'});
           }}>
           <FastImage
             source={{uri: topView.image}}

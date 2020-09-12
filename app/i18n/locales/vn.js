@@ -72,6 +72,6 @@ export default {
     whoAraYou: 'Bạn là nam hay nữ?',
   },
   ClusterScreen: {
-    header: 'Cluster',
+    header: 'Tin nổi bật',
   },
 };
