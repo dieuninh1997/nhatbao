@@ -1,19 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {View, Switch, Image, TouchableOpacity, FlatList} from 'react-native';
+import {View, TouchableOpacity, FlatList} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import LottieView from 'lottie-react-native';
 import Axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
-import {useSelector} from 'react-redux';
 
 import Text from '../../components/Text';
 import Header from '../../components/Header';
 import {CommonStyles, CommonColors, Fonts} from '../../utils/CommonStyles';
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import I18n from '../../i18n/i18n';
-import SettingIcon from '../../../assets/svg/ic_settings';
-import {scale} from '../../libs/reactSizeMatter/scalingUtils';
-import AvatarIcon from '../../../assets/svg/ic_avatar_user.svg';
 import BackButton from '../../components/BackButton';
 import {getDateTime} from '../../utils/Filter';
 
@@ -21,6 +17,7 @@ export default (props) => {
   const clusterName = props?.route?.params?.name;
   const navigation = useNavigation();
   const [data, setData] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
 
   const loadData = async () => {
     try {
@@ -37,6 +34,14 @@ export default (props) => {
       loadData();
     }
   }, [data]);
+
+  const _onRefresh = () => {
+    setRefreshing(true);
+    loadData();
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 500);
+  };
 
   return (
     <View style={styles.container}>
@@ -75,6 +80,8 @@ export default (props) => {
             </TouchableOpacity>
           )}
           keyExtractor={(item, index) => `${item.id}_${index}`}
+          onRefresh={_onRefresh}
+          refreshing={refreshing}
         />
       ) : (
         <View style={styles.loadingContainer}>

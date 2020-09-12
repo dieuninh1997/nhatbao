@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   FlatList,
@@ -16,7 +16,6 @@ import Header from '../../components/Header';
 import {CommonStyles, CommonColors} from '../../utils/CommonStyles';
 import ScaledSheet from '../../libs/reactSizeMatter/ScaledSheet';
 import I18n from '../../i18n/i18n';
-import ReloadIcon from '../../../assets/svg/ic_reload.svg';
 import {scale} from '../../libs/reactSizeMatter/scalingUtils';
 import store from '../../store';
 import * as actions from '../../actions';
@@ -26,11 +25,12 @@ export default function FollowScreen(props) {
   const feeds = useSelector((state) => state.feeds.feeds);
   const gender = useSelector((state) => state.user.gender);
   const navigation = useNavigation();
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    if (_.isEmpty(feeds)) {
-      store.dispatch(actions.fetchAllFeeds());
-    }
+    // if (_.isEmpty(feeds)) {
+    store.dispatch(actions.fetchAllFeeds());
+    // }
   }, [feeds]);
 
   let genderFeeds = !_.isEmpty(feeds) ? feeds[`${gender}`] : [];
@@ -93,6 +93,14 @@ export default function FollowScreen(props) {
     );
   };
 
+  const _onRefresh = () => {
+    setRefreshing(true);
+    store.dispatch(actions.fetchAllFeeds());
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 500);
+  };
+
   return (
     <View style={styles.container}>
       {renderHeader()}
@@ -114,6 +122,8 @@ export default function FollowScreen(props) {
             renderItem={renderItem}
             numColumns={2}
             ItemSeparatorComponent={() => <View style={styles.separator} />}
+            onRefresh={_onRefresh}
+            refreshing={refreshing}
           />
         </View>
       )}

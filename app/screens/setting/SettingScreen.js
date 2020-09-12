@@ -64,7 +64,7 @@ function SettingScreen({navigation, language}) {
             <ArrowIcon width={15} height={15} color="#000" />
           </View>
         </TouchableWithoutFeedback>
-        {showLanguage && (
+        {/* {showLanguage && (
           <View>
             <TouchableWithoutFeedback onPress={() => changeLocale('en')}>
               <View style={styles.itemLanguage}>
@@ -93,7 +93,7 @@ function SettingScreen({navigation, language}) {
               </View>
             </TouchableWithoutFeedback>
           </View>
-        )}
+        )} */}
       </View>
     </View>
   );

@@ -28,12 +28,9 @@ const renderHeader = (title) => {
 
 export default function HomeItem(props) {
   const {data, headerTitle} = props?.route?.params?.value;
-  console.log('================================================');
-  console.log('data', data);
-  console.log('================================================');
   const navigation = useNavigation();
   const [arrData, setArrData] = useState([]);
-  // const arrData = _.map(data.data, (val, key) => ({key, val}));
+  const [refreshing, setRefreshing] = useState(false);
 
   const loadData = async () => {
     try {
@@ -54,11 +51,21 @@ export default function HomeItem(props) {
     }
   }, []);
 
+  const _onRefresh = () => {
+    setRefreshing(true);
+    loadData();
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 500);
+  };
+
   return (
     <View style={styles.container}>
       {renderHeader(headerTitle)}
       {arrData?.length > 0 ? (
         <FlatList
+          onRefresh={_onRefresh}
+          refreshing={refreshing}
           style={styles.list}
           data={arrData}
           renderItem={({item, index}) => (

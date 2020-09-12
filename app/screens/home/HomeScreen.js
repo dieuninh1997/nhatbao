@@ -36,6 +36,7 @@ export default function HomeScreen(props) {
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(false);
   const topics = useSelector((state) => state.topics.topics);
+
   const keys = Object.keys(topics);
   const otherData = [];
   keys.map((key) => {

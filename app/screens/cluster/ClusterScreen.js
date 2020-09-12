@@ -28,14 +28,13 @@ import * as actions from '../../actions';
 export default (props) => {
   const navigation = useNavigation();
   const cluster = useSelector((state) => state.cluster.cluster);
-  console.log('================================================');
-  console.log('cluster', cluster);
-  console.log('================================================');
+
+  const [refreshing, setRefreshing] = useState(false);
   const [arrCluster, setArrCluster] = useState([]);
   useEffect(() => {
-    if (_.isEmpty(cluster)) {
-      store.dispatch(actions.fetchAllCluster());
-    } else {
+    store.dispatch(actions.fetchAllCluster());
+
+    if (!_.isEmpty(cluster)) {
       const res = _.values(cluster);
       setArrCluster(res);
     }
@@ -77,6 +76,14 @@ export default (props) => {
     );
   };
 
+  const _onRefresh = () => {
+    setRefreshing(true);
+    store.dispatch(actions.fetchAllCluster());
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 500);
+  };
+
   const renderList = () => {
     const data = arrCluster.length > 0 && arrCluster.slice(1);
     return (
@@ -86,6 +93,8 @@ export default (props) => {
         renderItem={renderItem}
         numColumns={2}
         style={{flex: 1}}
+        onRefresh={_onRefresh}
+        refreshing={refreshing}
       />
     );
   };
@@ -135,7 +144,18 @@ export default (props) => {
           </Text>
         }
       />
-      <View style={styles.content}>{renderList()}</View>
+      {arrCluster.length > 0 ? (
+        <View style={styles.content}>{renderList()}</View>
+      ) : (
+        <View style={styles.loadingContainer}>
+          <LottieView
+            style={styles.loadingIcon}
+            source={require('../../../assets/animations/row_loading.json')}
+            autoPlay
+            loop
+          />
+        </View>
+      )}
     </View>
   );
 };
@@ -222,5 +242,16 @@ const styles = ScaledSheet.create({
   },
   itemImage: {
     flex: 1,
+  },
+  loadingContainer: {
+    flex: 1,
+    marginTop: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loadingIcon: {
+    width: '100@s',
+    height: '100@s',
+    alignSelf: 'center',
   },
 });
