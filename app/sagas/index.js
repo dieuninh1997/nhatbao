@@ -4,6 +4,7 @@ import {watchFetchAllTopics} from './topicSaga';
 import {watchChangeLanguage, watchChooseGender} from './userSaga';
 import {watchFetchAllDomain} from './domainSaga';
 import {watchFetchAllCluster} from './clusterSaga';
+import {watchFetchAllCover} from './coverSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -13,5 +14,6 @@ export default function* rootSaga() {
     watchChooseGender(),
     watchFetchAllDomain(),
     watchFetchAllCluster(),
+    watchFetchAllCover(),
   ]);
 }

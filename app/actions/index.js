@@ -14,6 +14,8 @@ export const fetchAllDomain = () => ({type: actionTypes.FETCH_ALL_DOMAIN});
 
 export const fetchAllCluster = () => ({type: actionTypes.FETCH_ALL_CLUSTER});
 
+export const fetchAllCover = () => ({type: actionTypes.FETCH_ALL_COVER});
+
 export const changeNetInfo = (params) => {
   return {type: actionTypes.CHANGE_NET_INFO, payload: params};
 };

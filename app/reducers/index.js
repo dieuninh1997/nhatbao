@@ -6,6 +6,7 @@ import topicsReducer from './topicsReducer';
 import userReducer from './userReducer';
 import domainReducer from './domainReducer';
 import clusterReducer from './clusterReducer';
+import coverReducer from './coverReducer';
 
 export default combineReducers({
   loading: loadingReducer,
@@ -15,4 +16,5 @@ export default combineReducers({
   user: userReducer,
   domain: domainReducer,
   cluster: clusterReducer,
+  cover: coverReducer,
 });

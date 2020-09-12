@@ -20,13 +20,10 @@ export default (props) => {
   const dataLoadingState = useSelector(
     (state) => state.loading.dataLoadingState,
   );
-  const topics = useSelector((state) => state.topics);
+  const topics = useSelector((state) => state.topics.topics);
+  const cover = useSelector((state) => state.cover.cover);
   const navigation = useNavigation();
   const [showPopup, setShowPopup] = useState(false);
-
-  console.log('================================================');
-  console.log('gender', gender);
-  console.log('================================================');
 
   useEffect(() => {
     RNSplashScreen.hide();
@@ -42,9 +39,13 @@ export default (props) => {
       } else {
         if (!dataLoadingState) {
           store.dispatch(actions.fetchAllTopics());
+          store.dispatch(actions.fetchAllCover());
         } else {
           if (_.isEmpty(topics)) {
             store.dispatch(actions.fetchAllTopics());
+          }
+          if (_.isEmpty(cover)) {
+            store.dispatch(actions.fetchAllCover());
           }
         }
       }
@@ -59,18 +60,14 @@ export default (props) => {
       AppPreferences.getGender().then((_gender) => {
         if (_gender) {
           store.dispatch(actions.chooseGender(_gender));
+        } else {
+          setShowPopup(true);
         }
       });
 
       store.dispatch(actions.changeNetInfo(isConnected));
     });
-  }, [dataLoadingState, gender, navigation, topics]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowPopup(true);
-    }, 100);
-  }, []);
+  }, [dataLoadingState, gender, topics, cover]);
 
   if (!_.isEmpty(topics) && gender) {
     navigation.dispatch(
@@ -95,9 +92,8 @@ export default (props) => {
           }
         />
       ) : null}
-      {!showPopup ? (
-        <Text style={styles.appName}>{I18n.t('common.appName')}</Text>
-      ) : null}
+
+      <Text style={styles.appName}>{I18n.t('common.appName')}</Text>
     </View>
   );
 };
