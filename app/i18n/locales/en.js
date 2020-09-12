@@ -4,6 +4,12 @@ export default {
     daysAgo: '{{d}} days ago',
     hoursAgo: '{{h}} hours ago',
     minutesAgo: '{{m}} minutes ago',
+    exit: {
+      ok: 'OK',
+      title: 'Exit App',
+      cancel: 'Cancel',
+      content: 'Exiting the application?',
+    },
   },
   HomeScreen: {
     header: 'Home',

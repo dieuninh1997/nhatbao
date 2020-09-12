@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Dimensions,
@@ -8,6 +8,8 @@ import {
   FlatList,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  BackHandler,
+  Alert,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import FastImage from 'react-native-fast-image';
@@ -30,14 +32,58 @@ import store from '../../store';
 import * as actions from '../../actions';
 import ArrowIcon from '../../../assets/svg/ic_arrow_next.svg';
 import {scale} from '../../libs/reactSizeMatter/scalingUtils';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 export default function HomeScreen(props) {
   const navigation = useNavigation();
+  const route = useRoute();
   const [refreshing, setRefreshing] = useState(false);
   const topics = useSelector((state) => state.topics.topics);
   const keys = Object.keys(topics);
   const otherData = [];
+
+  useEffect(() => {
+    const backAction = () => {
+      const mainScreens = [
+        'HomeScreen',
+        'FollowScreen',
+        'ClusterScreen',
+        'FollowSearch',
+        'AccountScreen',
+      ];
+      const index = mainScreens.indexOf(route.name);
+      if (navigation.isFocused && navigation.isFocused() && index !== -1) {
+        Alert.alert(
+          I18n.t('common.exit.title'),
+          I18n.t('common.exit.content'),
+          [
+            {
+              text: I18n.t('common.exit.cancel'),
+              onPress: () => {},
+              style: 'cancel',
+            },
+            {
+              text: I18n.t('common.exit.ok'),
+              onPress: () => BackHandler.exitApp(),
+            },
+          ],
+          {
+            cancelable: false,
+          },
+        );
+        return true;
+      }
+      return false;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
   keys.map((key) => {
     if (key !== 'trend' && key !== 'hot_news') {
       otherData.push(key);

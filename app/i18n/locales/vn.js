@@ -4,6 +4,12 @@ export default {
     daysAgo: '{{d}} ngày trước',
     hoursAgo: '{{h}} giờ trước',
     minutesAgo: '{{m}} phút trước',
+    exit: {
+      ok: 'Đồng ý',
+      title: 'Thoát ứng dung',
+      cancel: 'Huỷ',
+      content: 'Bạn muốn thoát khỏi ứng dụng?',
+    },
   },
   HomeScreen: {
     header: 'Trang Chủ',

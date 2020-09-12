@@ -25,7 +25,7 @@ export default (props) => {
   useEffect(() => {
     Animated.timing(animatedValue, {
       toValue: 1,
-      duration: 2000,
+      duration: 5000,
       easing: Easing.linear,
     }).start(() => {
       navigation.navigate('MainScreen');
