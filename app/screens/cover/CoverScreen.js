@@ -20,14 +20,24 @@ import {CommonColors} from '../../utils/CommonStyles';
 export default (props) => {
   const navigation = useNavigation();
   const cover = useSelector((state) => state.cover.cover);
-  const [animatedValue, setAnimatedValue] = useState(new Animated.Value(0))
+  const [animatedValue, setAnimatedValue] = useState(new Animated.Value(0));
   useEffect(() => {
-    Animated.timing(animatedValue, {
-      toValue: 1,
-      duration: 5000,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    }).start();
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(animatedValue, {
+          toValue: 1,
+          duration: 5000,
+          easing: Easing.linear,
+          useNativeDriver: true,
+          delay: 1000,
+        }),
+        Animated.timing(animatedValue, {
+          toValue: 0,
+          duration: 5000,
+          useNativeDriver: true,
+        }),
+      ]),
+    ).start();
   }, [animatedValue, navigation]);
 
   const renderCover = () => {
@@ -50,7 +60,7 @@ export default (props) => {
               {
                 translateX: animatedValue.interpolate({
                   inputRange: [0, 1],
-                  outputRange: [-width * 0.2, 0],
+                  outputRange: [-width * 0.25, 0],
                 }),
               },
             ],
@@ -58,15 +68,16 @@ export default (props) => {
         />
         <View style={styles.textContainer}>
           <View style={{flex: 1}} />
-          <View style={[styles.row, {alignItems: 'center'}]}>
-            <Text style={styles.titleText}>{title}</Text>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('MainScreen');
-              }}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('MainScreen');
+            }}>
+            <View style={[styles.row, {alignItems: 'center'}]}>
+              <Text style={styles.titleText}>{title}</Text>
+
               <NextIcon width={25} height={25} color={'#FFF'} />
-            </TouchableOpacity>
-          </View>
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     );
@@ -94,13 +105,13 @@ const styles = ScaledSheet.create({
     zIndex: 1000,
     padding: 16,
     paddingBottom: 50,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    // backgroundColor: 'rgba(0, 0, 0, 0.5)',
     width,
     height,
   },
   titleText: {
     flex: 1,
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: '#FFF',
     fontSize: 24,
     textTransform: 'uppercase',
   },
