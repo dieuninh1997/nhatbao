@@ -33,7 +33,7 @@ const Stack = createStackNavigator();
 const MyTabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName={'ClusterScreen'}
+      initialRouteName={'HomeScreen'}
       tabBarOptions={{
         showLabel: false,
         activeTintColor: CommonColors.activeTintColor,

@@ -193,7 +193,7 @@ const styles = ScaledSheet.create({
   },
   titleText: {
     color: '#FFF',
-    fontSize: 12,
+    fontSize: '16@ms',
     fontWeight: 'bold',
     letterSpacing: 0.5,
     paddingHorizontal: 10,
@@ -212,16 +212,16 @@ const styles = ScaledSheet.create({
     padding: 10,
   },
   borderTop: {
-    width: 10,
-    height: 10,
+    width: '15@s',
+    height: '15@s',
     borderTopWidth: 5,
     borderLeftWidth: 5,
     borderTopColor: CommonColors.activeTintColor,
     borderLeftColor: CommonColors.activeTintColor,
   },
   borderBottom: {
-    width: 10,
-    height: 10,
+    width: '15@s',
+    height: '15@s',
     borderBottomWidth: 5,
     borderRightWidth: 5,
     borderBottomColor: CommonColors.activeTintColor,
@@ -234,7 +234,7 @@ const styles = ScaledSheet.create({
   },
   itemContainer: {
     flex: 1,
-    height: scale(150),
+    height: height * 0.25,
     padding: scale(2),
   },
   itemImage: {
